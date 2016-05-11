@@ -42,3 +42,33 @@ Route::get('dndvlt/delete/{id}','DnDvLtController@destroy');
 
 //End Setting
 
+
+//Quản lý
+    //Giá dịch vụ lưu trú
+        //Kê khai thông tin doanh nghiệp
+Route::get('ttdndvlt','DvLtController@TtDnIndex');
+Route::get('ttdndvlt/{id}/edit','DvLtController@TtDnEdit');
+Route::patch('ttdndvlt/{id}','DvLtController@TtDnUpdate');
+        //End Kê khai thông tin doanh nghiệp
+
+        //Kê khai thông tin cơ sở kinh doanh
+Route::get('ttcskddvlt','DvLtController@TtCsKdIndex');
+Route::get('ttcskddvlt/create','DvLtController@TtCsKdCreate');
+Route::get('/ajax/createph/','AjaxController@createph');
+Route::get('/ajax/editph','AjaxController@editph');
+Route::get('/ajax/updateph','AjaxController@updateph');
+Route::get('/ajax/deleteph','AjaxController@deleteph');
+Route::post('ttcskddvlt','DvLtController@TtCsKdStore');
+Route::get('ttcskddvlt/{id}/edit','DvLtController@TtCsKdEdit');
+Route::get('/ajax/chinhsuaph/','AjaxController@chinhsuaph');
+Route::get('/ajax/capnhatph/','AjaxController@capnhatph');
+Route::get('/ajax/xoaph/','AjaxController@xoaph');
+Route::get('/ajax/themmoiph/','AjaxController@themmoiph');
+Route::patch('ttcskddvlt/{id}','DvLtController@TtCsKdUpdate');
+        //End Kê khai thông tin cơ sở kinh doanh
+    //End giá dịch vụ lưu trú
+
+    //Giá dịch vụ vận tải
+    //End giá dịch vụ vận tải
+//End Quản lý
+

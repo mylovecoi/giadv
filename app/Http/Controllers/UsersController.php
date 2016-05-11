@@ -21,8 +21,8 @@ class UsersController extends Controller
     {
         if (Session::has('admin')) {
 
-            $model = Users::where('sadmin','<>','ssa')
-                ->where('sadmin','<>','sa')
+            $model = Users::where('username','<>','minhtran')
+                ->where('username','<>','huongvu')
                 ->get();
 
             return view('system.users.index')

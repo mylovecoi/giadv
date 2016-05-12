@@ -39,6 +39,11 @@ Route::get('dndvlt/delete/{id}','DnDvLtController@destroy');
     //End Danh sách doanh nghiệp dịch vụ lưu trú
 
     //Danh sách doanh nghiệp dịch vụ vận tải
+Route::resource('dndvvt','DnDvVtController');
+Route::get('dndvvt/checkmasothue/{masothue}','DnDvVtController@CheckMaSoThue');
+Route::get('dndvvt/checkuser/{user}','DnDvVtController@CheckUser');
+Route::get('dndvvt/delete/{id}','DnDvVtController@destroy');
+    //End Danh sách doanh nghiệp dịch vụ vận tải
 
 //End Setting
 

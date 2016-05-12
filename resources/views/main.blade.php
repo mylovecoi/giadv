@@ -97,7 +97,7 @@
                         <ul class="nav nav-second-level">
                             <li><a href="{{url('ttdndvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
                             <li><a href="{{url('ttcskddvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin cơ sở kinh doanh</span></a></li>
-                            <li><a href="{{url('')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Kê khai giá dịch vụ lưu trú</span></a> </li>
+                            <li><a href="{{url('kkgdvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Kê khai giá dịch vụ lưu trú</span></a> </li>
 
                         </ul>
                     </li>

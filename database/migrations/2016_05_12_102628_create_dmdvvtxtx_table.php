@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDmdvvtTable extends Migration
+class CreateDmdvvtxtxTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateDmdvvtTable extends Migration
      */
     public function up()
     {
-        Schema::create('dmdvvt', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('macosokd')->nullable();
+        Schema::create('dmdvvtxtx', function (Blueprint $table) {
+            $table->increments('id')->nullable();
+            $table->string('masothue')->nullable();
             $table->string('madichvu')->nullable();
             $table->string('tendichvu')->nullable();
             $table->string('qccl')->nullable();
@@ -31,6 +31,6 @@ class CreateDmdvvtTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dmdvvt');
+        Schema::drop('dmdvvtxtx');
     }
 }

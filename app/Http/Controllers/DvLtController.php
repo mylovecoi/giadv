@@ -89,7 +89,7 @@ class DvLtController extends Controller
     {
         //
     }
-    //Thông tin doanh nghiệp- Cho doanh nghiệp tự cập nhật được thông tin của mình
+//Thông tin doanh nghiệp- Cho doanh nghiệp tự cập nhật được thông tin của mình
     public function TtDnIndex(){
         if (Session::has('admin')) {
 
@@ -139,7 +139,7 @@ class DvLtController extends Controller
     }
     //End Thông tin doanh nghiệp
 
-    //Thông tin cơ sở kinh doanh - 1 doanh nghiệp có thể có nhiều cơ sở kinh doanh
+//Thông tin cơ sở kinh doanh - 1 doanh nghiệp có thể có nhiều cơ sở kinh doanh
     public function TtCsKdIndex(){
         if (Session::has('admin')) {
             $modeldn = DnDvLt::where('masothue',session('admin')->mahuyen)
@@ -232,5 +232,5 @@ class DvLtController extends Controller
             return view('errors.notlogin');
     }
 
-    //End Thông tin cơ sở kinh doanh
+//End Thông tin cơ sở kinh doanh
 }

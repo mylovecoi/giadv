@@ -97,8 +97,8 @@
                         <ul class="nav nav-second-level">
                             <li><a href="{{url('ttdndvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
                             <li><a href="{{url('ttcskddvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin cơ sở kinh doanh</span></a></li>
-                            <li><a href="{{url('kkgdvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Kê khai giá dịch vụ lưu trú</span></a> </li>
-
+                            <li><a href="{{url('kkgdvlt/show')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Kê khai giá dịch vụ lưu trú</span></a> </li>
+                            <li><a href="{{url('xetduyetkkgdvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt kê khai giá dịch vụ lưu trú</span></a> </li>
                         </ul>
                     </li>
                     <!--End Quản lý-->
@@ -119,6 +119,7 @@
                             <li><a href="{{url('dndvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Danh sách doanh nghiệp cung cấp dịch vụ lưu trú</span></a></li>
                             <li><a href="{{url('dndvvt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Danh sách doanh nghiệp cung cấp dịch vụ vận tải</span></a></li>
                             <li><a href="{{url('user')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Quản lý tài khoản</span></a> </li>
+                            <li><a href="{{url('general')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Cấu hình hệ thống</span></a> </li>
 
                         </ul>
                     </li>

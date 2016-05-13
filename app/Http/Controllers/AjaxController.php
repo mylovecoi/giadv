@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\KkGDvLt;
+use App\KkGDvLtCt;
+use App\KkGDvLtCtDf;
 use App\TtCsKdDvLt;
 use App\TtPhong;
 use Illuminate\Http\Request;
@@ -12,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 
 class AjaxController extends Controller
 {
-    //Tạo mới thông tin cơ sở kinh doanh
+// <editor-fold defaultstate="collapsed" desc="--Tạo mới thông tin cơ sở kinh doanh--">
     public function createph(Request $request){
         $result = array(
             'status' => 'fail',
@@ -224,9 +227,9 @@ class AjaxController extends Controller
 
         die(json_encode($result));
     }
-    //End Tạo thông tin phòng cơ sở quản lý
+// </editor-fold>
 
-    //Chỉnh sửa thông tin cơ sở kinh doanh
+// <editor-fold defaultstate="collapsed" desc="--Chỉnh sửa thông tin cơ sở kinh doanh--">
     public function chinhsuaph(Request $request){
         $result = array(
             'status' => 'fail',
@@ -443,6 +446,253 @@ class AjaxController extends Controller
 
         die(json_encode($result));
     }
+// </editor-fold>
 
-    //End Chính sửa
+// <editor-fold defaultstate="collapsed" desc="--Tạo giá phòng kê khai--">
+    public function editgiaph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $modelph = TtCsKdDvLt::where('id',$inputs['id'])
+                ->first();
+            $modelgiakk = KkGDvLtCtDf::where('macskd',$modelph->macskd)
+                ->where('maloaip',$modelph->maloaip)
+                ->first();
+            if(isset($modelgiakk)){
+                $mucgiakk = $modelgiakk->mucgiakk;
+                $mucgialk = $modelgiakk->mucgialk;
+            }else{
+                $mucgiakk = 0;
+                $mucgialk = 0;
+            }
+
+            $result['message'] = '<div class="form-horizontal" id="ttgiaph">';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label class="col-md-4 control-label"><b>Mức giá kê khai liền kê</b></label>';
+            $result['message'] .= '<div class="col-md-6 ">';
+            $result['message'] .= '<input type="text" id="mucgialk" name="mucgialk" class="form-control" data-mask="fdecimal" value="'.$mucgialk.'" autofocus>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label class="col-md-4 control-label"><b>Mức giá kê khai </b></label>';
+            $result['message'] .= '<div class="col-md-6 ">';
+            $result['message'] .= '<input type="text" id="mucgiakk" name="mucgiakk" class="form-control" data-mask="fdecimal" value="'.$mucgiakk.'">';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '<input type="hidden" id="idedit" name="idedit" value="'.$modelph->id.'">';
+            $result['status'] = 'success';
+
+        }
+        die(json_encode($result));
+    }
+
+    public function updategiaph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        $inputs['mucgialk'] = str_replace(',','',$inputs['mucgialk']);
+        $inputs['mucgialk'] = str_replace('.','',$inputs['mucgialk']);
+        $inputs['mucgiakk'] = str_replace(',','',$inputs['mucgiakk']);
+        $inputs['mucgiakk'] = str_replace('.','',$inputs['mucgiakk']);
+
+        if(isset($inputs['id'])){
+            $modelph = TtCsKdDvLt:: where('id',$inputs['id'])->first();
+
+            $modelgiaph = new KkGDvLtCtDf();
+            $modelgiaph->maloaip = $modelph->maloaip;
+            $modelgiaph->loaip = $modelph->loaip;
+            $modelgiaph->qccl = $modelph->qccl;
+            $modelgiaph->sohieu = $modelph->sohieu;
+            $modelgiaph->ghichu = $modelph->ghichu;
+            $modelgiaph->macskd = $modelph->macskd;
+            $modelgiaph->mucgialk = $inputs['mucgialk'];
+            $modelgiaph->mucgiakk = $inputs['mucgiakk'];
+            $modelgiaph->save();
+
+            $model = TtCsKdDvLt::where('macskd',$modelph->macskd)
+                ->get();
+            $modelgiaphtam = KkGDvLtCtDf::where('macskd',$modelph->macskd)
+                ->get();
+            foreach($model as $ph){
+                $this->getGiaphtam($modelgiaphtam,$ph);
+            }
+            //dd($model);
+
+            $result['message'] = '<tbody id="ttphong">';
+            if(count($model) > 0){
+                foreach($model as $phong){
+                    $result['message'] .= '<tr>';
+                    $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
+                    $result['message'] .= '<td>'.$phong->sohieu.'</td>';
+                    $result['message'] .= '<td>'.number_format($phong->mucgialk).'</td>';
+                    $result['message'] .= '<td>'.number_format($phong->mucgiakk).'</td>';
+                    $result['message'] .= '<td>'.
+                        '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'
+                        .'</td>';
+                    $result['message'] .= '</tr>';
+                }
+                $result['message'] .= '</tbody>';
+                $result['status'] = 'success';
+            }
+        }
+
+        die(json_encode($result));
+    }
+
+    public function getGiaphtam($phs,$array){
+        foreach($phs as $ph){
+            if($ph->maloaip == $array->maloaip){
+                $array->mucgiakk = $ph->mucgiakk;
+                $array->mucgialk = $ph->mucgialk;
+            }
+        }
+
+    }
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="--Chính sửa giá phòng kê khai--">
+    public function chinhsuagiaph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $modelgiaph = KkGDvLtCt::where('id',$inputs['id'])
+                ->first();
+
+            $result['message'] = '<div class="form-horizontal" id="ttgiaph">';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label class="col-md-4 control-label"><b>Mức giá kê khai liền kê</b></label>';
+            $result['message'] .= '<div class="col-md-6 ">';
+            $result['message'] .= '<input type="text" id="mucgialk" name="mucgialk" class="form-control" data-mask="fdecimal" value="'.$modelgiaph->mucgialk.'" autofocus>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label class="col-md-4 control-label"><b>Mức giá kê khai </b></label>';
+            $result['message'] .= '<div class="col-md-6 ">';
+            $result['message'] .= '<input type="text" id="mucgiakk" name="mucgiakk" class="form-control" data-mask="fdecimal" value="'.$modelgiaph->mucgiakk.'">';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '<input type="hidden" id="idct" name="idct" value="'.$modelgiaph->id.'">';
+            $result['message'] .= '<input type="hidden" id="mahsct" name="mahsct" value="'.$modelgiaph->mahs.'">';
+            $result['status'] = 'success';
+
+        }
+        die(json_encode($result));
+    }
+
+    public function capnhatgiaph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+        $inputs['mucgialk'] = str_replace(',','',$inputs['mucgialk']);
+        $inputs['mucgialk'] = str_replace('.','',$inputs['mucgialk']);
+        $inputs['mucgiakk'] = str_replace(',','',$inputs['mucgiakk']);
+        $inputs['mucgiakk'] = str_replace('.','',$inputs['mucgiakk']);
+
+        if(isset($inputs['id'])){
+            $modelgiaph = KkGDvLtCt::where('id',$inputs['id'])
+                ->first();
+            $modelgiaph->mucgialk = $inputs['mucgialk'];
+            $modelgiaph->mucgiakk = $inputs['mucgiakk'];
+            $modelgiaph->save();
+
+            $model = KkGDvLtCt::where('mahs',$inputs['mahs'])
+                ->get();
+
+            $result['message'] = '<tbody id="ttphong">';
+            if(count($model) > 0){
+                foreach($model as $phong){
+                    $result['message'] .= '<tr>';
+                    $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
+                    $result['message'] .= '<td>'.$phong->sohieu.'</td>';
+                    $result['message'] .= '<td>'.number_format($phong->mucgialk).'</td>';
+                    $result['message'] .= '<td>'.number_format($phong->mucgiakk).'</td>';
+                    $result['message'] .= '<td>'.
+                        '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'
+                        .'</td>';
+                    $result['message'] .= '</tr>';
+                }
+                $result['message'] .= '</tbody>';
+                $result['status'] = 'success';
+            }
+        }
+
+        die(json_encode($result));
+    }
+
+
+// </editor-fold>
+
+    public function viewlydo(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $model = KkGDvLt::where('id',$inputs['id'])
+                ->first();
+
+            //$result['message'] = '<div class="col-md-9 " id="ndlydo">';
+            $result['message'] = '<textarea id="lydo" class="form-control required" name="lydo" cols="30" rows="6">'.$model->lydo.'</textarea>';
+            //$result['message'] .= '</div>';
+            $result['status'] = 'success';
+
+        }
+        die(json_encode($result));
+    }
 }

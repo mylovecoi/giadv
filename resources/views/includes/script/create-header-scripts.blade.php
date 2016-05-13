@@ -6,7 +6,6 @@
 <script type="text/javascript" src="{{ url('js/jquery.inputmask.bundle.min.js') }}"></script>
 <script>
     $(function(){
-
         // Input Mask
         if($.isFunction($.fn.inputmask))
         {

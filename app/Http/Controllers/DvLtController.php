@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\CsKdDvLt;
 use App\DnDvLt;
+use App\KkGDvLt;
+use App\KkGDvLtCt;
+use App\KkGDvLtCtDf;
 use App\TtCsKdDvLt;
 use App\TtPhong;
 use Illuminate\Http\Request;
@@ -21,7 +24,44 @@ class DvLtController extends Controller
      */
     public function index()
     {
-        //
+        if (Session::has('admin')) {
+            $model = KkGDvLt::where('trangthai','Chờ duyệt')
+                //->Orwhere('trangthai','Duyệt')
+                ->get();
+            $modelcskd = CsKdDvLt::all();
+            foreach($model as $ttkk){
+                $this->getTTCSKD($modelcskd,$ttkk);
+            }
+
+            return view('quanly.dvlt.index')
+                ->with('model',$model)
+                ->with('pageTitle','Thông tin cơ sở kinh doanh');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function getTTCSKD($cskds,$array){
+        foreach($cskds as $cskd){
+            if($cskd->masothue == $array->masothue){
+                $array->tencskd = $cskd->tencskd;
+            }
+        }
+    }
+
+    public function tralai(Request $request){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $model = KkGDvLt::where('id',$input['idtralai'])
+                ->first();
+            $model->lydo = $input['lydo'];
+            $model->trangthai = 'Bị trả lại';
+            $model->save();
+
+            return redirect('xetduyetkkgdvlt');
+
+        }else
+            return view('errors.notlogin');
     }
 
     /**
@@ -89,7 +129,9 @@ class DvLtController extends Controller
     {
         //
     }
-//Thông tin doanh nghiệp- Cho doanh nghiệp tự cập nhật được thông tin của mình
+
+// <editor-fold defaultstate="collapsed" desc="--Thông tin doanh nghiệp- Cho doanh nghiệp tự cập nhật được thông tin của mình--">
+
     public function TtDnIndex(){
         if (Session::has('admin')) {
 
@@ -137,9 +179,10 @@ class DvLtController extends Controller
         }else
             return view('errors.notlogin');
     }
-    //End Thông tin doanh nghiệp
+// </editor-fold>
 
-//Thông tin cơ sở kinh doanh - 1 doanh nghiệp có thể có nhiều cơ sở kinh doanh
+// <editor-fold defaultstate="collapsed" desc="--Thông tin cơ sở kinh doanh - 1 doanh nghiệp có thể có nhiều cơ sở kinh doanh--">
+
     public function TtCsKdIndex(){
         if (Session::has('admin')) {
             $modeldn = DnDvLt::where('masothue',session('admin')->mahuyen)
@@ -232,5 +275,165 @@ class DvLtController extends Controller
             return view('errors.notlogin');
     }
 
-//End Thông tin cơ sở kinh doanh
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="--Kê khai giá dịch vụ lưu trú--">
+    public function KkGDvLtShow(){
+        if (Session::has('admin')) {
+            $modeldn = DnDvLt::where('masothue',session('admin')->mahuyen)
+                ->first();
+            $model = CsKdDvLt::where('masothue',session('admin')->mahuyen)
+                ->get();
+
+            return view('quanly.dvlt.kkgiadv.show')
+                ->with('modeldn',$modeldn)
+                ->with('model',$model)
+                ->with('pageTitle','Thông tin cơ sở kinh doanh');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function KkGDvLtIndex($id){
+        if (Session::has('admin')) {
+            $modelcskd = CsKdDvLt::findOrFail($id);
+
+            $model = KkGDvLt::where('macskd',$modelcskd->macskd)
+                ->orderBy('id', 'esc')
+                ->get();
+
+            return view('quanly.dvlt.kkgiadv.index')
+                ->with('modelcskd',$modelcskd)
+                ->with('model',$model)
+                ->with('pageTitle','Thông tin cơ sở kinh doanh');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function KkGDvLtCreate($id){
+        if (Session::has('admin')) {
+            $modelcskd = CsKdDvLt::findOrFail($id);
+            $modelkkctdf = KkGDvLtCtDf::where('macskd',$modelcskd->macskd)
+                ->delete();
+            $modelph = TtCsKdDvLt::where('macskd',$modelcskd->macskd)
+                ->get();
+            //Lấy giá liên kề trong bảng công bố add vào modelph
+
+            return view('quanly.dvlt.kkgiadv.create')
+                ->with('modelcskd',$modelcskd)
+                ->with('modelph',$modelph)
+                ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function KkGDvLtStore(Request $request,$id){
+        if (Session::has('admin')) {
+            $mahs = getdate()[0];
+            $insert = $request->all();
+            $model = new KkGDvLt();
+            $model->ngaynhap = $insert['ngaynhap'];
+            $model->mahs = $mahs;
+            $model->socv = $insert['socv'];
+            $model->ngayhieuluc = $insert['ngayhieuluc'];
+            $model->socvlk = $insert['socvlk'];
+            $model->trangthai = 'Chờ chuyển';
+            $model->macskd = $insert['macskd'];
+            $model->masothue = session('admin')->mahuyen;
+            $model->ghichu = $insert['ghichu'];
+            if($model->save()){
+                $modelph = KkGDvLtCtDf::where('macskd',$insert['macskd'])
+                    ->get();
+                foreach($modelph as $ph){
+                    $modelgiaph = new KkGDvLtCt();
+                    $modelgiaph->maloaip = $ph->maloaip;
+                    $modelgiaph->loaip = $ph->loaip;
+                    $modelgiaph->qccl = $ph->qccl;
+                    $modelgiaph->sohieu = $ph->sohieu;
+                    $modelgiaph->ghichu = $ph->ghichu;
+                    $modelgiaph->macskd = $ph->macskd;
+                    $modelgiaph->mucgialk = $ph->mucgialk;
+                    $modelgiaph->mucgiakk = $ph->mucgiakk;
+                    $modelgiaph->mahs = $mahs;
+                    $modelgiaph->save();
+                }
+            }
+
+            return redirect('kkgdvlt/'.$id);//Truyền thêm id của CsKd và mã số cskd vào hidden trên Form để kéo về insert
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function KkGDvLtEdit($idcskd,$id){
+        if (Session::has('admin')) {
+            $modelcskd = CsKdDvLt::where('id',$idcskd)
+                ->first();
+            $model = KkGDvLt::findOrFail($id);
+            $modelgiaph = KkGDvLtCt::where('mahs',$model->mahs)
+                ->get();
+
+            return view('quanly.dvlt.kkgiadv.edit')
+                ->with('model',$model)
+                ->with('modelgiaph',$modelgiaph)
+                ->with('modelcskd',$modelcskd)
+                ->with('pageTitle','Chỉnh sửa kê khai giá dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function KkGDvLtUpdate(Request $request,$idcskd,$id){
+        if (Session::has('admin')) {
+            $update = $request->all();
+
+            $model = KkGDvLt::findOrFail($id);
+            $model->ngaynhap = $update['ngaynhap'];
+            $model->socv = $update['socv'];
+            $model->ngayhieuluc = $update['ngayhieuluc'];
+            $model->socvlk = $update['socvlk'];
+            $model->save();
+
+            return redirect('kkgdvlt/'.$idcskd);
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function KkGDvLtDelete(Request $request,$id){
+        if (Session::has('admin')) {
+            $delete = $request->all();
+
+            $model = KkGDvLt::where('id',$delete['iddelete'])->first();
+            if($model->delete()){
+                $modelgiaph = KkGDvLtCt::where('mahs',$model->mahs)->delete();
+            }
+
+            return redirect('kkgdvlt/'.$id);
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function KkGDvLtChuyen(Request $request,$id){
+        if (Session::has('admin')) {
+            $input = $request->all();
+            $now = getdate();
+            $tgchuyen = $now['mday'].'/'.$now['mon'].'/'.$now['year'].'-'.$now['hours'].':'.$now['minutes'];
+            $model = KkGDvLt::where('id',$input['idchuyen'])->first();
+            $model->ttnguoinop = $input['ttnguoinop'];
+            $model->trangthai = 'Chờ duyệt';
+            $model->ngaychuyen = $tgchuyen;
+            $model->save();
+
+            return redirect('kkgdvlt/'.$id);
+
+        }else
+            return view('errors.notlogin');
+    }
+
+// </editor-fold>
+
 }

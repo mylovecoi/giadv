@@ -36,7 +36,7 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
     <tr>
         <td width="40%" style="text-transform: uppercase;">
-            <b>{{$modelcompany->tendoanhnghiep}}</b><br>
+            <b>{{$modeldn->tendn}}</b><br>
             --------<br>
         </td>
         <td>
@@ -50,39 +50,39 @@
             <i>V/v kê khai giá dịch vụ lưu trú</i>
         </td>
         <td>
-            <i>{{$modelcompany->diadanh}}, ngày..{{ date("d",strtotime($modelkk->ngaynhap))}}..tháng..{{ date("m",strtotime($modelkk->ngaynhap))}}..năm..{{ date("Y",strtotime($modelkk->ngaynhap))}}..</i>
+            <i>{{$modeldn->diadanh}} ngày..{{ date("d",strtotime($modelkk->ngaynhap))}}..tháng..{{ date("m",strtotime($modelkk->ngaynhap))}}..năm..{{ date("Y",strtotime($modelkk->ngaynhap))}}..</i>
         </td>
     </tr>
 </table>
 
 
-<p style="text-align: center; font-weight: bold; font-size: 16px;"><i><u>Kính gửi</u></i>: {{(getGeneralConfigs()['donvi'])}}</p>
+<p style="text-align: center; font-weight: bold; font-size: 16px;"><i><u>Kính gửi</u></i>: {{(getGeneralConfigs()['tendonvi'])}}</p>
 
 <p>Doanh nghiệp chúng tôi tự xây dựng và kê khai giá dịch vụ lưu trú như sau:</p>
 
-<p>-Tên doanh nghiệp: <span>{{$modelcompany->tendoanhnghiep}}</span></p>
+<p>-Tên doanh nghiệp: <span>{{$modeldn->tendn}}</span></p>
 
-<p>-Mã số thuế <span>{{$modelcompany->masothue}}</span> </p>
+<p>-Mã số thuế <span>{{$modeldn->masothue}}</span> </p>
 
-<p>-Địa chỉ trụ sở chính: {{$modelcompany->diachitruso}}</p>
+<p>-Địa chỉ trụ sở chính: {{$modeldn->diachidn}}</p>
 
-<p>-Điện thoại: {{$modelcompany->telephone}}     -     Số fax: {{$modelcompany->fax}}</p>
+<p>-Điện thoại: {{$modeldn->teldn}}     -     Số fax: {{$modeldn->faxdn}}</p>
 
-<p>-Tên cơ sở kinh doanh: <span>{{$modelcompany->tencosokinhdoanh}}</span></p>
+<p>-Tên cơ sở kinh doanh: <span>{{$modelcskd->tencskd}}</span></p>
 
-<p>-Loại hạng của cơ sở kinh doanh: {{$modelcompany->loaihang}} sao</p>
+<p>-Loại hạng của cơ sở kinh doanh: {{$modelcskd->loaihang}} sao</p>
 
-<p>-Địa chỉ: {{$modelcompany->diachikinhdoanh}}    -      Điện thoại: {{$modelcompany->telephonekinhdoanh}}</p>
+<p>-Địa chỉ: {{$modelcskd->diachikd}}    -      Điện thoại: {{$modelcskd->telkd}}</p>
 
-<p>Nơi đăng ký nộp thuế của cơ sở kinh doanh đăng ký giá: {{$modelcompany->dknopthue}}</p>
+<p>Nơi đăng ký nộp thuế của cơ sở kinh doanh đăng ký giá: {{$modeldn->noidknopthue}}</p>
 
-<p>{{$modelcompany->tendoanhnghiep}} gửi Bảng kê khai giá dịch vụ lưu trú và kê khai thực hiện kể từ ngày <span>{{getDayVn($modelkk->ngayad)}}</span></p>
+<p>{{$modeldn->tendn}} gửi Bảng kê khai giá dịch vụ lưu trú và kê khai thực hiện kể từ ngày <span>{{getDayVn($modelkk->ngayhieuluc)}}</span></p>
 
-<p>Bảng kê khai giá gửi kèm theo công văn này sẽ thay thế cho Bảng kê khai giá kèm theo công văn số {{$modelkk->cvlk}}.</p>
+<p>Bảng kê khai giá gửi kèm theo công văn này sẽ thay thế cho Bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}}.</p>
 
-<p>{{$modelcompany->tendoanhnghiep}} xin chịu trách nhiệm trước pháp luật về tính đúng đắn của mức giá mà chúng tôi kê khai.</p>
+<p>{{$modeldn->tendn}} xin chịu trách nhiệm trước pháp luật về tính đúng đắn của mức giá mà chúng tôi kê khai.</p>
 
-<p>Đề nghị quý cơ quan ghi nhận ngày nộp Biểu mẫu kê khai giá của {{$modelcompany->tendoanhnghiep}} theo quy định</p>
+<p>Đề nghị quý cơ quan ghi nhận ngày nộp Biểu mẫu kê khai giá của {{$modeldn->tendn}} theo quy định</p>
 
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
     <tr>
@@ -92,7 +92,7 @@
             - Lưu.
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="70%">
-            <b>{{$modelcompany->chucdanh}}</b><br>
+            <b>{{$modeldn->chucdanhky}}</b><br>
         </td>
     </tr>
 
@@ -111,7 +111,7 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 25px; text-align: center;">
     <tr>
         <td width="40%" style="text-transform: uppercase;">
-            <b>{{$modelcompany->tendoanhnghiep}}</b><br>
+            <b>{{$modeldn->tendn}}</b><br>
             --------<br>
         </td>
         <td>
@@ -121,7 +121,7 @@
     </tr>
 </table>
 <p style="text-align: center; font-weight: bold; font-size: 16px;">BẢNG KÊ KHAI GIÁ DỊCH VỤ LƯU TRÚ</p>
-<p style="text-align: center;">(Kèm theo công văn số {{$modelkk->socv}}  ngày {{ date("d",strtotime($modelkk->ngaynhap))}} tháng {{ date("m",strtotime($modelkk->ngaynhap))}} năm {{ date("Y",strtotime($modelkk->ngaynhap))}} của {{$modelcompany->tendoanhnghiep}})</p>
+<p style="text-align: center;">(Kèm theo công văn số {{$modelkk->socv}}  ngày {{ date("d",strtotime($modelkk->ngaynhap))}} tháng {{ date("m",strtotime($modelkk->ngaynhap))}} năm {{ date("Y",strtotime($modelkk->ngaynhap))}} của {{$modeldn->tendn}})</p>
 <p style="text-align: right; font-size: 16px;"><i>Đơn vị tính: Đồng/phòng/ngày đêm</i></p>
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
@@ -131,12 +131,12 @@
         <th>Mức giá kê<br>khai</th>
         <th>Ghi chú</th>
     </tr>
-    @foreach($modelttql as $ctkk)
+    @foreach($modelkkct as $ctkk)
         <tr>
             <th style="text-align: left">{{$ctkk->loaip.'-'.$ctkk->qccl}}</th>
             <th style="text-align: left">{{$ctkk->sohieu}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
-            <th style="text-align: right">{{number_format($ctkk->mucgia)}}</th>
+            <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
             <th>{{$ctkk->ghichu}}</th>
         </tr>
     @endforeach
@@ -148,7 +148,7 @@
 
         </td>
         <td style="text-align: center;text-transform: uppercase; " width="70%">
-            <b>{{$modelcompany->chucdanh}}</b><br>
+            <b>{{$modeldn->chucdanhky}}</b><br>
         </td>
     </tr>
 
@@ -167,9 +167,9 @@
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:0 auto 20px; text-align: center;">
     <tr>
         <td width="40%" style="text-transform: uppercase;">
-            <b>{{$modelcompany->tendoanhnghiep}}</b><br>
-            Địa chỉ: {{$modelcompany->diachitruso}}<br>
-            Mã số thuế: {{$modelcompany->masothue}}
+            <b>{{$modeldn->tendn}}</b><br>
+            Địa chỉ: {{$modeldn->diachidn}}<br>
+            Mã số thuế: {{$modeldn->masothue}}
         </td>
         <td>
             <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>
@@ -186,11 +186,11 @@
         <th>Mức giá niêm<br>yết</th>
         <th>Ghi chú</th>
     </tr>
-    @foreach($modelttql as $ctkk)
+    @foreach($modelkkct as $ctkk)
         <tr>
             <th style="text-align: left">{{$ctkk->loaip.'-'.$ctkk->qccl}}</th>
             <th style="text-align: left">{{$ctkk->sohieu}}</th>
-            <th style="text-align: right">{{number_format($ctkk->mucgia)}}</th>
+            <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
             <th>{{$ctkk->ghichu}}</th>
         </tr>
     @endforeach
@@ -199,9 +199,7 @@
     Cơ sở kinh doanh chúng tôi cam kết thực hiện niêm yết giá và bán theo giá niêm yết.<br>
     Nếu sai cơ sở chúng tôi xin hoàn toàn chịu trách nhiệm trước pháp luật.<br>
     Khi cần quý khách có thể liên hệ theo các số điện thoại sau, nếu cơ sở chúng tôi không thực hiện đúng bảng giá đã niêm yết:<br>
-    Sở Tài chính: 058.3822072 (Phòng Thanh tra)- 058.3826741 (Phòng Vật giá)<br>
-    Sở Văn hóa, Thể thao và Du lịch: 058.3811871 (Phòng Thanh tra)<br>
-    Chi cục Thuế TP. Nha Trang: 058.35622181.
+    {!! nl2br(e(getGeneralConfigs()['ttlh'])) !!}
 </p>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
     <tr>
@@ -209,7 +207,7 @@
 
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="70%">
-            <b>{{$modelcompany->chucdanh}}</b><br>
+            <b>{{$modeldn->chucdanhky}}</b><br>
         </td>
     </tr>
 

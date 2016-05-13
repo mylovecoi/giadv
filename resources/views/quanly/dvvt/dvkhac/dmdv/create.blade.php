@@ -94,7 +94,7 @@
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
                     type: 'GET',
-                    url: '/dvvantai/dvkhac/chkdv/'+$(this).val(),
+                    url: '/dvvantai/dvkhac/chkdv/'+{{session('admin')->mahuyen}} +'/'+$(this).val(),
                     data: {
                         _token: CSRF_TOKEN
                     },

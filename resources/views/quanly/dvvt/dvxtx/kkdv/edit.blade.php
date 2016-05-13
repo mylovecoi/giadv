@@ -68,18 +68,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Người nộp
+                                        <label class="col-sm-4 control-label">Các yếu tố cấu thành giá
                                         </label>
                                         <div class="col-sm-4 controls">
-                                            <input type="text" name="nguoinop" id="nguoinop" class="form-control" value="{{$model->nguoinop}}" {{(session('admin')->level == 'T') ? 'readonly' : ''}}>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Ghi chú
-                                        </label>
-                                        <div class="col-sm-4 controls">
-                                            <textarea id="ghichu" data-provide="markdown" class="form-control md-input" name="ghichu" cols="30" rows="10" onchange="Changeeditor()" {{(session('admin')->level == 'T') ? 'readonly' : ''}}>{{$model->ghichu}}</textarea>
+                                            <textarea id="ghichu" data-provide="markdown" class="form-control md-input" name="ghichu" cols="30" rows="10" placeholder="Các yếu tố chi phí cấu thành giá (đối với kê khai lần đầu); phân tích nguyên nhân, nêu rõ biến động của các yếu tố hình thành giá tác động làm tăng hoặc giảm giá (đối với kê khai lại)." onchange="Changeeditor()" {{(session('admin')->level == 'T') ? 'readonly' : ''}}>{{$model->ghichu}}</textarea>
 
                                         </div>
                                     </div>

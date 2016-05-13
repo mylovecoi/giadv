@@ -133,7 +133,7 @@
         <th>% tăng hoặc<br>giảm giá</th>
         <th>Ghi chú</th>
     </tr>
-    @foreach($modeldm as $ctkk)
+    @foreach($modelgia as $ctkk)
         <tr>
             <th style="text-align: left; font-weight: normal">{{$ctkk->tendichvu}}</th>
             <th style="text-align: left; font-weight: normal">{{$ctkk->qccl}}</th>

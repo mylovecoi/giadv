@@ -10,12 +10,20 @@ class KkDvVtKhac extends Model
     protected $fillabel = [
         'id',
         'masothue',
+        'masokk',
         'ngaynhap',
         'socv',
+        'socvlk',
         'ngayhieuluc',
         'nguoinop',
         'ngaynhan',
         'trangthai',
-        'ghichu'
+        'ghichu',
+        'ngaychuyen',
+        'lydo',
+        'nguoinop',
+        'sdtnn',
+        'faxnn',
+        'emailnn'
     ];
 }

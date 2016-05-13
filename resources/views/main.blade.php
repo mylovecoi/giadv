@@ -106,15 +106,15 @@
                     <!--Quản lý dịch vụ vận tải-->
                     <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ vận tải</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                           <li><a href="{{url('dvvantai/dvxekhach')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Thông tin loại dịch vận tải hành khách bằng xe ô tô theo tuyến cố định</span></a> </li>
-                           <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa-car"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe ô tô theo tuyến cố định</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvxb/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Thông tin loại dịch vận tải hành khách bằng xe buýt theo tuyến cố định</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvxb/kekhai')}}"><i class="fa fa-ambulance"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe buýt theo tuyến cố định</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvxtx/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Thông tin loại dịch vận tải hành khách bằng xe taxi</span></a> </li>
+                           <li><a href="{{url('dvvantai/dvxekhach')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe khách</span></a> </li>
+                           <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa-car"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe khách</span></a> </li>
+                           <li><a href="{{url('dvvantai/dvxb/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe buýt</span></a> </li>
+                           <li><a href="{{url('dvvantai/dvxb/kekhai')}}"><i class="fa fa-ambulance"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe buýt</span></a> </li>
+                           <li><a href="{{url('dvvantai/dvxtx/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe taxi</span></a> </li>
                            <li><a href="{{url('dvvantai/dvxtx/kekhai')}}"><i class="fa fa-taxi"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe taxi</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvkhac/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Thông tin loại dịch vận tải chở hàng</span></a> </li>
+                           <li><a href="{{url('dvvantai/dvkhac/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải chở hàng</span></a> </li>
                             <li><a href="{{url('dvvantai/dvkhac/kekhai')}}"><i class="fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải chở hàng</span></a> </li>
-                            </ul>
+                        </ul>
                     </li>
                     <!--End Quản lý dịch vụ vận tải-->
 

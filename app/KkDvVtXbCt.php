@@ -9,12 +9,17 @@ class KkDvVtXbCt extends Model
     protected $table = 'kkdvvtxbct';
     protected $fillable = [
         'id',
-        'idkk',
+        'masokk',
         'madichvu',
+        'tendichvu',
+        'qccl',
+        'dvtluot',
+        'dvtthang',
         'giakkluot',
         'giakklkluot',
         'giakkthang',
         'giakklkthang',
-        'ghichu'
+        'ghichu',
+        'thuevat'
     ];
 }

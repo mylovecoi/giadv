@@ -27,12 +27,6 @@
         function confirmDelete(id) {
             $('#frmDelete').attr('action', "dvvantai/thaotackkdvxk/delete/" + id);
         }
-        function confirmChuyen(id) {
-            $('#frmChuyen').attr('action', "dvvantai/thaotackkdvxk/chuyen/" + id);
-        }
-        function confirmTraLai(id) {
-            $('#frmTraLai').attr('action', "dvvantai/thaotackkdvxk/tralai/" + id);
-        }
         function  getSelectedCheckboxes(){
 
             var ids = '';
@@ -126,12 +120,16 @@
                                                     @if($kk->trangthai == "Chờ chuyển")
                                                         <td align="center"><span class="badge badge-warning">{{$kk->trangthai}}</span></td>
                                                     @elseif($kk->trangthai == 'Chờ duyệt')
-                                                        <td align="center"><span class="badge badge-danger">{{$kk->trangthai}}</span></td>
+                                                        <td align="center">
+                                                            <span class="badge badge-danger">{{$kk->trangthai}}</span>
+                                                            <button type="button" onclick="clkNguoiChuyen('{{$kk->nguoinop.'&'.$kk->ngaychuyen.'&'.$kk->sdtnn.'&'.$kk->faxnn.'&'.$kk->emailnn}}')" class="badge badge-info" data-target="#nguoichuyen-modal-confirm" data-toggle="modal">&nbsp;
+                                                                Người nộp</button>
+                                                        </td>
                                                     @else
                                                         <td align="center"><span class="badge badge-success">{{$kk->trangthai}}</span></td>
                                                     @endif
                                                     <td>
-                                                        <a href="{{url('dvvantai/kkdvxkct/'.$kk->id)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Chi tiết</a>
+                                                        <a href="{{url('dvvantai/kkdvxkct/'.$kk->masokk)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Chi tiết</a>
 
                                                         @if($kk->trangthai == "Chờ chuyển")
                                                             <a href="{{url('dvvantai/kkdvxk/'.$kk->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
@@ -139,13 +137,12 @@
                                                             <button type="button" onclick="confirmDelete('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                                                 Xóa</button>
 
-                                                            <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
+                                                            <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                                                 Chuyển</button>
                                                         @elseif($kk->trangthai == 'Chờ duyệt')
                                                             @if(session('admin')->level == 'T')
-                                                                <button type="button" onclick="confirmTraLai('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#tralai-modal-confirm" data-toggle="modal"><i class="fa fa-mail-reply"></i>&nbsp;
+                                                                <button type="button" onclick="confirmTraLai('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#tradvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                                                     Trả lại</button>
-
                                                                 <a href="{{url('dvvantai/kkdvxk/'.$kk->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Ngày nhận HS</a>
                                                             @endif
                                                         @else
@@ -167,7 +164,77 @@
             </div>
         </div>
     </div>
+    <script>
 
+        function clickTraDVVT(id) {
+            //$('#frmTraLai').attr('action', "dvvantai/thaotackkdvxk/tralai/" + id);
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/dvvantai/thaotackkdvxk/tralai',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: $('#idtra').val(),
+                    lydo: $('#lydotra').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if(data.status == 'success') {
+                        alert('Chuyển bảng kê khai thành công.');
+                        location.reload();
+                    }
+                },
+                error: function(message){
+                    alert(message);
+                }
+            })
+        }
+
+        function confirmChuyen(id) {
+            $('#idkk').attr('value', id);
+        }
+
+        function confirmTraLai(id) {
+            $('#idtra').attr('value', id);
+        }
+
+        function clkNguoiChuyen(str){
+            //alert(str);
+            aNgCh=str.split('&');
+            $('input[name="nguoinoptt"]').val(aNgCh[0]);
+            $('input[name="ngaychuyentt"]').val(aNgCh[1]);
+            $('input[name="sdtnntt"]').val(aNgCh[2]);
+            $('input[name="faxnntt"]').val(aNgCh[3]);
+            $('input[name="emailnntt"]').val(aNgCh[4]);
+        }
+
+        function clickChuyenDVVT(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/dvvantai/thaotackkdvxk/chuyen',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: $('#idkk').val(),
+                    nguoinop: $('input[name="nguoinop"]').val(),
+                    ngaychuyen: $('input[name="ngaychuyen"]').val(),
+                    sdtnn: $('input[name="sdtnn"]').val(),
+                    faxnn: $('input[name="faxnn"]').val(),
+                    emailnn: $('input[name="emailnn"]').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if(data.status == 'success') {
+                        alert('Chuyển bảng kê khai thành công.');
+                        location.reload();
+                    }
+                },
+                error: function(message){
+                    alert(message);
+                }
+            })
+        }
+    </script>
     @include('includes.e.modal-confirm')
 
 @stop

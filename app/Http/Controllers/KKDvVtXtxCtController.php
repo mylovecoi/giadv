@@ -19,59 +19,36 @@ class KKDvVtXtxCtController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($idkk)
+    public function index($masokk)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXtx::where('id', $idkk)->first();
-            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)->first();
-            $model = DmDvVtXtx::where('masothue', $modelkk->masothue)->get();
-            $modelgia = KkDvVtXtxCt::where('idkk', $idkk)->get();
+            $modelkk = KkDvVtXtx::where('masokk', $masokk)->first();
+            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)->select('tendonvi')->first();
 
-            foreach ($model as $gianiemyet) {
-                $this->getGia($modelgia, $gianiemyet);
+            $model = KkDvVtXtxCt::where('masokk', $masokk)->get();
+            if(count($model)==0) {
+                $modeldv = DmDvVtXtx::where('masothue', $modelkk->masothue)->get();
+                foreach($modeldv as $dv){
+                    $giadv=new KkDvVtXtxCt();
+                    $giadv->masokk=$masokk;
+                    $giadv->madichvu=$dv['madichvu'];
+                    $giadv->tendichvu=$dv['tendichvu'];
+                    $giadv->qccl=$dv['qccl'];
+                    $giadv->dvt=$dv['dvt'];
+                    $giadv->save();
+                }
+                $model = KkDvVtXtxCt::where('masokk', $masokk)->get();
             }
 
             return view('quanly.dvvt.dvxtx.kkct.index')
-                ->with('model', $model)
-                ->with('modeldonvi', $modeldonvi)
+                ->with('masokk', $masokk)
                 ->with('modelkk', $modelkk)
+                ->with('model', $model)
+                ->with('tendonvi', $modeldonvi->tendonvi)
                 ->with('pageTitle', 'Bảng kê khai giá dịch vụ vận tải');
         } else
             return view('errors.notlogin');
     }
-
-    public function getGia($gias, $array)
-    {
-        foreach ($gias as $gia) {
-            if ($gia->madichvu == $array->madichvu) {
-                $array->giakk= $gia->giakk;
-                $array->giakklk = $gia->giakklk;
-                $array->idgia = $gia->id;
-            }
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($idkk, $madichvu)
-    {
-        if (Session::has('admin')) {
-            $modelkk = KkDvVtXtx::where('id', $idkk)->first();
-
-            $modeldichvu = DmDvVtXtx::where('masothue', $modelkk->masothue)
-                ->where('madichvu', $madichvu)->first();
-
-            return view('quanly.dvvt.dvxtx.kkct.create')
-                ->with('modeldichvu', $modeldichvu)
-                ->with('idkk', $idkk)
-                ->with('pageTitle', 'Nhập giá dịch vụ vận tải');
-        } else
-            return view('errors.notlogin');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -80,6 +57,7 @@ class KKDvVtXtxCtController extends Controller
      */
     public function store(Request $request)
     {
+        //Bỏ
         if (Session::has('admin')) {
             $insert = $request->all();
             $model = new KkDvVtXtxCt();
@@ -99,20 +77,13 @@ class KKDvVtXtxCtController extends Controller
             return view('errors.notlogin');
     }
 
-    public function edit($idkk, $idgia)
+    public function edit($id)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXtx::where('id', $idkk)->first();
-
-            $model = KkDvVtXtxCt::where('id', $idgia)->first();
-
-            $modeldichvu = DmDvVtXtx::where('masothue', $modelkk->masothue)
-                ->where('madichvu', $model->madichvu)->first();
-            //dd($modelphong);
+            $model = KkDvVtXtxCt::where('id', $id)->first();
             return view('quanly.dvvt.dvxtx.kkct.edit')
-                ->with('modeldichvu', $modeldichvu)
                 ->with('model', $model)
-                ->with('idkk', $idkk)
+                ->with('id', $id)
                 ->with('pageTitle', 'Cập nhật giá dịch vụ');
         } else
             return view('errors.notlogin');
@@ -125,57 +96,52 @@ class KKDvVtXtxCtController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idkk, $idgia)
+    public function update(Request $request, $id)
     {
         if (Session::has('admin')) {
             $update = $request->all();
-            $model = KkDvVtXtxCt::where('id', $idgia)->first();
-            //Số tiền lượt
             $update['giakklk'] = str_replace(',', '', $update['giakklk']);
             $update['giakklk'] = str_replace('.', '', $update['giakklk']);
             $update['giakk'] = str_replace(',', '', $update['giakk']);
             $update['giakk'] = str_replace('.', '', $update['giakk']);
 
+            $model = KkDvVtXtxCt::where('id', $id)->first();
             $model->giakklk = $update['giakklk'];
             $model->giakk = $update['giakk'];
+            $model->tendichvu = $update['tendichvu'];
+            $model->qccl = $update['qccl'];
+            $model->dvt = $update['dvt'];
+            $model->thuevat = $update['thuevat'];
             $model->save();
-            return redirect('dvvantai/dvxtx/chitiet/danhsach/' . $idkk);
+            return redirect('dvvantai/dvxtx/chitiet/danhsach/' . $model->masokk);
             //return redirect('ctkkgdvlt/'.$idkk);
         } else
             return view('errors.notlogin');
     }
 
-    public function destroy(Request $request, $idkk)
+    public function destroy($id)
     {
         if (Session::has('admin')) {
-            $input = $request->all();
-            $model = KkDvVtXtxCt::where('id', $input['iddelete'])->first();
+            $model = KkDvVtXtxCt::where('id', $id)->first();
+            $masokk = $model->masokk;
             $model->delete();
 
-            return redirect('dvvantai/dvxtx/chitiet/danhsach/' . $idkk);
+            return redirect('dvvantai/dvxtx/chitiet/danhsach/' . $masokk);
         } else
             return view('errors.notlogin');
     }
 
-    public function printKK($idkk)
+    public function printKK($masokk)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXtx::where('id', $idkk)
-                ->first();
-            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)
-                ->first();
-            $modeldm = DmDvVtXtx::where('masothue', $modelkk->masothue)->get();
-
-            $modelgia = KkDvVtXtxCt::where('idkk', $idkk)->get();
-
-            foreach ($modeldm as $dichvu) {
-                $this->getGia($modelgia, $dichvu);
-            }
+            $modelkk = KkDvVtXtx::where('masokk', $masokk)->first();
+            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)->first();
+            $modelgia = KkDvVtXtxCt::where('masokk', $masokk)->get();
 
             return view('reports.kkgdvvt.kkgdvxtx.printf')
                 ->with('modeldonvi', $modeldonvi)
                 ->with('modelkk', $modelkk)
-                ->with('modeldm', $modeldm)
+                ->with('modelgia', $modelgia)
                 ->with('pageTitle', 'Kê khai giá dịch vụ vận tải');
         } else
             return view('errors.notlogin');

@@ -19,21 +19,31 @@ class KkDvVtXbCtController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($idkk)
+    public function index($masokk)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXb::where('id', $idkk)->first();
-            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)->first();
-            $model = DmDvVtXb::where('masothue', $modelkk->masothue)->get();
-            $modelgia = KkDvVtXbCt::where('idkk', $idkk)->get();
-
-            foreach ($model as $gianiemyet) {
-                $this->getGia($modelgia, $gianiemyet);
+            $modelkk = KkDvVtXb::where('masokk', $masokk)->first();
+            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)->select('tendonvi')->first();
+            $model = KkDvVtXbCt::where('masokk', $masokk)->get();
+            if(count($model)==0) {
+                $modeldv = DmDvVtXb::where('masothue', $modelkk->masothue)->get();
+                foreach($modeldv as $dv){
+                    $giadv=new KkDvVtXbCt();
+                    $giadv->masokk=$masokk;
+                    $giadv->madichvu=$dv['madichvu'];
+                    $giadv->tendichvu=$dv['tendichvu'];
+                    $giadv->qccl=$dv['qccl'];
+                    $giadv->dvtluot=$dv['dvtluot'];
+                    $giadv->dvtthang=$dv['dvtthang'];
+                    $giadv->save();
+                }
+                $model = KkDvVtXbCt::where('masokk', $masokk)->get();
             }
 
             return view('quanly.dvvt.dvxb.kkct.index')
+                ->with('masokk', $masokk)
                 ->with('model', $model)
-                ->with('modeldonvi', $modeldonvi)
+                ->with('tendonvi', $modeldonvi->tendonvi)
                 ->with('modelkk', $modelkk)
                 ->with('pageTitle', 'Bảng kê khai giá dịch vụ vận tải');
         } else
@@ -108,20 +118,16 @@ class KkDvVtXbCtController extends Controller
             return view('errors.notlogin');
     }
 
-    public function edit($idkk, $idgia)
+    public function edit($id)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXb::where('id', $idkk)->first();
-
-            $model = KkDvVtXbCt::where('id', $idgia)->first();
-
-            $modeldichvu = DmDvVtXb::where('masothue', $modelkk->masothue)
-                ->where('madichvu', $model->madichvu)->first();
+            //$modelkk = KkDvVtXb::where('id', $idkk)->first();
+            $model = KkDvVtXbCt::where('id', $id)->first();
+            //$modeldichvu = DmDvVtXb::where('masothue', $modelkk->masothue)
+            //    ->where('madichvu', $model->madichvu)->first();
             //dd($modelphong);
             return view('quanly.dvvt.dvxb.kkct.edit')
-                ->with('modeldichvu', $modeldichvu)
                 ->with('model', $model)
-                ->with('idkk', $idkk)
                 ->with('pageTitle', 'Cập nhật giá dịch vụ');
         } else
             return view('errors.notlogin');
@@ -134,11 +140,11 @@ class KkDvVtXbCtController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idkk, $idgia)
+    public function update(Request $request, $id)
     {
         if (Session::has('admin')) {
             $update = $request->all();
-            $model = KkDvVtXbCt::where('id', $idgia)->first();
+            $model = KkDvVtXbCt::where('id', $id)->first();
             //Số tiền lượt
             $update['giakklkluot'] = str_replace(',', '', $update['giakklkluot']);
             $update['giakklkluot'] = str_replace('.', '', $update['giakklkluot']);
@@ -154,44 +160,49 @@ class KkDvVtXbCtController extends Controller
             $model->giakkluot = $update['giakkluot'];
             $model->giakklkthang = $update['giakklkthang'];
             $model->giakkthang = $update['giakkthang'];
+
+            $model->tendichvu = $update['tendichvu'];
+            $model->qccl = $update['qccl'];
+            $model->dvtthang = $update['dvtthang'];
+            $model->dvtluot = $update['dvtluot'];
+            $model->thuevat = $update['thuevat'];
             $model->save();
-            return redirect('dvvantai/dvxb/chitiet/danhsach/' . $idkk);
+
+            return redirect('dvvantai/dvxb/chitiet/danhsach/' . $model->masokk);
             //return redirect('ctkkgdvlt/'.$idkk);
         } else
             return view('errors.notlogin');
     }
 
-    public function destroy(Request $request, $idkk)
+    public function destroy($id)
     {
         if (Session::has('admin')) {
-            $input = $request->all();
-            $model = KkDvVtXbCt::where('id', $input['iddelete'])->first();
+            $model = KkDvVtXbCt::where('id', $id)->first();
+            $masokk = $model->masokk;
             $model->delete();
 
-            return redirect('dvvantai/dvxb/chitiet/danhsach/' . $idkk);
+            return redirect('dvvantai/dvxb/chitiet/danhsach/' . $masokk);
         } else
             return view('errors.notlogin');
     }
 
-    public function printKK($idkk)
+    public function printKK($masokk)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXb::where('id', $idkk)
+            $modelkk = KkDvVtXb::where('masokk', $masokk)
                 ->first();
             $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)
                 ->first();
             $modeldm = DmDvVtXb::where('masothue', $modelkk->masothue)->get();
 
-            $modelgia = KkDvVtXbCt::where('idkk', $idkk)->get();
+            $modelgia = KkDvVtXbCt::where('masokk', $masokk)->get();
 
-            foreach ($modeldm as $dichvu) {
-                $this->getGia($modelgia, $dichvu);
-            }
 
             return view('reports.kkgdvvt.kkgdvxb.printf')
                 ->with('modeldonvi', $modeldonvi)
                 ->with('modelkk', $modelkk)
                 ->with('modeldm', $modeldm)
+                ->with('modelgia', $modelgia)
                 ->with('pageTitle', 'Kê khai giá dịch vụ vận tải');
         } else
             return view('errors.notlogin');

@@ -34,28 +34,35 @@
                     <div class="portlet-body">
                         <div class="panel">
                             <div class="panel-body pan">
-                                {!! Form::model($model, ['method' => 'PATCH', 'url'=>'dvvantai/kkdvxkct/'.$idkk.'/'.$model->id.'/update', 'class'=>'form-horizontal form-validate']) !!}
+                                {!! Form::model($model, ['method' => 'PATCH', 'url'=>'dvvantai/kkdvxkct/'.$id.'/update', 'class'=>'form-horizontal form-validate']) !!}
 
                                 <div class="portlet-body">
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Tên dịch vụ
                                         </label>
                                         <div class="col-sm-4 controls">
-                                            {{$modeldichvu->tendichvu}}
+                                            {!!Form::text('tendichvu', null, array('id' => 'tendichvu','class' => 'form-control','autofocus'=>'autofocus'))!!}
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Quy cách chất lượng
                                         </label>
                                         <div class="col-sm-4 controls">
-                                            {{$modeldichvu->qccl}}
+                                            {!!Form::text('qccl', null, array('id' => 'qccl','class' => 'form-control'))!!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Đơn vị tính
+                                        </label>
+                                        <div class="col-sm-4 controls">
+                                            {!!Form::text('dvt', null, array('id' => 'dvt','class' => 'form-control'))!!}
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Mức giá kê khai trước liền kề
                                         </label>
                                         <div class="col-sm-4 controls">
-                                            {!!Form::text('giakklk', null, array('id' => 'giakklk','class' => 'form-control','autofocus'=>'autofocus','data-mask'=>'fdecimal'))!!}
+                                            {!!Form::text('giakklk', null, array('id' => 'giakklk','class' => 'form-control','data-mask'=>'fdecimal'))!!}
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -71,6 +78,14 @@
                                         </label>
                                         <div class="col-sm-4 controls">
                                             {!!Form::text('giahl', null, array('id' => 'giahl','class' => 'form-control','autofocus'=>'autofocus','data-mask'=>'fdecimal'))!!}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Thuế VAT
+                                        </label>
+                                        <div class="col-sm-4 controls">
+                                            {!!Form::text('thuevat', null, array('id' => 'thuevat','class' => 'form-control'))!!}
                                         </div>
                                     </div>
 

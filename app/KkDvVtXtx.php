@@ -9,13 +9,20 @@ class KkDvVtXtx extends Model
     protected $table = 'kkdvvtxtx';
     protected $fillabel = [
         'id',
+        'masokk',
         'masothue',
         'ngaynhap',
         'socv',
+        'socvlk',
         'ngayhieuluc',
-        'nguoinop',
         'ngaynhan',
         'trangthai',
-        'ghichu'
+        'ghichu',
+        'ngaychuyen',
+        'lydo',
+        'nguoinop',
+        'sdtnn',
+        'faxnn',
+        'emailnn'
     ];
 }

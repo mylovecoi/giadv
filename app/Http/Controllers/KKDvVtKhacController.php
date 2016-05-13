@@ -22,17 +22,9 @@ class KKDvVtKhacController extends Controller
         if (Session::has('admin')) {
 
             if(session('admin')->level == 'T')
-                $model = KkDvVtKhac::where('trangthai','<>','Chờ chuyển')
-                    ->get();
+                $model = KkDvVtKhac::where('trangthai','<>','Chờ chuyển')->get();
             else
-                $model = KkDvVtKhac::where('masothue',session('admin')->mahuyen)
-                    ->get();
-
-            $modeldonvi = DonViDvVt::all();
-
-            foreach($model as $dn){
-                $this->getTenDV($modeldonvi,$dn);
-            }
+                $model = KkDvVtKhac::where('masothue',session('admin')->mahuyen) ->get();
 
             return view('quanly.dvvt.dvkhac.kkdv.index')
                 ->with('model',$model)
@@ -40,13 +32,6 @@ class KKDvVtKhacController extends Controller
 
         }else
             return view('errors.notlogin');
-    }
-
-    public function getTenDV($atenDV,$array){
-        foreach($atenDV as $tenDV){
-            if($tenDV->masothue == $array->masothue)
-                $array->tendonvi = $tenDV->tendonvi;
-        }
     }
     /**
      * Show the form for creating a new resource.
@@ -72,12 +57,14 @@ class KKDvVtKhacController extends Controller
     public function store(Request $request)
     {
         if (Session::has('admin')) {
+            $ma=getdate();
             $insert = $request->all();
             $model = new KkDvVtKhac();
+            $model->masokk = session('admin')->mahuyen . '.' . $ma[0];
             $model->ngaynhap = $insert['ngaynhap'];
             $model->socv = $insert['socv'];
+            //$model->socvlk = $insert['socv'];
             $model->ngayhieuluc = $insert['ngayhieuluc'];
-            $model->nguoinop=$insert['nguoinop'];
             $model->trangthai = 'Chờ chuyển';
             $model->masothue = session('admin')->mahuyen;
             $model->ghichu = $insert['ghichu'];
@@ -121,7 +108,7 @@ class KKDvVtKhacController extends Controller
             $model->socv = $update['socv'];
             $model->ngayhieuluc = $update['ngayhieuluc'];
             $model->ghichu = $update['ghichu'];
-            $model->nguoinop = $update['nguoinop'];
+            //$model->nguoinop = $update['nguoinop'];
             $model->ngaynhan = $update['ngaynhan'];
             $model->save();
             return redirect('dvvantai/dvkhac/kekhai');
@@ -146,14 +133,33 @@ class KKDvVtKhacController extends Controller
             return view('errors.notlogin');
     }
 
-    public function chuyen($id){
-        if (Session::has('admin')) {
-            $model = KkDvVtKhac::findOrFail($id);
+    public function chuyen(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $model = KkDvVtKhac::findOrFail($inputs['id']);
             $model->trangthai = 'Chờ duyệt';
+            $model->nguoinop = $inputs['nguoinop'];
+            $model->ngaychuyen = $inputs['ngaychuyen'];
+            $model->sdtnn = $inputs['sdtnn'];
+            $model->faxnn = $inputs['faxnn'];
+            $model->emailnn = $inputs['emailnn'];
             $model->save();
-            return redirect('dvvantai/dvkhac/kekhai');
-        }else
-            return view('errors.notlogin');
+            $result['message'] = 'Chuyển thành công.';
+            $result['status'] = 'success';
+        }
+        die(json_encode($result));
     }
 
     public function duyet($ids){

@@ -20,106 +20,43 @@ class KkDvVtXkCtController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($idkk)
+    public function index($masokk)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXk::where('id', $idkk)->first();
-            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)->first();
-            $model = DmDvVtXk::where('masothue', $modelkk->masothue)->get();
-            $modelgia = KkDvVtXkCt::where('idkk', $idkk)->get();
-
-            foreach ($model as $gianiemyet) {
-                $this->getGia($modelgia, $gianiemyet);
+            $modelkk = KkDvVtXk::where('masokk', $masokk)->first();
+            $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)->select('tendonvi')->first();
+            $model = KkDvVtXkCt::where('masokk', $masokk)->get();
+            if(count($model)==0) {
+                $modeldv = DmDvVtXk::where('masothue', $modelkk->masothue)->get();
+                foreach($modeldv as $dv){
+                    $giadv=new KkDvVtXkCt();
+                    $giadv->masokk=$masokk;
+                    $giadv->madichvu=$dv['madichvu'];
+                    $giadv->tendichvu=$dv['tendichvu'];
+                    $giadv->qccl=$dv['qccl'];
+                    $giadv->dvt=$dv['dvt'];
+                    $giadv->save();
+                }
+                $model = KkDvVtXkCt::where('masokk', $masokk)->get();
             }
 
             return view('quanly.dvvt.dvxk.kkct.index')
-                ->with('model', $model)
-                ->with('modeldonvi', $modeldonvi)
+                ->with('masokk', $masokk)
                 ->with('modelkk', $modelkk)
+                ->with('model', $model)
+                ->with('tendonvi', $modeldonvi->tendonvi)
                 ->with('pageTitle', 'Bảng kê khai giá dịch vụ vận tải bằng ô tô');
         } else
             return view('errors.notlogin');
     }
 
-    public function getGia($gias, $array)
-    {
-        foreach ($gias as $gia) {
-            if ($gia->madichvu == $array->madichvu) {
-                $array->giakk = $gia->giakk;
-                $array->giakklk = $gia->giakklk;
-                $array->idgia = $gia->id;
-            }
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($idkk, $madichvu)
+    public function edit($id)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXk::where('id', $idkk)->first();
-
-            $modeldichvu = DmDvVtXk::where('masothue', $modelkk->masothue)
-                ->where('madichvu', $madichvu)->first();
-
-            return view('quanly.dvvt.dvxk.kkct.create')
-                ->with('modeldichvu', $modeldichvu)
-                ->with('idkk', $idkk)
-                ->with('pageTitle', 'Nhập giá dịch vụ');
-        } else
-            return view('errors.notlogin');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        if (Session::has('admin')) {
-            $insert = $request->all();
-            $model = new KkDvVtXkCt();
-
-            $insert['giakklk'] = str_replace(',', '', $insert['giakklk']);
-            $insert['giakklk'] = str_replace('.', '', $insert['giakklk']);
-            $insert['giakk'] = str_replace(',', '', $insert['giakk']);
-            $insert['giakk'] = str_replace('.', '', $insert['giakk']);
-
-            $model->idkk = $insert['idkk'];
-            $model->giahl = $insert['giahl'];
-            $model->madichvu = $insert['madichvu'];
-            $model->giakk = $insert['giakk'];
-            $model->giakklk = $insert['giakklk'];
-            $model->save();
-            return redirect('dvvantai/kkdvxkct/' . $insert['idkk']);
-        } else
-            return view('errors.notlogin');
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($idkk, $idgia)
-    {
-        if (Session::has('admin')) {
-            $modelkk = KkDvVtXk::where('id', $idkk)->first();
-
-            $model = KkDvVtXkCt::where('id', $idgia)->first();
-
-            $modeldichvu = DmDvVtXk::where('masothue', $modelkk->masothue)
-                ->where('madichvu', $model->madichvu)->first();
-            //dd($modelphong);
+            $model = KkDvVtXkCt::where('id', $id)->first();
             return view('quanly.dvvt.dvxk.kkct.edit')
-                ->with('modeldichvu', $modeldichvu)
                 ->with('model', $model)
-                ->with('idkk', $idkk)
+                ->with('id', $id)
                 ->with('pageTitle', 'Cập nhật giá dịch vụ');
         } else
             return view('errors.notlogin');
@@ -132,70 +69,65 @@ class KkDvVtXkCtController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idkk, $idgia)
+    public function update(Request $request, $id)
     {
         if (Session::has('admin')) {
             $update = $request->all();
-            $model = KkDvVtXkCt::where('id', $idgia)->first();
+            $model = KkDvVtXkCt::where('id', $id)->first();
             $update['giakklk'] = str_replace(',', '', $update['giakklk']);
             $update['giakklk'] = str_replace('.', '', $update['giakklk']);
             $update['giakk'] = str_replace(',', '', $update['giakk']);
             $update['giakk'] = str_replace('.', '', $update['giakk']);
+            $update['giahl'] = str_replace(',', '', $update['giahl']);
+            $update['giahl'] = str_replace('.', '', $update['giahl']);
 
+            $model->tendichvu = $update['tendichvu'];
+            $model->qccl = $update['qccl'];
+            $model->dvt = $update['dvt'];
             $model->giakklk = $update['giakklk'];
             $model->giakk = $update['giakk'];
             $model->giahl = $update['giahl'];
+            $model->thuevat = $update['thuevat'];
             $model->save();
-            return redirect('dvvantai/kkdvxkct/' . $idkk);
-            //return redirect('ctkkgdvlt/'.$idkk);
+            return redirect('dvvantai/kkdvxkct/' . $model->masokk);
         } else
             return view('errors.notlogin');
     }
 
-    public function destroy(Request $request, $idkk)
+    public function destroy($id)
     {
         if (Session::has('admin')) {
-            $input = $request->all();
-            $model = KkDvVtXkCt::where('id', $input['iddelete'])->first();
+            $model = KkDvVtXkCt::where('id',$id)->first();
+
+            $masokk = $model->masokk;
+
             $model->delete();
 
-            return redirect('dvvantai/kkdvxkct/' . $idkk);
+            return redirect('dvvantai/kkdvxkct/' . $masokk);
         } else
             return view('errors.notlogin');
     }
 
-    public function printKK($idkk)
+    public function printKK($masokk)
     {
         if (Session::has('admin')) {
-            $modelkk = KkDvVtXk::where('id', $idkk)
+            $modelkk = KkDvVtXk::where('masokk', $masokk)
                 ->first();
             $modeldonvi = DonViDvVt::where('masothue', $modelkk->masothue)
                 ->first();
             $modeldm = DmDvVtXk::where('masothue', $modelkk->masothue)->get();
 
-            $modelgia = KkDvVtXkCt::where('idkk', $idkk)->get();
+            $modelgia = KkDvVtXkCt::where('masokk', $masokk)->get();
 
-            foreach ($modeldm as $dichvu) {
-                $this->getGiaDV($modelgia, $dichvu);
-            }
 
             return view('reports.kkgdvvt.kkgdvxk.printf')
                 ->with('modeldonvi', $modeldonvi)
                 ->with('modelkk', $modelkk)
+                ->with('modelgia', $modelgia)
                 ->with('modeldm', $modeldm)
                 ->with('pageTitle', 'Kê khai giá dịch vụ vận tải bằng ô tô');
         } else
             return view('errors.notlogin');
-    }
-
-    public function getGiaDV($giakk, $dichvu)
-    {
-        foreach ($giakk as $gia) {
-            if ($gia->madichvu == $dichvu->madichvu) {
-                $dichvu->giakklk = $gia->giakklk;
-                $dichvu->giakk = $gia->giakk;
-            }
-        }
     }
 
 }

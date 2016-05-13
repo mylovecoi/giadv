@@ -135,8 +135,10 @@ class DmDvVtXtxController extends Controller
             return view('errors.notlogin');
     }
 
-    public function chkDv($madichvu){
-        $obj=DmDvVtXtx::where('madichvu',$madichvu)->first();
+    public function chkDv($masothue,$madichvu){
+        $obj=DmDvVtXtx::where('madichvu',$madichvu)
+            ->where('masothue',$masothue)
+            ->first();
         if($obj){
             echo 'duplicate';
         }else{

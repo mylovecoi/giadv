@@ -27,9 +27,7 @@
         function confirmDelete(id) {
             $('#frmDelete').attr('action', "thaotac/delete/" + id);
         }
-        function confirmChuyen(id) {
-            $('#frmChuyen').attr('action', "thaotac/chuyen/" + id);
-        }
+
         function confirmTraLai(id) {
             $('#frmTraLai').attr('action', "thaotac/tralai/" + id);
         }
@@ -97,13 +95,10 @@
                                             <thead>
                                             <tr>
                                                 <th style="width: 1%; padding: 10px; background: #efefef"><input type="checkbox" class="checkall"/></th>
-                                                <th>Tên đơn vị</th>
                                                 <th>Ngày kê khai</th>
                                                 <th>Số công văn</th>
                                                 <th>Áp dụng từ ngày</th>
                                                 <th>Ngày nhận hồ sơ</th>
-                                                <th>Người nộp</th>
-                                                <th>Ghi chú</th>
                                                 <th style="width: 5%">Trạng thái</th>
                                                 <th style="width: 15%">Thao tác</th>
                                             </tr>
@@ -112,22 +107,22 @@
                                             @foreach($model as $kk)
                                                 <tr>
                                                     <td><input type="checkbox" type="checkbox" name = "ck_value"  id="ck_value" value="{{$kk->id}}"/></td>
-                                                    <td>{{$kk->tendonvi}}</td>
                                                     <td>{{getDayVn($kk->ngaynhap)}}</td>
                                                     <td>{{$kk->socv}}</td>
                                                     <td>{{getDayVn($kk->ngayhieuluc)}}</td>
                                                     <td>{{getDayVn($kk->ngaynhan)=='01/01/1970'?'':getDayVn($kk->ngaynhan)}}</td>
-                                                    <td>{{$kk->nguoinop}}</td>
-                                                    <td>{!! nl2br(e($kk->ghichu)) !!}</td>
                                                     @if($kk->trangthai == "Chờ chuyển")
                                                         <td align="center"><span class="badge badge-warning">{{$kk->trangthai}}</span></td>
+
                                                     @elseif($kk->trangthai == 'Chờ duyệt')
-                                                        <td align="center"><span class="badge badge-danger">{{$kk->trangthai}}</span></td>
+                                                        <td align="center"><span class="badge badge-danger">{{$kk->trangthai}}</span>
+                                                        <button type="button" onclick="clkNguoiChuyen('{{$kk->nguoinop.'&'.$kk->ngaychuyen.'&'.$kk->sdtnn.'&'.$kk->faxnn.'&'.$kk->emailnn}}')" class="badge badge-info" data-target="#nguoichuyen-modal-confirm" data-toggle="modal">&nbsp;
+                                                            Người nộp</button>
                                                     @else
                                                         <td align="center"><span class="badge badge-success">{{$kk->trangthai}}</span></td>
                                                     @endif
                                                     <td>
-                                                        <a href="{{url('dvvantai/dvxb/chitiet/danhsach/'.$kk->id)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Chi tiết</a>
+                                                        <a href="{{url('dvvantai/dvxb/chitiet/danhsach/'.$kk->masokk)}}" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Chi tiết</a>
 
                                                         @if($kk->trangthai == "Chờ chuyển")
                                                             <a href="{{url('dvvantai/dvxb/kekhai/'.$kk->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
@@ -135,7 +130,7 @@
                                                             <button type="button" onclick="confirmDelete('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;
                                                                 Xóa</button>
 
-                                                            <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
+                                                            <button type="button" onclick="confirmChuyen('{{$kk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyendvvt-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                                                 Chuyển</button>
                                                         @elseif($kk->trangthai == 'Chờ duyệt')
                                                             @if(session('admin')->level == 'T')
@@ -163,6 +158,50 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function confirmChuyen(id) {
+            $('#idkk').attr('value', id);
+        }
+
+        function clkNguoiChuyen(str){
+            //alert(str);
+            aNgCh=str.split('&');
+            $('input[name="nguoinoptt"]').val(aNgCh[0]);
+            $('input[name="ngaychuyentt"]').val(aNgCh[1]);
+            $('input[name="sdtnntt"]').val(aNgCh[2]);
+            $('input[name="faxnntt"]').val(aNgCh[3]);
+            $('input[name="emailnntt"]').val(aNgCh[4]);
+        }
+
+        function clickChuyenDVVT(id){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/dvvantai/dvxb/thaotac/chuyen',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: $('#idkk').val(),
+                    nguoinop: $('input[name="nguoinop"]').val(),
+                    ngaychuyen: $('input[name="ngaychuyen"]').val(),
+                    sdtnn: $('input[name="sdtnn"]').val(),
+                    faxnn: $('input[name="faxnn"]').val(),
+                    emailnn: $('input[name="emailnn"]').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if(data.status == 'success') {
+                        alert('Chuyển bảng kê khai thành công.');
+                        location.reload();
+                    }
+                },
+                error: function(message){
+                    alert(message);
+            }
+            })
+
+        }
+    </script>
 
     @include('includes.e.modal-confirm')
 

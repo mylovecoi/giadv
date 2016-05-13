@@ -72,12 +72,15 @@ class KkDvVtXkController extends Controller
     public function store(Request $request)
     {
         if (Session::has('admin')) {
+            $ma=getdate();
             $insert = $request->all();
             $model = new KkDvVtXk();
+            $model->masokk = session('admin')->mahuyen . '.' . $ma[0];
             $model->ngaynhap = $insert['ngaynhap'];
             $model->socv = $insert['socv'];
+            //$model->socvlk = $insert['socv']; lấy trong bảng công bố
             $model->ngayhieuluc = $insert['ngayhieuluc'];
-            $model->nguoinop=$insert['nguoinop'];
+            //$model->nguoinop=$insert['nguoinop'];
             $model->trangthai = 'Chờ chuyển';
             $model->masothue = session('admin')->mahuyen;
             $model->ghichu = $insert['ghichu'];
@@ -86,17 +89,6 @@ class KkDvVtXkController extends Controller
 
         }else
             return view('errors.notlogin');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -132,7 +124,7 @@ class KkDvVtXkController extends Controller
             $model->socv = $update['socv'];
             $model->ngayhieuluc = $update['ngayhieuluc'];
             $model->ghichu = $update['ghichu'];
-            $model->nguoinop = $update['nguoinop'];
+            //$model->nguoinop = $update['nguoinop'];
             $model->ngaynhan = $update['ngaynhan'];
             $model->save();
             return redirect('dvvantai/kkdvxk');
@@ -157,14 +149,33 @@ class KkDvVtXkController extends Controller
             return view('errors.notlogin');
     }
 
-    public function chuyen($id){
-        if (Session::has('admin')) {
-            $model = KkDvVtXk::findOrFail($id);
+    public function chuyen(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $model = KkDvVtXk::findOrFail($inputs['id']);
             $model->trangthai = 'Chờ duyệt';
+            $model->nguoinop = $inputs['nguoinop'];
+            $model->ngaychuyen = $inputs['ngaychuyen'];
+            $model->sdtnn = $inputs['sdtnn'];
+            $model->faxnn = $inputs['faxnn'];
+            $model->emailnn = $inputs['emailnn'];
             $model->save();
-            return redirect('dvvantai/kkdvxk');
-        }else
-            return view('errors.notlogin');
+            $result['message'] = 'Chuyển thành công.';
+            $result['status'] = 'success';
+        }
+        die(json_encode($result));
     }
 
     public function duyet($ids){
@@ -193,13 +204,35 @@ class KkDvVtXkController extends Controller
             return view('errors.notlogin');
     }
 
-    public function tralai($id){
-        if (Session::has('admin')) {
-            $model = KkDvVtXk::findOrFail($id);
-            $model->trangthai = 'Chờ chuyển';
+    public function tralai(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $model = KkDvVtXk::findOrFail($inputs['id']);
+            $model->trangthai = 'Bị trả lại';
+            $model->lydo = $inputs['lydo'];
+            /* có nên xóa thông tin người nôp khi trả lại ko ?????
+            $model->nguoinop = $inputs['nguoinop'];
+            $model->ngaychuyen = $inputs['ngaychuyen'];
+            $model->sdtnn = $inputs['sdtnn'];
+            $model->faxnn = $inputs['faxnn'];
+            $model->emailnn = $inputs['emailnn'];
+            */
             $model->save();
-            return redirect('dvvantai/kkdvxk');
-        }else
-            return view('errors.notlogin');
+            $result['message'] = 'Trả lại thành công.';
+            $result['status'] = 'success';
+        }
+        die(json_encode($result));
     }
 }

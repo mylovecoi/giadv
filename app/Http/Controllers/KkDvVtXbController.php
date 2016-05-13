@@ -29,11 +29,9 @@ class KkDvVtXbController extends Controller
                     ->get();
 
             $modeldonvi = DonViDvVt::all();
-
             foreach($model as $dn){
                 $this->getTenDV($modeldonvi,$dn);
             }
-
             return view('quanly.dvvt.dvxb.kkdv.index')
                 ->with('model',$model)
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải');
@@ -72,10 +70,13 @@ class KkDvVtXbController extends Controller
     public function store(Request $request)
     {
         if (Session::has('admin')) {
+            $ma=getdate();
             $insert = $request->all();
             $model = new KkDvVtXb();
+            $model->masokk = session('admin')->mahuyen . '.' . $ma[0];
             $model->ngaynhap = $insert['ngaynhap'];
             $model->socv = $insert['socv'];
+            //$model->socvlk = $insert['socv'];
             $model->ngayhieuluc = $insert['ngayhieuluc'];
             $model->nguoinop=$insert['nguoinop'];
             $model->trangthai = 'Chờ chuyển';
@@ -138,7 +139,6 @@ class KkDvVtXbController extends Controller
     public function destroy($id)
     {
         if (Session::has('admin')) {
-
             $model = KkDvVtXb::findOrFail($id);
             $model->delete();
             return redirect('dvvantai/dvxb/kekhai');
@@ -146,14 +146,33 @@ class KkDvVtXbController extends Controller
             return view('errors.notlogin');
     }
 
-    public function chuyen($id){
-        if (Session::has('admin')) {
-            $model = KkDvVtXb::findOrFail($id);
+    public function chuyen(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $model = KkDvVtXb::findOrFail($inputs['id']);
             $model->trangthai = 'Chờ duyệt';
+            $model->nguoinop = $inputs['nguoinop'];
+            $model->ngaychuyen = $inputs['ngaychuyen'];
+            $model->sdtnn = $inputs['sdtnn'];
+            $model->faxnn = $inputs['faxnn'];
+            $model->emailnn = $inputs['emailnn'];
             $model->save();
-            return redirect('dvvantai/dvxb/kekhai');
-        }else
-            return view('errors.notlogin');
+            $result['message'] = 'Chuyển thành công.';
+            $result['status'] = 'success';
+        }
+        die(json_encode($result));
     }
 
     public function duyet($ids){

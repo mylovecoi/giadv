@@ -55,7 +55,7 @@
                                                 <th style="width: 1%; padding: 10px; background: #efefef"><input type="checkbox" class="checkall"/></th>
                                                 <th style="width: 10%">Mã dịch vụ</th>
                                                 <th style="width: 25%">Tên dịch vụ</th>
-                                                <th style="width: 25%">Quy cách chất lượng phòng</th>
+                                                <th style="width: 25%">Quy cách chất lượng</th>
                                                 <th style="width: 10%">Đơn vị tính</th>
                                                 <th style="width: 20%">Ghi chú</th>
                                                 <th style="width: 10%">Thao tác</th>

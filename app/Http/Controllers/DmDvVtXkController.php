@@ -56,7 +56,6 @@ class DmDvVtXkController extends Controller
     {
         if (Session::has('admin')) {
             $insert = $request->all();
-
             $model = new DmDvVtXk();
             $model->madichvu = $insert['madichvu'];
             $model->tendichvu = $insert['tendichvu'];
@@ -70,17 +69,6 @@ class DmDvVtXkController extends Controller
 
         }else
             return view('errors.notlogin');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -148,8 +136,10 @@ class DmDvVtXkController extends Controller
             return view('errors.notlogin');
     }
 
-    public function chkDvXk($madichvu){
-        $obj=DmDvVtXk::where('madichvu',$madichvu)->first();
+    public function chkDvXk($masothue,$madichvu){
+        $obj=DmDvVtXk::where('madichvu',$madichvu)
+            ->where('masothue',$masothue)
+            ->first();
         if($obj){
             echo 'duplicate';
         }else{

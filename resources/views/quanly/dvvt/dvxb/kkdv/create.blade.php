@@ -63,10 +63,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Ghi chú
+                                        <label class="col-sm-4 control-label">Các yếu tố cấu thành giá
                                         </label>
                                         <div class="col-sm-4 controls">
-                                            <textarea id="ghichu" class="form-control" name="ghichu" cols="30" rows="10"></textarea>
+                                            <textarea id="ghichu" class="form-control" name="ghichu" cols="30" rows="10" placeholder="Các yếu tố chi phí cấu thành giá (đối với kê khai lần đầu); phân tích nguyên nhân, nêu rõ biến động của các yếu tố hình thành giá tác động làm tăng hoặc giảm giá (đối với kê khai lại)."></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">

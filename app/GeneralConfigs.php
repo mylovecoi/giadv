@@ -9,7 +9,6 @@ class GeneralConfigs extends Model
     protected $table = 'general-configs';
     protected $filltable = [
         'id',
-<<<<<<< HEAD
         'maqhns',
         'tendonvi',
         'diachi',
@@ -21,14 +20,6 @@ class GeneralConfigs extends Model
         'sodvlt',
         'sodvvt',
         'ttlh'
-=======
-        'madv',
-        'donvi',
-        'diachi',
-        'thutruong',
-        'ketoan',
-        'nguoilapbieu',
-        'namhethong'
->>>>>>> origin/master
+
     ];
 }

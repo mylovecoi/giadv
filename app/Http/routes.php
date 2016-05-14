@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -53,7 +52,9 @@ Route::resource('general','GeneralConfigsController');
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="--Quản lý--">
-//Giá dịch vụ lưu trú
+
+// <editor-fold defaultstate="collapsed" desc="--Giá dịch vụ lưu trú--">
+
 //Kê khai thông tin doanh nghiệp
 Route::get('ttdndvlt','DvLtController@TtDnIndex');
 Route::get('ttdndvlt/{id}/edit','DvLtController@TtDnEdit');
@@ -96,11 +97,14 @@ Route::get('kkgdvlt/viewkk/{id}','ReportsController@kkgdv');
 Route::get('xetduyetkkgdvlt','DvLtController@index');
 Route::post('xetduyetkkgdvlt/tralai','DvLtController@tralai');
 Route::get('/ajax/viewlydo/','AjaxController@viewlydo');
+Route::post('xetduyetkkgdvlt/duyet','DvLtController@duyet');
 //End Kê khai giá dịch vụ lưu trú
 
 //End giá dịch vụ lưu trú
+// </editor-fold>
 
-//Giá dịch vụ vận tải
+// <editor-fold defaultstate="collapsed" desc="--Giá dịch vụ vận tải--">
+
 Route::group(['prefix'=>'dvvantai'],function(){
     //Danh sách đơn vị
     Route::resource('donvi','DonViDvVtController');
@@ -217,7 +221,7 @@ Route::group(['prefix'=>'dvvantai'],function(){
     //End Dịch vụ vận tải khác
 });
 //End Giá dịch vụ vận tải
-
+// </editor-fold>
 
 // </editor-fold>
 

@@ -61,6 +61,13 @@ function getDayVn($date) {
         $newday='';
     return $newday;
 }
+function getDateTime($date) {
+    if($date != null)
+        $newday = date('d/m/Y H:i:s',strtotime($date));
+    else
+        $newday='';
+    return $newday;
+}
 
 function can($module = null, $action = null)
 {

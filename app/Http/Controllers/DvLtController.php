@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\CsKdDvLt;
 use App\DnDvLt;
+use App\GeneralConfigs;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
 use App\TtCsKdDvLt;
 use App\TtPhong;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,7 +28,7 @@ class DvLtController extends Controller
     {
         if (Session::has('admin')) {
             $model = KkGDvLt::where('trangthai','Chờ duyệt')
-                //->Orwhere('trangthai','Duyệt')
+                ->Orwhere('trangthai','Duyệt')
                 ->get();
             $modelcskd = CsKdDvLt::all();
             foreach($model as $ttkk){
@@ -64,6 +66,31 @@ class DvLtController extends Controller
             return view('errors.notlogin');
     }
 
+    public function duyet(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            $model = KkGDvLt::where('id',$input['idduyet'])
+                ->first();
+            $model->trangthai = 'Duyệt';
+            $model->ngaynhan = Carbon::now()->toDateString();
+            $model->sohsnhan = getGeneralConfigs()['sodvlt'] + 1;
+            if($model->save()){
+                $modelconfig = GeneralConfigs::first();
+                $modelconfig->sodvlt = getGeneralConfigs()['sodvlt'] + 1;
+                $modelconfig->save();
+            }
+
+            return redirect('xetduyetkkgdvlt');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function congbo($id){
+        $model = KkGDvLt::findOrFail($id);
+        //$modeldel =
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -339,6 +366,7 @@ class DvLtController extends Controller
             $model->socv = $insert['socv'];
             $model->ngayhieuluc = $insert['ngayhieuluc'];
             $model->socvlk = $insert['socvlk'];
+            $model->ngaycvlk = $insert['ngaycvlk'];
             $model->trangthai = 'Chờ chuyển';
             $model->macskd = $insert['macskd'];
             $model->masothue = session('admin')->mahuyen;
@@ -420,8 +448,7 @@ class DvLtController extends Controller
     public function KkGDvLtChuyen(Request $request,$id){
         if (Session::has('admin')) {
             $input = $request->all();
-            $now = getdate();
-            $tgchuyen = $now['mday'].'/'.$now['mon'].'/'.$now['year'].'-'.$now['hours'].':'.$now['minutes'];
+            $tgchuyen = Carbon::now()->toDateTimeString();
             $model = KkGDvLt::where('id',$input['idchuyen'])->first();
             $model->ttnguoinop = $input['ttnguoinop'];
             $model->trangthai = 'Chờ duyệt';
@@ -433,6 +460,7 @@ class DvLtController extends Controller
         }else
             return view('errors.notlogin');
     }
+
 
 // </editor-fold>
 

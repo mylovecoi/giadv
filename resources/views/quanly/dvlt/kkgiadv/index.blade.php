@@ -69,6 +69,7 @@
                                                 <th>Ngày kê khai</th>
                                                 <th>Ngày thực hiện<br>mức giá kê khai</th>
                                                 <th>Số công văn</th>
+                                                <th>Số công văn liền kề</th>
                                                 <th width="15%">Trạng thái</th>
                                                 <th width="20%">Thao tác</th>
                                             </tr>
@@ -79,19 +80,28 @@
                                                 <td><input type="checkbox" type="checkbox" name = "ck_value"  id="ck_value" value="{{$ttkk->id}}"/></td>
                                                 <td>{{getDayVn($ttkk->ngaynhap)}}</td>
                                                 <td>{{getDayVn($ttkk->ngayhieuluc)}}</td>
-                                                <td>{{$ttkk->socv}}</td>
+                                                <td>{{$ttkk->socv}}
+                                                    @if($ttkk->trangthai== 'Duyệt')
+                                                        <br>Số hồ sơ nhận: {{$ttkk->sohsnhan}}
+                                                        <br>Ngày nhận: {{getDayVn($ttkk->ngaynhan)}}
+                                                    @endif
+                                                </td>
+                                                <td>{{$ttkk->socvlk.'-'.getDayVn($ttkk->ngaycvlk)}}</td>
                                                 @if($ttkk->trangthai == "Chờ chuyển")
                                                 <td align="center"><span class="badge badge-warning">{{$ttkk->trangthai}}</span></td>
                                                 @elseif($ttkk->trangthai == 'Chờ duyệt')
-                                                    <td align="center"><span class="badge badge-success">{{$ttkk->trangthai}}</span></td>
+                                                    <td align="center"><span class="badge badge-success">{{$ttkk->trangthai}}</span>
+                                                        <br>Thời gian chuyển:<br><b>{{getDateTime($ttkk->ngaychuyen)}}</b>
+                                                    </td>
                                                 @elseif($ttkk->trangthai == 'Bị trả lại')
                                                     <td align="center">
                                                         <span class="badge badge-danger">{{$ttkk->trangthai}}</span><br>&nbsp;
-
                                                     </td>
-
                                                 @else
-                                                    <td align="center"><span class="badge badge-success">{{$ttkk->trangthai}}</span></td>
+                                                    <td align="center">
+                                                        <span class="badge badge-success">{{$ttkk->trangthai}}</span>
+                                                        <br>Thời gian chuyển:<br><b>{{getDateTime($ttkk->ngaychuyen)}}</b>
+                                                    </td>
                                                 @endif
                                                 <td>
                                                     <a href="{{url('kkgdvlt/viewkk/'.$ttkk->id)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>

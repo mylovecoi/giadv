@@ -50,7 +50,7 @@
             <i>V/v kê khai giá dịch vụ lưu trú</i>
         </td>
         <td>
-            <i>{{$modeldn->diadanh}} ngày..{{ date("d",strtotime($modelkk->ngaynhap))}}..tháng..{{ date("m",strtotime($modelkk->ngaynhap))}}..năm..{{ date("Y",strtotime($modelkk->ngaynhap))}}..</i>
+            <i>{{$modeldn->diadanh}}, ngày..{{ date("d",strtotime($modelkk->ngaynhap))}}..tháng..{{ date("m",strtotime($modelkk->ngaynhap))}}..năm..{{ date("Y",strtotime($modelkk->ngaynhap))}}..</i>
         </td>
     </tr>
 </table>
@@ -78,7 +78,7 @@
 
 <p>{{$modeldn->tendn}} gửi Bảng kê khai giá dịch vụ lưu trú và kê khai thực hiện kể từ ngày <span>{{getDayVn($modelkk->ngayhieuluc)}}</span></p>
 
-<p>Bảng kê khai giá gửi kèm theo công văn này sẽ thay thế cho Bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}}.</p>
+<p>Bảng kê khai giá gửi kèm theo công văn này sẽ thay thế cho Bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}}- ngày {{getDayVn($modelkk->ngaycvlk)}}.</p>
 
 <p>{{$modeldn->tendn}} xin chịu trách nhiệm trước pháp luật về tính đúng đắn của mức giá mà chúng tôi kê khai.</p>
 
@@ -95,16 +95,22 @@
             <b>{{$modeldn->chucdanhky}}</b><br>
         </td>
     </tr>
-
 </table>
+
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:100px auto; text-align: center;">
     <tr>
         <td style="text-align: center;">
             Cơ quan tiếp nhận biểu mẫu đăng ký giá<br>
             ghi nhận ngày nộp biểu mẫu đăng ký giá<br>
-            <br><br><br><br>
+            @if($modelkk->sohsnhan != '')
+                Đã nhận hồ sơ<br>
+                Số: {{$modelkk->sohsnhan}}<br>
+                Ngày: {{getDayVn($modelkk->ngaynhan)}}
+            @endif
         </td>
     </tr>
+</table>
+
 </table>
 <p style="page-break-before: always">
 <!--Trang2-->
@@ -158,7 +164,12 @@
         <td style="text-align: center;">
             Cơ quan tiếp nhận biểu mẫu đăng ký giá<br>
             ghi nhận ngày nộp biểu mẫu đăng ký giá<br>
-            <br><br><br><br>
+
+            @if($modelkk->sohsnhan != '')
+                Đã nhận hồ sơ<br>
+                Số: {{$modelkk->sohsnhan}}<br>
+                Ngày: {{getDayVn($modelkk->ngaynhan)}}
+            @endif
         </td>
     </tr>
 </table>
@@ -178,7 +189,7 @@
     </tr>
 </table>
 <p style="text-align: center; font-weight: bold; font-size: 16px;">BẢNG GIÁ PHÒNG</p>
-<p style="text-align: center;">Thực hiện từ ngày<br>(Theo bảng giá đã kê khai)</p>
+<p style="text-align: center;">Thực hiện từ ngày {{ date("d",strtotime($modelkk->ngayhieuluc))}} tháng {{ date("m",strtotime($modelkk->ngayhieuluc))}} năm {{ date("Y",strtotime($modelkk->ngayhieuluc))}} <br>(Theo bảng giá đã kê khai với cơ quan tài chính  ngày {{ date("d",strtotime($modelkk->ngaynhap))}} tháng {{ date("m",strtotime($modelkk->ngaynhap))}} năm {{ date("Y",strtotime($modelkk->ngaynhap))}} )</p>
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
         <th>Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>

@@ -20,6 +20,7 @@ class CreateCbkkgdvltTable extends Migration
             $table->date('ngaynhap')->nullable();
             $table->string('socv')->nullable();
             $table->string('socvlk')->nullable();
+            $table->date('ngaycvlk')->nullable();
             $table->date('ngayhieuluc')->nullable();
             $table->text('ttnguoinop')->nullable();
             $table->date('ngaynhan')->nullable();

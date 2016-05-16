@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CbKkGDvLt;
 use App\CsKdDvLt;
 use App\DnDvLt;
 use App\GeneralConfigs;
@@ -80,6 +81,7 @@ class DvLtController extends Controller
                 $modelconfig->sodvlt = getGeneralConfigs()['sodvlt'] + 1;
                 $modelconfig->save();
             }
+            $this->congbo($input['idduyet']);
 
             return redirect('xetduyetkkgdvlt');
 
@@ -88,8 +90,23 @@ class DvLtController extends Controller
     }
 
     public function congbo($id){
-        $model = KkGDvLt::findOrFail($id);
-        //$modeldel =
+        $modelkk = KkGDvLt::findOrFail($id);
+        $modeldel = CbKkGDvLt::where('macskd',$modelkk->macskd)
+            ->delete();
+        $model = new CbKkGDvLt();
+        $model->ngaynhap = $modelkk->ngaynhap;
+        $model->mahs = $modelkk->mahs;
+        $model->socv = $modelkk->socv;
+        $model->ngayhieuluc = $modelkk->ngayhieuluc;
+        $model->socvlk = $modelkk->socvlk;
+        $model->ngaycvlk = $modelkk->ngaycvlk;
+        //$model->trangthai = 'Chờ chuyển';
+        $model->macskd = $modelkk->macskd;
+        $model->masothue = $modelkk->masothue;
+        $model->ghichu = $modelkk->ghichu;
+        $model->ngaynhan = $modelkk->ngaynhan;
+        $model->sohsnhan = $modelkk->sohsnhan;
+        $model->save();
     }
     /**
      * Show the form for creating a new resource.

@@ -41,4 +41,16 @@ class ReportsController extends Controller
             return view('errors.notlogin');
     }
 
+    public function dvltbc1(Request $request){
+        if (Session::has('admin')) {
+
+
+            return view('reports.kkgdvlt.bcth.BC1')
+
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+
+        }else
+            return view('errors.notlogin');
+    }
+
 }

@@ -225,3 +225,12 @@ Route::group(['prefix'=>'dvvantai'],function(){
 
 // </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="--Báo cáo--">
+
+Route::get('reports/dvlt', function(){
+    return view('reports.kkgdvlt.bcth.index')
+        ->with('pageTitle','Báo cáo tổng hợp dịch vụ lưu trú');
+});
+Route::post('reports/dvlt/BC1','ReportsController@dvltbc1');
+
+// </editor-fold>

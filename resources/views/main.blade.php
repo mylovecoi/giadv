@@ -123,9 +123,9 @@
                     <!--End Quản lý dịch vụ vận tải-->
 
                     <!--Báo cáo thống kê-->
-                    <li id="navbaocao"><a href="{{url('')}}"><i class="fa fa-file fa-fw"></i><span class="menu-title">Báo cáo - Thống kê</span><span class="fa arrow"></span></a>
+                    <li id="navbaocao"><a href="{{url('')}}"><i class="fa fa-file fa-fw"></i><span class="menu-title">Báo cáo tổng hợp</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{url('')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Báo cáo thống kê</span></a></li>
+                            <li><a href="{{url('reports/dvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Dịch vụ lưu trú</span></a></li>
 
                         </ul>
                     </li>

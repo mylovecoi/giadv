@@ -39,7 +39,7 @@
                 data: {
                     _token: CSRF_TOKEN,
                     id: $('input[name="idedit"]').val(),
-                    maloaip: $('input[name="maloaipedit"]').val(),
+                    //maloaip: $('input[name="maloaipedit"]').val(),
                     loaip: $('input[name="loaipedit"]').val(),
                     qccl: $('textarea[name="qccledit"]').val(),
                     sohieu: $('textarea[name="sohieuedit"]').val(),
@@ -92,7 +92,7 @@
                     <div class="panel-heading">Kê khai thông tin cơ sở kinh doanh dịch vụ lưu trú</div>
                     <div class="panel-body pan">
                         {!! Form::open(['url'=>'ttcskddvlt', 'id' => 'create-ttcskddvlt', 'class'=>'horizontal-form form-validate']) !!}
-                        <div class="form-body pal"><b>Thông tin cơ sở kinh doanh</b>
+                        <div class="form-body pal"><!--b>Thông tin cơ sở kinh doanh</b-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputLastName" class="control-label">Tên cơ sở kinh doanh<span class="require">*</span></label>
@@ -138,12 +138,12 @@
                             <b>Thông tin phòng-chất lượng quy cách</b>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <!--div class="col-md-6">
                                     <div class="form-group"><label for="selGender" class="control-label">Ký hiệu loại phòng
                                             <span class="require">*</span></label>
                                         <div><input type="text" name="maloaip" id="maloaip" class="form-control"></div>
                                     </div>
-                                </div>
+                                </div-->
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="selGender" class="control-label">Loại phòng
                                             <span class="require">*</span></label>
@@ -195,7 +195,7 @@
                                         <table id="tabletrocap" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                             <thead>
                                             <tr>
-                                                <th>Ký hiệu loại phòng</th>
+                                                <!--th>Ký hiệu loại phòng</th-->
                                                 <th>Loại phòng</th>
                                                 <th>Quy cách chất lượng</th>
                                                 <th>Số hiệu phòng</th>
@@ -235,7 +235,7 @@
                     type: 'GET',
                     data: {
                         _token: CSRF_TOKEN,
-                        maloaip: $('input[name="maloaip"]').val(),
+                        //maloaip: $('input[name="maloaip"]').val(),
                         loaip: $('input[name="loaip"]').val(),
                         qccl: $('textarea[name="qccl"]').val(),
                         sohieu: $('textarea[name="sohieu"]').val(),
@@ -248,12 +248,12 @@
                          if(data.status == 'success') {
                              alert('Cập nhật thông tin thành công');
                              $('#ttphong').replaceWith(data.message);
-                             $('#maloaip').val('');
+                             //$('#maloaip').val('');
                              $('#loaip').val('');
                              $('#qccl').val('');
                              $('#sohieu').val('');
                              $('#ghichu').val('');
-                             $('#maloaip').focus();
+                             $('#loaip').focus();
                         }
                     }
                 })
@@ -281,4 +281,5 @@
             </div>
         </div>
     </div>
+
 @stop

@@ -55,6 +55,9 @@
         <th>Tên cơ sở kinh doanh</th>
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
+        <th>Số công văn</th>
+        <th>Ngày kê khai</th>
+        <th>Ngày thực hiện<br> mức giá kê khai</th>
         <th>Mức giá kê khai liền kề</th>
         <th>Mức giá kê</th>
         <th>Mức tăng giảm</th>
@@ -66,6 +69,9 @@
             <th style="text-align: right"></th>
             <th style="text-align: right"></th>
             <th style="text-align: left"></th>
+            <th style="text-align: left"></th>
+            <th style="text-align: right"></th>
+            <th style="text-align: right"></th>
             <th style="text-align: left"></th>
             <th style="text-align: right"></th>
             <th style="text-align: right"></th>

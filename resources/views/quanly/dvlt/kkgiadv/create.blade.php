@@ -175,7 +175,7 @@
                                     <div class="form-group"><label for="inputEmail" class="control-label">Số công văn liền kề
                                             <span class="require">*</span></label>
                                         <div>
-                                            <input type="text" name="socvlk" id="socvlk" class="form-control required">
+                                            <input type="text" name="socvlk" id="socvlk" class="form-control required" value="{{(isset($modelcb)) ? $modelcb->socvlk : '' }}">
                                             <!--Bổ xung sau-->
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
                                     <div class="form-group"><label for="inputEmail" class="control-label">Ngày nhập số công văn liền kề
                                             <span class="require">*</span></label>
                                         <div>
-                                            <div><input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control required"></div>
+                                            <div><input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control required" value="{{(isset($modelcb)) ? $modelcb->ngaycvlk : '' }}"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                                                 <tr>
                                                     <td>{{$ph->loaip.'-'.$ph->qccl}}</td>
                                                     <td>{{$ph->sohieu}}</td>
-                                                    <td></td>
+                                                    <td>{{number_format($ph->gialk)}}</td>
                                                     <td></td>
                                                     <td>
                                                         <button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem({{$ph->id}});"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>

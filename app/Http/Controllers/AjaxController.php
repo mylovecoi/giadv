@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CbKkGDvLt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
@@ -15,7 +16,9 @@ use Illuminate\Support\Facades\Session;
 
 class AjaxController extends Controller
 {
-// <editor-fold defaultstate="collapsed" desc="--Tạo mới thông tin cơ sở kinh doanh--">
+
+
+// <editor-fold defaultstate="collapsed" desc="--Tạo mới thông tin cơ sở kinh doanh DVLT--">
     public function createph(Request $request){
         $result = array(
             'status' => 'fail',
@@ -31,9 +34,9 @@ class AjaxController extends Controller
         //dd($request);
         $inputs = $request->all();
 
-        if(isset($inputs['maloaip'])){
+        if(isset($inputs['loaip'])){
             $modelph = new TtPhong();
-            $modelph->maloaip = $inputs['maloaip'];
+            $modelph->maloaip = getdate()[0];
             $modelph->loaip = $inputs['loaip'];
             $modelph->qccl = $inputs['qccl'];
             $modelph->sohieu = $inputs['sohieu'];
@@ -47,7 +50,7 @@ class AjaxController extends Controller
             if(count($model) > 0){
                 foreach($model as $phong){
                     $result['message'] .= '<tr>';
-                    $result['message'] .= '<td>'.$phong->maloaip.'</td>';
+                    //$result['message'] .= '<td>'.$phong->maloaip.'</td>';
                     $result['message'] .= '<td>'.$phong->loaip.'</td>';
                     $result['message'] .= '<td>'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
@@ -90,11 +93,11 @@ class AjaxController extends Controller
 
 
             $result['message'] .= '<div class="row">';
-            $result['message'] .= '<div class="col-md-6">';
-            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Ký hiệu loại phòng<span class="require">*</span></label>';
-            $result['message'] .= '<div><input type="text" name="maloaipedit" id="maloaipedit" class="form-control" value="'.$model->maloaip.'"></div>';
-            $result['message'] .= '</div>';
-            $result['message'] .= '</div>';
+            //$result['message'] .= '<div class="col-md-6">';
+            //$result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Ký hiệu loại phòng<span class="require">*</span></label>';
+            //$result['message'] .= '<div><input type="text" name="maloaipedit" id="maloaipedit" class="form-control" value="'.$model->maloaip.'"></div>';
+            //$result['message'] .= '</div>';
+            //$result['message'] .= '</div>';
             $result['message'] .= '<div class="col-md-6">';
             $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Loại phòng<span class="require">*</span></label>';
             $result['message'] .= '<div><input type="text" name="loaipedit" id="loaipedit" class="form-control" value="'.$model->loaip.'"></div>';
@@ -148,9 +151,9 @@ class AjaxController extends Controller
         //dd($request);
         $inputs = $request->all();
 
-        if(isset($inputs['maloaip'])){
+        if(isset($inputs['loaip'])){
             $modelph = TtPhong:: where('id',$inputs['id'])->first();
-            $modelph->maloaip = $inputs['maloaip'];
+            //$modelph->maloaip = $inputs['maloaip'];
             $modelph->loaip = $inputs['loaip'];
             $modelph->qccl = $inputs['qccl'];
             $modelph->sohieu = $inputs['sohieu'];
@@ -164,7 +167,7 @@ class AjaxController extends Controller
             if(count($model) > 0){
                 foreach($model as $phong){
                     $result['message'] .= '<tr>';
-                    $result['message'] .= '<td>'.$phong->maloaip.'</td>';
+                    //$result['message'] .= '<td>'.$phong->maloaip.'</td>';
                     $result['message'] .= '<td>'.$phong->loaip.'</td>';
                     $result['message'] .= '<td>'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
@@ -209,7 +212,7 @@ class AjaxController extends Controller
             if(count($model) > 0){
                 foreach($model as $phong){
                     $result['message'] .= '<tr>';
-                    $result['message'] .= '<td>'.$phong->maloaip.'</td>';
+                    //$result['message'] .= '<td>'.$phong->maloaip.'</td>';
                     $result['message'] .= '<td>'.$phong->loaip.'</td>';
                     $result['message'] .= '<td>'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
@@ -230,6 +233,7 @@ class AjaxController extends Controller
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="--Chỉnh sửa thông tin cơ sở kinh doanh--">
+
     public function chinhsuaph(Request $request){
         $result = array(
             'status' => 'fail',
@@ -254,11 +258,11 @@ class AjaxController extends Controller
 
 
             $result['message'] .= '<div class="row">';
-            $result['message'] .= '<div class="col-md-6">';
-            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Ký hiệu loại phòng<span class="require">*</span></label>';
-            $result['message'] .= '<div><input type="text" name="maloaipedit" id="maloaipedit" class="form-control" value="'.$model->maloaip.'"></div>';
-            $result['message'] .= '</div>';
-            $result['message'] .= '</div>';
+            //$result['message'] .= '<div class="col-md-6">';
+            //$result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Ký hiệu loại phòng<span class="require">*</span></label>';
+            //$result['message'] .= '<div><input type="text" name="maloaipedit" id="maloaipedit" class="form-control" value="'.$model->maloaip.'"></div>';
+            //$result['message'] .= '</div>';
+            //$result['message'] .= '</div>';
             $result['message'] .= '<div class="col-md-6">';
             $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Loại phòng<span class="require">*</span></label>';
             $result['message'] .= '<div><input type="text" name="loaipedit" id="loaipedit" class="form-control" value="'.$model->loaip.'"></div>';
@@ -313,9 +317,9 @@ class AjaxController extends Controller
         //dd($request);
         $inputs = $request->all();
 
-        if(isset($inputs['maloaip'])){
+        if(isset($inputs['loaip'])){
             $modelph = TtCsKdDvLt:: where('id',$inputs['id'])->first();
-            $modelph->maloaip = $inputs['maloaip'];
+            //$modelph->maloaip = $inputs['maloaip'];
             $modelph->loaip = $inputs['loaip'];
             $modelph->qccl = $inputs['qccl'];
             $modelph->sohieu = $inputs['sohieu'];
@@ -329,7 +333,7 @@ class AjaxController extends Controller
             if(count($model) > 0){
                 foreach($model as $phong){
                     $result['message'] .= '<tr>';
-                    $result['message'] .= '<td>'.$phong->maloaip.'</td>';
+                    //$result['message'] .= '<td>'.$phong->maloaip.'</td>';
                     $result['message'] .= '<td>'.$phong->loaip.'</td>';
                     $result['message'] .= '<td>'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
@@ -378,7 +382,7 @@ class AjaxController extends Controller
             if(count($model) > 0){
                 foreach($model as $phong){
                     $result['message'] .= '<tr>';
-                    $result['message'] .= '<td>'.$phong->maloaip.'</td>';
+                    //$result['message'] .= '<td>'.$phong->maloaip.'</td>';
                     $result['message'] .= '<td>'.$phong->loaip.'</td>';
                     $result['message'] .= '<td>'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
@@ -412,9 +416,9 @@ class AjaxController extends Controller
         //dd($request);
         $inputs = $request->all();
 
-        if(isset($inputs['maloaip'])){
+        if(isset($inputs['loaip'])){
             $modelph = new TtCsKdDvLt();
-            $modelph->maloaip = $inputs['maloaip'];
+            //$modelph->maloaip = $inputs['maloaip'];
             $modelph->loaip = $inputs['loaip'];
             $modelph->qccl = $inputs['qccl'];
             $modelph->sohieu = $inputs['sohieu'];
@@ -428,7 +432,7 @@ class AjaxController extends Controller
             if(count($model) > 0){
                 foreach($model as $phong){
                     $result['message'] .= '<tr>';
-                    $result['message'] .= '<td>'.$phong->maloaip.'</td>';
+                    //$result['message'] .= '<td>'.$phong->maloaip.'</td>';
                     $result['message'] .= '<td>'.$phong->loaip.'</td>';
                     $result['message'] .= '<td>'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
@@ -448,7 +452,7 @@ class AjaxController extends Controller
     }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="--Tạo giá phòng kê khai--">
+// <editor-fold defaultstate="collapsed" desc="--Chỉnh sửa giá phòng--">
     public function editgiaph(Request $request){
         $result = array(
             'status' => 'fail',
@@ -474,8 +478,18 @@ class AjaxController extends Controller
                 $mucgiakk = $modelgiakk->mucgiakk;
                 $mucgialk = $modelgiakk->mucgialk;
             }else{
-                $mucgiakk = 0;
-                $mucgialk = 0;
+                $modelcb = CbKkGDvLt::where('macskd',$modelph->macskd)
+                    ->first();
+                if(isset($modelcb)){
+                    $modelcbgia = KkGDvLtCt::where('mahs',$modelcb->mahs)
+                        ->where('maloaip',$modelph->maloaip)
+                        ->first();
+                    $mucgialk = $modelcbgia->mucgiakk;
+                    $mucgiakk = 0;
+                }else {
+                    $mucgiakk = 0;
+                    $mucgialk = 0;
+                }
             }
 
             $result['message'] = '<div class="form-horizontal" id="ttgiaph">';
@@ -572,9 +586,7 @@ class AjaxController extends Controller
         }
 
     }
-// </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="--Chính sửa giá phòng kê khai--">
     public function chinhsuagiaph(Request $request){
         $result = array(
             'status' => 'fail',
@@ -668,6 +680,7 @@ class AjaxController extends Controller
 
 // </editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc="--View lý do ko duyệt dịch vụ lưu trú--">
     public function viewlydo(Request $request){
         $result = array(
             'status' => 'fail',
@@ -695,4 +708,10 @@ class AjaxController extends Controller
         }
         die(json_encode($result));
     }
+
+//</editor-fold>
+
+
+
+
 }

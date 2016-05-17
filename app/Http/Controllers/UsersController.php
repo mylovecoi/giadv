@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Districts;
+use App\DnDvLt;
+use App\DonViDvVt;
 use App\Users;
 use Illuminate\Http\Request;
 
@@ -21,8 +23,7 @@ class UsersController extends Controller
     {
         if (Session::has('admin')) {
 
-            $model = Users::where('username','<>','minhtran')
-                ->where('username','<>','huongvu')
+            $model = Users::where('level','<>','T')
                 ->get();
 
             return view('system.users.index')
@@ -42,7 +43,9 @@ class UsersController extends Controller
     public function create()
     {
         if (Session::has('admin')) {
+            $modeldn = DnDvLt::all();
             return view('system.users.create')
+                ->with('modeldn',$modeldn)
                 ->with('pageTitle','Thêm mới tài khoản');
 
         }else
@@ -290,4 +293,15 @@ class UsersController extends Controller
             return view('errors.notlogin');
 
     }
+
+    public function checkuser($user){
+
+        $model = Users::where('username',$user)->first();
+        if(isset($model)){
+            echo 'duplicate';
+        }else {
+            echo 'ok';
+        }
+    }
+
 }

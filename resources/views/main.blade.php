@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="Thu, 19 Nov 1900 08:52:00 GMT">
-    <link rel="shortcut icon" href="vendors/pageloader/images/loader4.GIF" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url('vendors/pageloader/images/loader4.GIF')}}" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/icons/favicon.png">
     <link rel="apple-touch-icon" href="images/icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
@@ -92,10 +92,11 @@
 
                     <li> <a href="{{url('')}}"> <i class="fa fa-desktop fa-fw"></i> <span class="menu-title">Màn hình tổng quan</span> </a> </li>
 
-                    <!--Quản lý-->
+                    <!--Quản lý dịch vụ lưu trú-->
+                    @if(can('dvlt','index'))
                     <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ lưu trú</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            @if(session('admin')->level=='H' || session('admin')->level == 'X')
+                            @if(session('admin')->level=='DNDVLT' || session('admin')->level == 'X')
                             <li><a href="{{url('ttdndvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
                             <li><a href="{{url('ttcskddvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin cơ sở kinh doanh</span></a></li>
                             <li><a href="{{url('kkgdvlt/show')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Kê khai giá dịch vụ lưu trú</span></a> </li>
@@ -105,30 +106,35 @@
                             @endif
                         </ul>
                     </li>
+                    @endif
                     <!--End Quản lý-->
 
                     <!--Quản lý dịch vụ vận tải-->
+                    @if(can('dvvt','index'))
                     <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ vận tải</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                           <li><a href="{{url('dvvantai/dvxekhach')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe khách</span></a> </li>
-                           <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa-car"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe khách</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvxb/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe buýt</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvxb/kekhai')}}"><i class="fa fa-ambulance"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe buýt</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvxtx/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe taxi</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvxtx/kekhai')}}"><i class="fa fa-taxi"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe taxi</span></a> </li>
-                           <li><a href="{{url('dvvantai/dvkhac/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải chở hàng</span></a> </li>
+                            <li><a href="{{url('dvvantai/dvxekhach')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe khách</span></a> </li>
+                            <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa-car"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe khách</span></a> </li>
+                            <li><a href="{{url('dvvantai/dvxb/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe buýt</span></a> </li>
+                            <li><a href="{{url('dvvantai/dvxb/kekhai')}}"><i class="fa fa-ambulance"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe buýt</span></a> </li>
+                            <li><a href="{{url('dvvantai/dvxtx/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe taxi</span></a> </li>
+                            <li><a href="{{url('dvvantai/dvxtx/kekhai')}}"><i class="fa fa-taxi"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe taxi</span></a> </li>
+                            <li><a href="{{url('dvvantai/dvkhac/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải chở hàng</span></a> </li>
                             <li><a href="{{url('dvvantai/dvkhac/kekhai')}}"><i class="fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải chở hàng</span></a> </li>
                         </ul>
                     </li>
+                    @endif
                     <!--End Quản lý dịch vụ vận tải-->
 
                     <!--Báo cáo thống kê-->
+                    @if(session('admin')->level == 'T')
                     <li id="navbaocao"><a href="{{url('')}}"><i class="fa fa-file fa-fw"></i><span class="menu-title">Báo cáo tổng hợp</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="{{url('reports/dvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Dịch vụ lưu trú</span></a></li>
 
                         </ul>
                     </li>
+                    @endif
                     <!--End Báo cáo thống kê-->
 
                     <!--Quản trị hệ thống-->

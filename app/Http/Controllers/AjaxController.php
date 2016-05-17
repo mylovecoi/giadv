@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\CbKkGDvLt;
+use App\DnDvLt;
+use App\DonViDvVt;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
@@ -710,6 +712,55 @@ class AjaxController extends Controller
     }
 
 //</editor-fold>
+
+    public function getTTdn(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+        //dd($inputs);
+
+        if(isset($inputs['loaidv'])){
+            if($inputs['loaidv'] == 'dvlt'){
+                $model = DnDvLt::all();
+                $result['message'] = '<select id="mahuyen" class="form-control" name="mahuyen">';
+                $result['message'] .='<option value="" selected="selected">-- Chọn doanh nghiệp --</option>';
+                if(count($model) > 0){
+                    foreach($model as $dn){
+                        $result['message'] .= '<option value="'.$dn->masothue.'">'.$dn->tendn.'</option>';
+                    }
+                    $result['message'] .= '</select>';
+                    $result['status'] = 'success';
+                }
+            }
+            else{
+                $model = DonViDvVt::all();
+                //dd($model);
+                $result['message'] = '<select id="mahuyen" class="form-control" name="mahuyen">';
+                $result['message'] .='<option value="" selected="selected">-- Chọn doanh nghiệp --</option>';
+                if(count($model) > 0){
+                    foreach($model as $dn){
+                        $result['message'] .= '<option value="'.$dn->masothue.'">'.$dn->tendonvi.'</option>';
+                    }
+                    $result['message'] .= '</select>';
+                    $result['status'] = 'success';
+                }
+            }
+            //dd($result['message']);
+
+        }
+
+        die(json_encode($result));
+    }
 
 
 

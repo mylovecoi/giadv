@@ -105,9 +105,9 @@
                                                     @if($user->level == 'T')
                                                         <td>Cấp Tỉnh</td>
                                                     @elseif($user->level == 'H')
-                                                        <td>Cấp Huyện</td>
+                                                        <td>Doanh nghiệp </td>
                                                     @else
-                                                        <td>Khai thác sử dụng</td>
+                                                        <td>Cơ sở kinh doanh</td>
                                                     @endif
 
                                                     @if($user->status == "Kích hoạt")

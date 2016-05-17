@@ -77,6 +77,7 @@ class DonViDvVtController extends Controller
                 $modeluser->status = 'Kích hoạt';
                 $modeluser->level = 'H';
                 $modeluser->mahuyen = $insert['masothue'];
+                $modeluser->pldv = 'DVVT';
                 $modeluser->save();
             }
             return redirect('dvvantai/donvi');

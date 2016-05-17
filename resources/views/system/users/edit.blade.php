@@ -56,7 +56,7 @@
                                             <input id="user" class="form-control required" name="user" type="text" value="{{$model->username}}">
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!--div class="form-group">
                                         <label class="col-sm-4 control-label">Nơi sử dụng
                                         </label>
                                         <div class="col-sm-4 controls">
@@ -76,7 +76,7 @@
 
                                             </select>
                                         </div>
-                                    </div>
+                                    </div-->
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Trạng thái
                                         </label>

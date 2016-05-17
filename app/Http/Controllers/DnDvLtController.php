@@ -77,6 +77,7 @@ class DnDvLtController extends Controller
                 $modeluser->status = 'Kích hoạt';
                 $modeluser->level = 'H';
                 $modeluser->mahuyen = $insert['masothue'];
+                $modeluser->pldv = 'DVLT';
                 $modeluser->save();
             }
             return redirect('dndvlt');

@@ -74,23 +74,23 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td><input type="checkbox" {{ (isset($permission->cuocvt->index) && $permission->cuocvt->index == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][index]"/></td>
+                                                <td><input type="checkbox" {{ (isset($permission->dvvt->index) && $permission->dvvt->index == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][index]"/></td>
                                                 <td>Xem</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" {{ (isset($permission->cuocvt->create) && $permission->cuocvt->create == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][create]"/></td>
+                                                <td><input type="checkbox" {{ (isset($permission->dvvt->create) && $permission->dvvt->create == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][create]"/></td>
                                                 <td>Thêm mới</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" {{ (isset($permission->cuocvt->create) && $permission->cuocvt->create == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][edit]"/></td>
+                                                <td><input type="checkbox" {{ (isset($permission->dvvt->create) && $permission->dvvt->create == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][edit]"/></td>
                                                 <td>Chỉnh sửa</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" {{ (isset($permission->cuocvt->delete) && $permission->cuocvt->delete == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][delete]"/></td>
+                                                <td><input type="checkbox" {{ (isset($permission->dvvt->delete) && $permission->dvvt->delete == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][delete]"/></td>
                                                 <td>Xóa</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" {{ (isset($permission->cuocvt->approve) && $permission->cuocvt->approve == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][approve]"/></td>
+                                                <td><input type="checkbox" {{ (isset($permission->dvvt->approve) && $permission->dvvt->approve == 1) ? 'checked' : '' }} value="1" name="roles[cuocvt][approve]"/></td>
                                                 @if($model->level == 'T')
                                                     <td>Duyệt</td>
                                                 @else

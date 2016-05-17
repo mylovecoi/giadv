@@ -28,6 +28,8 @@ Route::get('/user/lock/{id}','UsersController@lockuser');
 Route::get('/user/unlock/{id}','UsersController@unlockuser');
 Route::get('user/permission/{id}','UsersController@permission');
 Route::post('/user/permission', 'UsersController@uppermission');
+Route::get('/user/checkuser/{user}','UsersController@checkuser');
+Route::get('/ajax/getTTdn','AjaxController@getTTdn');
 //End Danh sách User
 
 //Danh sách doanh nghiệp dịch vụ lưu trú

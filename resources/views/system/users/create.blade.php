@@ -9,6 +9,28 @@
     <!-- put the custom script for this page here -->
     <script type="text/javascript" src="{{ url('vendors/jquery-validate/jquery.validate.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('js/form-validation.js') }}"></script>
+    <script>
+        function getTT() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert($('#loaidv').val());
+            $.ajax({
+                url: '/ajax/getTTdn',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    loaidv:  $('#loaidv').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if(data.status == 'success') {
+                        //alert(data.message);
+                        $('#mahuyen').replaceWith(data.message);
+                    }
+                }
+            })
+        }
+    </script>
+
 @stop
 
 @section('content')
@@ -64,12 +86,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Đơn vị trực thuộc
+                                        <label class="col-sm-4 control-label">Loại dịch vụ cung cấp<span
+                                                    class="require">*</span></label>
+                                        <div class="col-sm-4 controls">
+                                            <select class="form-control" id="loaidv" name="loaidv" onchange="getTT()">
+                                                <option value="dvlt">Dịch vụ lưu trú</option>
+                                                <option value ="dvvt">Dịch vụ vận tải</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Doanh nghiệp
                                         </label>
                                         <div class="col-sm-4 controls">
                                             <select id="mahuyen" class="form-control" name="mahuyen">
-                                                <option value="" selected="selected">-- Chọn đơn vị trực thuộc --</option>
-
+                                                <option value="" selected="selected">-- Chọn doanh nghiệp --</option>
+                                                @foreach($modeldn as $dn)
+                                                    <option value="{{$dn->masothue}}">{{$dn->tendn}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -106,7 +140,7 @@
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
                     type: 'GET',
-                    url: '/districts/checkuser/'+$(this).val(),
+                    url: '/user/checkuser/'+$(this).val(),
                     data: {
                         _token: CSRF_TOKEN,
                     },
@@ -125,5 +159,7 @@
             })
         }(jQuery));
     </script>
+
+
 @stop
 

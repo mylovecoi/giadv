@@ -10,7 +10,7 @@ function getPermissionDefault($level) {
             'delete' => 0,
             'approve'=> 1
         ),
-        'cuocvt' => array(
+        'dvvt' => array(
             'index' => 1,
             'create' => 0,
             'edit' => 0,
@@ -18,7 +18,6 @@ function getPermissionDefault($level) {
             'approve'=> 1
         ),
     );
-
     $roles['H'] = array(
         'dvlt' => array(
             'index' => 1,
@@ -27,7 +26,7 @@ function getPermissionDefault($level) {
             'delete' => 1,
             'approve'=> 1
         ),
-        'cuocvt' => array(
+        'dvvt' => array(
             'index' => 1,
             'create' => 1,
             'edit' => 1,
@@ -43,7 +42,7 @@ function getPermissionDefault($level) {
             'delete' => 1,
             'approve'=> 0
         ),
-        'cuocvt' => array(
+        'dvvt' => array(
             'index' => 1,
             'create' => 1,
             'edit' => 1,

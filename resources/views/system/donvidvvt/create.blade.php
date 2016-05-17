@@ -18,7 +18,7 @@
                 <div class="portlet box">
                     <div class="portlet-header">
                         <div class="caption">
-                            <b>THÊM MỚI DOANH NGHIỆP CUNG CẤP DỊCH VỤ LƯU TRÚ</b>
+                            <b>THÊM MỚI DOANH NGHIỆP CUNG CẤP DỊCH VỤ VẬN TẢI</b>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label"></label>
+                                    <label class="col-sm-3 control-label">Doanh nghiệp cung cấp dịch vụ<span class="require">*</span> </label>
                                     <label class="col-sm-2 control-label">Dịch vụ xe khách</label>
                                     <div class="col-sm-1 controls">
                                         <input id="dvxk" type="checkbox" name="dvxk" class="form-control">

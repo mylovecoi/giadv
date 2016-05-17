@@ -96,7 +96,7 @@
                     @if(can('dvlt','index'))
                     <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ lưu trú</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            @if(session('admin')->level=='DNDVLT' || session('admin')->level == 'X')
+                            @if(session('admin')->level=='H' || session('admin')->level == 'X')
                             <li><a href="{{url('ttdndvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
                             <li><a href="{{url('ttcskddvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin cơ sở kinh doanh</span></a></li>
                             <li><a href="{{url('kkgdvlt/show')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Kê khai giá dịch vụ lưu trú</span></a> </li>

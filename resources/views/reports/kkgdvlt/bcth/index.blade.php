@@ -53,6 +53,7 @@
                                 <div class="col-lg-12">
                                     <ul class="ul-report">
                                         <li><a data-target="#BC1-thoai-confirm" data-toggle="modal">Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian</a></li>
+                                        <li><a data-target="#BC2-thoai-confirm" data-toggle="modal">Báo cáo thống kê chi tiết đơn vị kê khai giá trong khoảng thời gian</a></li>
                                     </ul>
                                 </div>
                             </div>

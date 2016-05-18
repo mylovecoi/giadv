@@ -77,8 +77,9 @@
 <p>Nơi đăng ký nộp thuế của cơ sở kinh doanh đăng ký giá: {{$modeldn->noidknopthue}}</p>
 
 <p>{{$modeldn->tendn}} gửi Bảng kê khai giá dịch vụ lưu trú và kê khai thực hiện kể từ ngày <span>{{getDayVn($modelkk->ngayhieuluc)}}</span></p>
-
+@if($modelkk->socvlk != '')
 <p>Bảng kê khai giá gửi kèm theo công văn này sẽ thay thế cho Bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}}- ngày {{getDayVn($modelkk->ngaycvlk)}}.</p>
+@endif
 
 <p>{{$modeldn->tendn}} xin chịu trách nhiệm trước pháp luật về tính đúng đắn của mức giá mà chúng tôi kê khai.</p>
 
@@ -148,6 +149,9 @@
     @endforeach
 </table>
 <p>{!! nl2br(e($modelkk->ghichu)) !!}</p>
+@if($modelkk->socvlk != '')
+    <p>Mức giá kê khai trước liền kề tại công văn số {{$modelkk->socvlk}} ngày {{getDayVn($modelkk->ngaycvlk)}} của {{$modeldn->tendn}}</p>
+@endif
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
     <tr>
         <td style="text-align: left;" width="30%">

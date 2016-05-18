@@ -54,7 +54,7 @@ function getPermissionDefault($level) {
 }
 
 function getDayVn($date) {
-    if($date != null)
+    if($date != null || $date != '')
         $newday = date('d/m/Y',strtotime($date));
     else
         $newday='';

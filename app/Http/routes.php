@@ -234,5 +234,6 @@ Route::get('reports/dvlt', function(){
         ->with('pageTitle','Báo cáo tổng hợp dịch vụ lưu trú');
 });
 Route::post('reports/dvlt/BC1','ReportsController@dvltbc1');
+Route::post('reports/dvlt/BC2','ReportsController@dvltbc2');
 
 // </editor-fold>

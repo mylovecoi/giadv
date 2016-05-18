@@ -46,33 +46,42 @@
     </tr>
 </table>
 
-<p style="text-align: center; font-weight: bold; font-size: 16px;">BÁO CÁO THỐNG KÊ CÁC ĐƠN VỊ KÊ KHAI GIÁ</p>
+<p style="text-align: center; font-weight: bold; font-size: 16px;">BÁO CÁO THỐNG KÊ CHI TIẾT ĐƠN VỊ KÊ KHAI GIÁ</p>
 <p style="text-align: center; font-weight: bold;">Từ ngày: {{getDayVn($input['ngaytu'])}} đến ngày {{getDayVn($input['ngayden'])}} </p>
 
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
         <th>STT</th>
-        <th>Tên cơ sở kinh doanh</th>
-        <th>Loại hạng</th>
-        <th>Địa chỉ</th>
-        <th>Số điện thoại</th>
-        <th>Số công văn</th>
-        <th>Ngày kê khai</th>
-        <th>Ngày thực hiện<br> mức giá kê khai</th>
-        <th>Trạng thái hồ sơ</th>
+        <th>Loại phòng</th>
+        <th>Quy cách chất lượng</th>
+        <th>Số hiệu phòng</th>
+        <th>Mức giá kê khai liền kề</th>
+        <th>Mức giá kê</th>
+        <th>Mức tăng giảm</th>
+        <th>Tỷ lệ (%)</th>
     </tr>
-    @foreach($model as $key => $ttkk)
-    <tr>
-        <th style="text-align: center">{{$key + 1}}</th>
-        <th style="text-align: left">{{$ttkk->tencskd}}</th>
-        <th style="text-align: center">{{$ttkk->loaihang}} sao</th>
-        <th style="text-align: left">{{$ttkk->diachikd}}</th>
-        <th style="text-align: center">{{$ttkk->telkd}}</th>
-        <th style="text-align: center">{{$ttkk->socv}}</th>
-        <th style="text-align: center">{{getDayVn($ttkk->ngaynhap)}}</th>
-        <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>
-        <th style="text-align: center">{{$ttkk->trangthai}}</th>
-    </tr>
+    @foreach($model as $cskd)
+        <tr>
+            <th style="text-align: left" colspan="8">
+                {{$cskd->tencskd}}-Loại hạng {{$cskd->loaihang}}-ngày kê khai {{getDayVn($cskd->ngaynhap)}}- ngày thực hiện mức giá kê khai {{getDayVn($cskd->ngayhieuluc)}}
+                - Trạng thái hồ sơ {{$cskd->trangthai}}
+            </th>
+        </tr>
+        @foreach($modelctkk as $key=>$ctkk)
+            @if($ctkk->mahs == $cskd->mahs)
+                <tr>
+                    <th style="text-align: center">{{$key +1}}</th>
+                    <th style="text-align: left">{{$ctkk->loaip}}</th>
+                    <th style="text-align: left">{{$ctkk->qccl}}</th>
+                    <th style="text-align: left">{{$ctkk->sohieu}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
+                    <th style="text-align: right"></th>
+                    <th style="text-align: right"></th>
+                </tr>
+            @endif
+        @endforeach
+
     @endforeach
 </table>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">

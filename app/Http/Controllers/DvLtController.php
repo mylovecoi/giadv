@@ -360,21 +360,25 @@ class DvLtController extends Controller
             $modelcskd = CsKdDvLt::findOrFail($id);
             $modelkkctdf = KkGDvLtCtDf::where('macskd',$modelcskd->macskd)
                 ->delete();
-            $modelcb = CbKkGDvLt::where('macskd',$modelcskd->macskd)
-                ->first();
 
             $modelph = TtCsKdDvLt::where('macskd',$modelcskd->macskd)
                 ->get();
-            $modelgcb  = KkGDvLtCt::where('mahs',$modelcb->mahs)
-                ->get();
-            foreach($modelph as $ph){
-                foreach($modelgcb as $giaph){
-                    if($giaph->maloaip == $ph->maloaip){
-                        $ph->gialk = $giaph->mucgiakk;
+            //dd($modelph);
+
+            $modelcb = CbKkGDvLt::where('macskd',$modelcskd->macskd)
+                ->first();
+
+            if(isset($modelcb)) {
+                $modelgcb  = KkGDvLtCt::where('mahs',$modelcb->mahs)
+                    ->get();
+                foreach ($modelph as $ph) {
+                    foreach ($modelgcb as $giaph) {
+                        if ($giaph->maloaip == $ph->maloaip) {
+                            $ph->gialk = $giaph->mucgiakk;
+                        }
                     }
                 }
             }
-
 
             return view('quanly.dvlt.kkgiadv.create')
                 ->with('modelcskd',$modelcskd)

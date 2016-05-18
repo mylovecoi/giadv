@@ -24,6 +24,7 @@ class CreateCbkkgdvltTable extends Migration
             $table->date('ngayhieuluc')->nullable();
             $table->text('ttnguoinop')->nullable();
             $table->date('ngaynhan')->nullable();
+            $table->string('sohsnhan')->nullable();
             $table->text('ghichu')->nullable();
             $table->date('ngaychuyen')->nullable();
             $table->text('lydo')->nullable();

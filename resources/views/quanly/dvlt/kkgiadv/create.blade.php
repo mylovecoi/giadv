@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="selGender" class="control-label">Ngày thực hiện mức giá kê khai</label>
-                                        <div><input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required"></div>
+                                        <div><input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control"></div>
                                     </div>
                                 </div>
                             </div>

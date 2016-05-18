@@ -78,11 +78,14 @@
                                                 <td>
                                                     <a href="{{url('kkgdvlt/viewkk/'.$ttkk->id)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                                 @if($ttkk->trangthai == 'Chờ duyệt')
-
                                                     <button type="button" onclick="confirmTraLai('{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
                                                         Trả lại</button>
                                                     <button type="button" onclick="confirmDuyet('{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-check-square-o"></i>&nbsp;
                                                         Duyệt</button>
+                                                @endif
+                                                @if($ttkk->trangthai == 'Duyệt')
+                                                    <button type="button" onclick="confirmDuyet('{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
+                                                        Chỉnh sửa</button>
                                                 @endif
                                                 </td>
                                             </tr>

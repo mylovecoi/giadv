@@ -367,7 +367,7 @@ class DvLtController extends Controller
 
             $modelcb = CbKkGDvLt::where('macskd',$modelcskd->macskd)
                 ->first();
-
+            //dd($modelcb);
             if(isset($modelcb)) {
                 $modelgcb  = KkGDvLtCt::where('mahs',$modelcb->mahs)
                     ->get();

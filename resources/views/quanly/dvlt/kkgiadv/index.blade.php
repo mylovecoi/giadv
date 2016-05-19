@@ -86,7 +86,7 @@
                                                         <br>Ngày nhận: {{getDayVn($ttkk->ngaynhan)}}
                                                     @endif
                                                 </td>
-                                                <td>{{$ttkk->socvlk.'-'.getDayVn($ttkk->ngaycvlk)}}</td>
+                                                <td>{{$ttkk->socvlk.'-'.(($ttkk->socvlk != '') ? getDayVn($ttkk->ngaycvlk) : '')}}</td>
                                                 @if($ttkk->trangthai == "Chờ chuyển")
                                                 <td align="center"><span class="badge badge-warning">{{$ttkk->trangthai}}</span></td>
                                                 @elseif($ttkk->trangthai == 'Chờ duyệt')

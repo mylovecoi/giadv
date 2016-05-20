@@ -21,8 +21,9 @@ class ReportsController extends Controller
      */
     public function kkgdv($id){
         if (Session::has('admin')) {
-
+            //dd($id);
             $modelkk = KkGDvLt::findOrFail($id);
+            //dd($modelkk);
             $modeldn = DnDvLt::where('masothue',$modelkk->masothue)
                 ->first();
             $modelcskd = CsKdDvLt::where('macskd',$modelkk->macskd)

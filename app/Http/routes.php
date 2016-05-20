@@ -96,7 +96,7 @@ Route::post('kkgdvlt/chuyen/{id}','DvLtController@KkGDvLtChuyen');
 Route::get('kkgdvlt/viewkk/{id}','ReportsController@kkgdv');
 //End Xem
 
-Route::get('xetduyetkkgdvlt','DvLtController@index');
+Route::get('xetduyetkkgdvlt/{tt}','DvLtController@index');
 Route::post('xetduyetkkgdvlt/tralai','DvLtController@tralai');
 Route::get('/ajax/viewlydo/','AjaxController@viewlydo');
 Route::post('xetduyetkkgdvlt/duyet','DvLtController@duyet');

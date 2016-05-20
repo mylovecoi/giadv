@@ -145,6 +145,7 @@
             <div class="col-lg-12">
                 <div class="panel panel">
                     <div class="panel-heading">Kê khai giá dịch vụ lưu trú</div>
+
                     <div class="panel-body pan">
                         {!! Form::open(['url'=>'kkgdvlt/'.$modelcskd->id, 'id' => 'create-kkgdvlt', 'class'=>'horizontal-form form-validate']) !!}
                         <div class="form-body pal">

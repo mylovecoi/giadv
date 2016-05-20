@@ -26,9 +26,10 @@ class CreateCbkkgdvltTable extends Migration
             $table->date('ngaynhan')->nullable();
             $table->string('sohsnhan')->nullable();
             $table->text('ghichu')->nullable();
-            $table->date('ngaychuyen')->nullable();
+            $table->dateTime('ngaychuyen')->nullable();
             $table->text('lydo')->nullable();
             $table->string('trangthai')->nullable();
+            $table->string('idkk')->nullable();
             $table->timestamps();
         });
     }

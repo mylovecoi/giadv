@@ -22,6 +22,7 @@ class CbKkGDvLt extends Model
         'ghichu',
         'ngaychuyen',
         'lydo',
-        'trangthai'
+        'trangthai',
+        'idkk'
     ];
 }

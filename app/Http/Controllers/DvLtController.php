@@ -25,12 +25,19 @@ class DvLtController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($tt)
     {
         if (Session::has('admin')) {
-            $model = KkGDvLt::where('trangthai','Chờ duyệt')
-                ->Orwhere('trangthai','Duyệt')
-                ->get();
+            if($tt == 'CD'){
+                $model = KkGDvLt::where('trangthai','Chờ duyệt')
+                    ->get();
+            }elseif($tt == 'D'){
+                $model = KkGDvLt::where('trangthai','Duyệt')
+                    ->get();
+            }else{
+                $model = CbKkGDvLt::all();
+            }
+
             $modelcskd = CsKdDvLt::all();
             foreach($model as $ttkk){
                 $this->getTTCSKD($modelcskd,$ttkk);
@@ -38,6 +45,7 @@ class DvLtController extends Controller
 
             return view('quanly.dvlt.index')
                 ->with('model',$model)
+                ->with('tt',$tt)
                 ->with('pageTitle','Thông tin cơ sở kinh doanh');
 
         }else
@@ -61,7 +69,7 @@ class DvLtController extends Controller
             $model->trangthai = 'Bị trả lại';
             $model->save();
 
-            return redirect('xetduyetkkgdvlt');
+            return redirect('xetduyetkkgdvlt/'.$input['tt']);
 
         }else
             return view('errors.notlogin');
@@ -73,6 +81,7 @@ class DvLtController extends Controller
             $input = $request->all();
             $model = KkGDvLt::where('id',$input['idduyet'])
                 ->first();
+            //dd($input['tt']);
             $model->trangthai = 'Duyệt';
             $model->ngaynhan = Carbon::now()->toDateString();
             $model->sohsnhan = getGeneralConfigs()['sodvlt'] + 1;
@@ -83,7 +92,7 @@ class DvLtController extends Controller
             }
             $this->congbo($input['idduyet']);
 
-            return redirect('xetduyetkkgdvlt');
+            return redirect('xetduyetkkgdvlt/'.$input['tt']);
 
         }else
             return view('errors.notlogin');
@@ -100,12 +109,15 @@ class DvLtController extends Controller
         $model->ngayhieuluc = $modelkk->ngayhieuluc;
         $model->socvlk = $modelkk->socvlk;
         $model->ngaycvlk = $modelkk->ngaycvlk;
-        //$model->trangthai = 'Chờ chuyển';
+        $model->trangthai = 'Đang công bố';
         $model->macskd = $modelkk->macskd;
         $model->masothue = $modelkk->masothue;
         $model->ghichu = $modelkk->ghichu;
         $model->ngaynhan = $modelkk->ngaynhan;
         $model->sohsnhan = $modelkk->sohsnhan;
+        $model->ngaychuyen = $modelkk->ngaychuyen;
+        $model->ttnguoinop = $modelkk->ttnguoinop;
+        $model->idkk = $modelkk->id;
         $model->save();
     }
     /**

@@ -15,11 +15,13 @@
     <!-- <script type="text/javascript" src="{{ url('vendors/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ url('js/table-datatables.js') }}"></script>
     <script>
-        function confirmTraLai(id) {
+        function confirmTraLai(tt,id) {
             document.getElementById("idtralai").value =id;
+            document.getElementById("tt").value =tt;
         }
-        function confirmDuyet(id){
+        function confirmDuyet(tt,id){
             document.getElementById("idduyet").value =id;
+            document.getElementById("tt").value =tt;
         }
     </script>
 @stop
@@ -39,7 +41,21 @@
                                     Duyệt</button-->
                             </div>
                         </div>
+
                         <div class="portlet-body">
+                            <div class="row mbm">
+                                <div class="col-md-1">
+                                    <div class="form-control-static"  style="white-space: nowrap;">Loại hồ sơ</div>
+                                </div>
+                                <div class="col-md-5">
+                                    <select id="select_loaihoso" name="select_loaihoso" class="form-control required">
+                                        <option value="CD" {{ ($tt == 'CD') ? 'selected' : '' }}>Hồ sơ kê khai giá dịch vụ đang chờ duyệt</option>
+                                        <option value="D" {{ ($tt == 'D') ? 'selected' : '' }}>Hồ sơ kê khai giá dịch vụ đã duyệt</option>
+                                        <option value="CB" {{ ($tt == 'CB') ? 'selected' : '' }}>Hồ sơ kê khai giá dịch vụ đang công bố</option>
+                                    </select>
+
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
@@ -76,16 +92,16 @@
                                                     </td>
 
                                                 <td>
+                                                @if($tt == 'CB')
+                                                    <a href="{{url('kkgdvlt/viewkk/'.$ttkk->idkk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
+                                                @else
                                                     <a href="{{url('kkgdvlt/viewkk/'.$ttkk->id)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
-                                                @if($ttkk->trangthai == 'Chờ duyệt')
-                                                    <button type="button" onclick="confirmTraLai('{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
-                                                        Trả lại</button>
-                                                    <button type="button" onclick="confirmDuyet('{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-check-square-o"></i>&nbsp;
-                                                        Duyệt</button>
                                                 @endif
-                                                @if($ttkk->trangthai == 'Duyệt')
-                                                    <button type="button" onclick="confirmDuyet('{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
-                                                        Chỉnh sửa</button>
+                                                @if($ttkk->trangthai == 'Chờ duyệt')
+                                                    <button type="button" onclick="confirmTraLai('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
+                                                        Trả lại</button>
+                                                    <button type="button" onclick="confirmDuyet('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-check-square-o"></i>&nbsp;
+                                                        Duyệt</button>
                                                 @endif
                                                 </td>
                                             </tr>
@@ -132,7 +148,7 @@
         </div>
         {!! Form::close() !!}
     </div>
-    <!--Modal Trả lại-->
+    <!--Modal Duyệt-->
     <div id="duyet-modal-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
         {!! Form::open(['url'=>'xetduyetkkgdvlt/duyet','id' => 'frm_Duyet','class'=>'form-horizontal form-validate']) !!}
         <div class="modal-dialog">
@@ -143,6 +159,7 @@
                     <h4 id="modal-header-primary-label" class="modal-title">Đồng ý duyệt kê khai giá dịch vụ lưu trú cho cơ sở kinh doanh?</h4>
                 </div>
                 <input type="hidden" name="idduyet" id="idduyet" value="">
+                <input type="hidden" name="tt" id="tt">
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
                     <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickDuyet()">Đồng ý</button>
@@ -158,6 +175,16 @@
         function ClickDuyet(){
             $('#frm_Duyet').submit();
         }
+        $(function(){
+
+            $('#select_loaihoso').change(function() {
+                var hs_type = $('#select_loaihoso').val();
+                var url = '/xetduyetkkgdvlt/'+hs_type;
+
+                //var url = current_path_url;
+                window.location.href = url;
+            });
+        })
     </script>
 @stop
 

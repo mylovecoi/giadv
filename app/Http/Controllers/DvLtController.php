@@ -28,15 +28,20 @@ class DvLtController extends Controller
     public function index($tt)
     {
         if (Session::has('admin')) {
-            if($tt == 'CD'){
+            if($tt == 'CN')
+                $model = KkGDvLt::where('trangthai','Chờ nhận')
+                    ->orderBy('id', 'esc')
+                    ->get();
+            elseif($tt == 'CD')
                 $model = KkGDvLt::where('trangthai','Chờ duyệt')
+                    ->orderBy('id', 'esc')
                     ->get();
-            }elseif($tt == 'D'){
+            elseif($tt == 'D')
                 $model = KkGDvLt::where('trangthai','Duyệt')
+                    ->orderBy('id', 'esc')
                     ->get();
-            }else{
+            else
                 $model = CbKkGDvLt::all();
-            }
 
             $modelcskd = CsKdDvLt::all();
             foreach($model as $ttkk){
@@ -69,7 +74,30 @@ class DvLtController extends Controller
             $model->trangthai = 'Bị trả lại';
             $model->save();
 
-            return redirect('xetduyetkkgdvlt/'.$input['tt']);
+            return redirect('xetduyetkkgdvlt/'.$input['tttralai']);
+
+        }else
+            return view('errors.notlogin');
+    }
+    public function nhanhs(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            $sohsnhan = getGeneralConfigs()['sodvlt'] + 1;
+            $model = KkGDvLt::where('id',$input['idnhan'])
+                ->first();
+            //dd($input['tt']);
+            $model->trangthai = 'Chờ duyệt';
+            $model->ngaynhan = Carbon::now()->toDateString();
+            $model->sohsnhan = $sohsnhan;
+            if($model->save()){
+                $modelconfig = GeneralConfigs::first();
+                $modelconfig->sodvlt = $sohsnhan;
+                $modelconfig->save();
+            }
+            //$this->congbo($input['idduyet']);
+
+            return redirect('xetduyetkkgdvlt/'.$input['ttnhan']);
 
         }else
             return view('errors.notlogin');
@@ -83,16 +111,12 @@ class DvLtController extends Controller
                 ->first();
             //dd($input['tt']);
             $model->trangthai = 'Duyệt';
-            $model->ngaynhan = Carbon::now()->toDateString();
-            $model->sohsnhan = getGeneralConfigs()['sodvlt'] + 1;
             if($model->save()){
-                $modelconfig = GeneralConfigs::first();
-                $modelconfig->sodvlt = getGeneralConfigs()['sodvlt'] + 1;
-                $modelconfig->save();
+                $this->congbo($input['idduyet']);
             }
-            $this->congbo($input['idduyet']);
 
-            return redirect('xetduyetkkgdvlt/'.$input['tt']);
+
+            return redirect('xetduyetkkgdvlt/'.$input['ttduyet']);
 
         }else
             return view('errors.notlogin');
@@ -240,7 +264,7 @@ class DvLtController extends Controller
 // <editor-fold defaultstate="collapsed" desc="--Thông tin cơ sở kinh doanh - 1 doanh nghiệp có thể có nhiều cơ sở kinh doanh--">
 
     public function TtCsKdIndex(){
-        if (Session::has('admin')) {
+        if (Session::has('admin')){
             $modeldn = DnDvLt::where('masothue',session('admin')->mahuyen)
                 ->first();
             $model = CsKdDvLt::where('masothue',session('admin')->mahuyen)
@@ -334,6 +358,7 @@ class DvLtController extends Controller
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="--Kê khai giá dịch vụ lưu trú--">
+
     public function KkGDvLtShow(){
         if (Session::has('admin')) {
             $modeldn = DnDvLt::where('masothue',session('admin')->mahuyen)
@@ -497,7 +522,7 @@ class DvLtController extends Controller
             $tgchuyen = Carbon::now()->toDateTimeString();
             $model = KkGDvLt::where('id',$input['idchuyen'])->first();
             $model->ttnguoinop = $input['ttnguoinop'];
-            $model->trangthai = 'Chờ duyệt';
+            $model->trangthai = 'Chờ nhận';
             $model->ngaychuyen = $tgchuyen;
             $model->save();
 

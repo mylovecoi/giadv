@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\DmHhTn;
 use App\DmHhXnK;
+use App\KkGDvLt;
+use App\KkGDvLtCt;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,7 +24,23 @@ class HomeController extends Controller
     {
         if (Session::has('admin')) {
 
+            if(session('admin')->level = 'T') {
+                $hsltcn = KkGDvLt::where('trangthai', 'Chờ nhận')->count();
+                $hsltcd = KkGDvLt::where('trangthai','Chờ duyệt')->count();
+
+            }else{
+                $hsltcn = KkGDvLt::where('trangthai', 'Chờ nhận')
+                    ->where('masothue',session('admin')->mahuyen)
+                    ->count();
+                $hsltcd = KkGDvLt::where('trangthai','Chờ duyệt')
+                    ->where('masothue',session('admin')->mahuyen)
+                    ->count();
+            }
+
+
             return view('dashboard')
+                ->with('hsltcn',$hsltcn)
+                ->with('hsltcd',$hsltcd)
                 ->with('pageTitle', 'Tổng quan');
         }else
             return view('welcome');

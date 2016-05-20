@@ -102,7 +102,7 @@
                             <li><a href="{{url('kkgdvlt/show')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Kê khai giá dịch vụ lưu trú</span></a> </li>
                             @endif
                             @if(session('admin')->level == 'T')
-                            <li><a href="{{url('xetduyetkkgdvlt/CD')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt kê khai giá dịch vụ lưu trú</span></a> </li>
+                            <li><a href="{{url('xetduyetkkgdvlt/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt kê khai giá dịch vụ lưu trú</span></a> </li>
                             @endif
                         </ul>
                     </li>

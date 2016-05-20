@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\CbKkGDvLt;
 use App\DnDvLt;
 use App\DonViDvVt;
+use App\GeneralConfigs;
 use App\KkGDvLt;
 use App\KkGDvLtCt;
 use App\KkGDvLtCtDf;
 use App\TtCsKdDvLt;
 use App\TtPhong;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -761,6 +763,49 @@ class AjaxController extends Controller
 
         die(json_encode($result));
     }
+
+    /**public function nhanhs(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+        //dd($inputs);
+
+        if(isset($inputs['id'])){
+            $sohsnhan = getGeneralConfigs()['sodvlt'] + 1;
+            $ngaythang = Carbon::now()->toDateString();
+
+            $result['message'] = '<div class="form-horizontal" id="ttnhanhs">';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label class="col-md-4 control-label"><b>Số hồ sơ nhận</b></label>';
+            $result['message'] .= '<div class="col-md-6 ">';
+            $result['message'] .= '<input type="text" id="sohsnhan" name="sohsnhan" class="form-control" value="'.$sohsnhan.'" autofocus>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '<div class="form-group">';
+            $result['message'] .= '<label class="col-md-4 control-label"><b>Ngày nhận </b></label>';
+            $result['message'] .= '<div class="col-md-6 ">';
+            $result['message'] .= '<input type="date" id="ngaynhan" name="ngaynhan" class="form-control" value="'.$ngaythang.'">';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '<input type="hidden" id="idnhan" name="idnhan" value="'.$inputs['id'].'">';
+            $result['message'] .= '<input type="hidden" id="tt" name="tt" value="'.$inputs['tt'].'">';
+            $result['status'] = 'success';
+
+        }
+
+        die(json_encode($result));
+    }*/
 
 
 

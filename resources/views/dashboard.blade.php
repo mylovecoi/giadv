@@ -26,10 +26,10 @@
                                             <div class="col-lg-3">
                                                 <div class="list-group">
                                                     <li class="list-group-item active"><b>Dịch vụ lưu trú</b></li>
+                                                    <li class="list-group-item">Chờ nhận<span
+                                                                class="badge badge-info pull-right">{{number_format($hsltcn)}}</span></li>
                                                     <li class="list-group-item">Chờ duyệt<span
-                                                                class="badge badge-info pull-right">0</span></li>
-                                                    <li class="list-group-item">Đã duyệt<span
-                                                                class="badge badge-info pull-right">0</span></li>
+                                                                class="badge badge-info pull-right">{{number_format($hsltcd)}}</span></li>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">

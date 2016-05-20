@@ -17,11 +17,32 @@
     <script>
         function confirmTraLai(tt,id) {
             document.getElementById("idtralai").value =id;
-            document.getElementById("tt").value =tt;
+            document.getElementById("tttralai").value =tt;
         }
         function confirmDuyet(tt,id){
             document.getElementById("idduyet").value =id;
-            document.getElementById("tt").value =tt;
+            document.getElementById("ttduyet").value =tt;
+        }
+        function confirmNhanHs(tt,id){
+            /**var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            //alert(id);
+            $.ajax({
+                url: '/ajax/nhanhs',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id,
+                    tt: tt
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if(data.status == 'success') {
+                        $('#ttnhanhs').replaceWith(data.message);
+                    }
+                }
+            })*/
+            document.getElementById("idnhan").value =id;
+            document.getElementById("ttnhan").value =tt;
         }
     </script>
 @stop
@@ -49,6 +70,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <select id="select_loaihoso" name="select_loaihoso" class="form-control required">
+                                        <option value="CN" {{ ($tt == 'CN') ? 'selected' : '' }}>Hồ sơ kê khai giá dịch vụ đang chờ nhận</option>
                                         <option value="CD" {{ ($tt == 'CD') ? 'selected' : '' }}>Hồ sơ kê khai giá dịch vụ đang chờ duyệt</option>
                                         <option value="D" {{ ($tt == 'D') ? 'selected' : '' }}>Hồ sơ kê khai giá dịch vụ đã duyệt</option>
                                         <option value="CB" {{ ($tt == 'CB') ? 'selected' : '' }}>Hồ sơ kê khai giá dịch vụ đang công bố</option>
@@ -80,17 +102,27 @@
                                                 <td>{{getDayVn($ttkk->ngaynhap)}}</td>
                                                 <td>{{getDayVn($ttkk->ngayhieuluc)}}</td>
                                                 <td>{{$ttkk->socv}}
-                                                    @if($ttkk->trangthai== 'Duyệt')
+                                                    @if($ttkk->trangthai!= 'Chờ nhận')
                                                         <br>Số hồ sơ nhận: <b>{{$ttkk->sohsnhan}}</b>
                                                         <br>Ngày nhận: <b>{{getDayVn($ttkk->ngaynhan)}}</b>
                                                     @endif
                                                 </td>
                                                 <td>{{$ttkk->ttnguoinop}}</td>
 
-                                                    <td align="center"><span class="badge badge-success">{{$ttkk->trangthai}}</span>
+                                                @if($ttkk->trangthai == 'Chờ duyệt')
+                                                    <td align="center"><span class="badge badge-warning">{{$ttkk->trangthai}}</span>
                                                         <br>Thời gian chuyển:<br><b>{{getDateTime($ttkk->ngaychuyen)}}</b>
                                                     </td>
-
+                                                @elseif($ttkk->trangthai == 'Chờ nhận')
+                                                    <td align="center"><span class="badge badge-warning">{{$ttkk->trangthai}}</span>
+                                                        <br>Thời gian chuyển:<br><b>{{getDateTime($ttkk->ngaychuyen)}}</b>
+                                                    </td>
+                                                @else
+                                                    <td align="center">
+                                                        <span class="badge badge-success">{{$ttkk->trangthai}}</span>
+                                                        <br>Thời gian chuyển:<br><b>{{getDateTime($ttkk->ngaychuyen)}}</b>
+                                                    </td>
+                                                @endif
                                                 <td>
                                                 @if($tt == 'CB')
                                                     <a href="{{url('kkgdvlt/viewkk/'.$ttkk->idkk)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
@@ -98,10 +130,16 @@
                                                     <a href="{{url('kkgdvlt/viewkk/'.$ttkk->id)}}" target="_blank" class="btn btn-default btn-xs mbs"><i class="fa fa-eye"></i>&nbsp;Xem chi tiết</a>
                                                 @endif
                                                 @if($ttkk->trangthai == 'Chờ duyệt')
-                                                    <button type="button" onclick="confirmTraLai('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-share-square-o"></i>&nbsp;
-                                                        Trả lại</button>
                                                     <button type="button" onclick="confirmDuyet('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-check-square-o"></i>&nbsp;
                                                         Duyệt</button>
+                                                    <button type="button" onclick="" class="btn btn-default btn-xs mbs" data-target="#" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
+                                                        Chỉnh sửa</button>
+                                                @endif
+                                                @if($ttkk->trangthai == 'Chờ nhận')
+                                                    <button type="button" onclick="confirmTraLai('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;
+                                                        Trả lại</button>
+                                                    <button type="button" onclick="confirmNhanHs('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#nhan-modal-confirm" data-toggle="modal"><i class="fa fa-share"></i>&nbsp;
+                                                        Nhận hồ sơ</button>
                                                 @endif
                                                 </td>
                                             </tr>
@@ -139,6 +177,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="idtralai" id="idtralai" value="">
+                    <input type="hidden" name="tttralai" id="tttralai">
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
@@ -159,10 +198,35 @@
                     <h4 id="modal-header-primary-label" class="modal-title">Đồng ý duyệt kê khai giá dịch vụ lưu trú cho cơ sở kinh doanh?</h4>
                 </div>
                 <input type="hidden" name="idduyet" id="idduyet" value="">
-                <input type="hidden" name="tt" id="tt">
+                <input type="hidden" name="ttduyet" id="ttduyet">
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
                     <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickDuyet()">Đồng ý</button>
+                </div>
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
+    <!--Modal Nhận Hs-->
+    <div id="nhan-modal-confirm" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        {!! Form::open(['url'=>'xetduyetkkgdvlt/nhanhs','id' => 'frm_NhanHs','class'=>'form-horizontal form-validate']) !!}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <button type="button" data-dismiss="modal" aria-hidden="true"
+                            class="close">&times;</button>
+                    <h4 id="modal-header-primary-label" class="modal-title">Đồng ý nhận hồ sơ kê khai giá dịch vụ lưu trú của cơ sở kinh doanh?</h4>
+                </div>
+                <!--div class="modal-body">
+                    <div class="form-horizontal" id="ttnhanhs">
+
+                    </div>
+                </div-->
+                <input type="hidden" name="idnhan" id="idnhan" value="">
+                <input type="hidden" name="ttnhan" id="ttnhan">
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="ClickNhanHs()">Đồng ý</button>
                 </div>
             </div>
         </div>
@@ -174,6 +238,9 @@
         }
         function ClickDuyet(){
             $('#frm_Duyet').submit();
+        }
+        function ClickNhanHs(){
+            $('#frm_NhanHs').submit();
         }
         $(function(){
 

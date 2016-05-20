@@ -81,7 +81,7 @@
                                                 <td>{{getDayVn($ttkk->ngaynhap)}}</td>
                                                 <td>{{getDayVn($ttkk->ngayhieuluc)}}</td>
                                                 <td>{{$ttkk->socv}}
-                                                    @if($ttkk->trangthai== 'Duyệt')
+                                                    @if($ttkk->trangthai!= 'Chờ nhận' || $ttkk->trangthai != 'Chờ chuyển')
                                                         <br>Số hồ sơ nhận: {{$ttkk->sohsnhan}}
                                                         <br>Ngày nhận: {{getDayVn($ttkk->ngaynhan)}}
                                                     @endif
@@ -90,7 +90,11 @@
                                                 @if($ttkk->trangthai == "Chờ chuyển")
                                                 <td align="center"><span class="badge badge-warning">{{$ttkk->trangthai}}</span></td>
                                                 @elseif($ttkk->trangthai == 'Chờ duyệt')
-                                                    <td align="center"><span class="badge badge-success">{{$ttkk->trangthai}}</span>
+                                                    <td align="center"><span class="badge badge-warning">{{$ttkk->trangthai}}</span>
+                                                        <br>Thời gian chuyển:<br><b>{{getDateTime($ttkk->ngaychuyen)}}</b>
+                                                    </td>
+                                                @elseif($ttkk->trangthai == 'Chờ nhận')
+                                                    <td align="center"><span class="badge badge-warning">{{$ttkk->trangthai}}</span>
                                                         <br>Thời gian chuyển:<br><b>{{getDateTime($ttkk->ngaychuyen)}}</b>
                                                     </td>
                                                 @elseif($ttkk->trangthai == 'Bị trả lại')

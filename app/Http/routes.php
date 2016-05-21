@@ -97,6 +97,8 @@ Route::get('kkgdvlt/viewkk/{id}','ReportsController@kkgdv');
 //End Xem
 
 Route::get('xetduyetkkgdvlt/{tt}','DvLtController@index');
+Route::get('xetduyetkkgdvlt/{tt}/{id}/edit','DvLtController@edit');
+Route::patch('xetduyetkkgdvlt/{id}','DvLtController@update');
 //Route::get('/ajax/nhanhs/','AjaxController@nhanhs');
 Route::post('xetduyetkkgdvlt/nhanhs','DvLtController@nhanhs');
 Route::post('xetduyetkkgdvlt/tralai','DvLtController@tralai');

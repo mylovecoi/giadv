@@ -50,6 +50,38 @@ function getPermissionDefault($level) {
             'approve'=> 0
         ),
     );
+    $roles['DVLT'] = array(
+        'dvlt' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
+        ),
+        'dvvt' => array(
+            'index' => 0,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 0
+        ),
+    );
+    $roles['DVVT'] = array(
+        'dvlt' => array(
+            'index' => 0,
+            'create' => 0,
+            'edit' => 0,
+            'delete' => 0,
+            'approve'=> 0
+        ),
+        'dvvt' => array(
+            'index' => 1,
+            'create' => 1,
+            'edit' => 1,
+            'delete' => 1,
+            'approve'=> 1
+        ),
+    );
     return json_encode($roles[$level]);
 }
 

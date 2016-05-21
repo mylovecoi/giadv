@@ -131,9 +131,8 @@
                                                 @endif
                                                 @if($ttkk->trangthai == 'Chờ duyệt')
                                                     <button type="button" onclick="confirmDuyet('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-check-square-o"></i>&nbsp;
-                                                        Duyệt</button>
-                                                    <button type="button" onclick="" class="btn btn-default btn-xs mbs" data-target="#" data-toggle="modal"><i class="fa fa-edit"></i>&nbsp;
-                                                        Chỉnh sửa</button>
+                                                        Duyệt</button>&nbsp;
+                                                    <a href="{{url('xetduyetkkgdvlt/'.$tt.'/'.$ttkk->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
                                                 @endif
                                                 @if($ttkk->trangthai == 'Chờ nhận')
                                                     <button type="button" onclick="confirmTraLai('{{$tt}}','{{$ttkk->id}}')" class="btn btn-default btn-xs mbs" data-target="#chuyen-modal-confirm" data-toggle="modal"><i class="fa fa-reply"></i>&nbsp;

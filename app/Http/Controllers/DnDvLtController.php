@@ -78,6 +78,7 @@ class DnDvLtController extends Controller
                 $modeluser->level = 'H';
                 $modeluser->mahuyen = $insert['masothue'];
                 $modeluser->pldv = 'DVLT';
+                $modeluser->permission =  getPermissionDefault('DVLT');
                 $modeluser->save();
             }
             return redirect('dndvlt');

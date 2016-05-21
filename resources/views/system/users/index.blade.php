@@ -89,7 +89,8 @@
                                                     <th>Username </th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
-                                                    <th>Câp sử dụng</th>
+                                                    <th>Cấp sử dụng</th>
+                                                    <th>Dịch vụ cung cấp</th>
                                                     <th style="width: 11%">Trạng thái </th>
                                                     <th style="width: 20%">Thao tác</th>
                                                 </tr>
@@ -109,6 +110,8 @@
                                                     @else
                                                         <td>Cơ sở kinh doanh</td>
                                                     @endif
+
+                                                    <td>{{$user->pldv}}</td>
 
                                                     @if($user->status == "Kích hoạt")
                                                         <td align="center"><span class="badge badge-warning">{{$user->status}}</span></td>

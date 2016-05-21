@@ -123,26 +123,29 @@ class DvLtController extends Controller
     }
 
     public function congbo($id){
-        $modelkk = KkGDvLt::findOrFail($id);
-        $modeldel = CbKkGDvLt::where('macskd',$modelkk->macskd)
-            ->delete();
-        $model = new CbKkGDvLt();
-        $model->ngaynhap = $modelkk->ngaynhap;
-        $model->mahs = $modelkk->mahs;
-        $model->socv = $modelkk->socv;
-        $model->ngayhieuluc = $modelkk->ngayhieuluc;
-        $model->socvlk = $modelkk->socvlk;
-        $model->ngaycvlk = $modelkk->ngaycvlk;
-        $model->trangthai = 'Đang công bố';
-        $model->macskd = $modelkk->macskd;
-        $model->masothue = $modelkk->masothue;
-        $model->ghichu = $modelkk->ghichu;
-        $model->ngaynhan = $modelkk->ngaynhan;
-        $model->sohsnhan = $modelkk->sohsnhan;
-        $model->ngaychuyen = $modelkk->ngaychuyen;
-        $model->ttnguoinop = $modelkk->ttnguoinop;
-        $model->idkk = $modelkk->id;
-        $model->save();
+        if (Session::has('admin')) {
+            $modelkk = KkGDvLt::findOrFail($id);
+            $modeldel = CbKkGDvLt::where('macskd',$modelkk->macskd)
+                ->delete();
+            $model = new CbKkGDvLt();
+            $model->ngaynhap = $modelkk->ngaynhap;
+            $model->mahs = $modelkk->mahs;
+            $model->socv = $modelkk->socv;
+            $model->ngayhieuluc = $modelkk->ngayhieuluc;
+            $model->socvlk = $modelkk->socvlk;
+            $model->ngaycvlk = $modelkk->ngaycvlk;
+            $model->trangthai = 'Đang công bố';
+            $model->macskd = $modelkk->macskd;
+            $model->masothue = $modelkk->masothue;
+            $model->ghichu = $modelkk->ghichu;
+            $model->ngaynhan = $modelkk->ngaynhan;
+            $model->sohsnhan = $modelkk->sohsnhan;
+            $model->ngaychuyen = $modelkk->ngaychuyen;
+            $model->ttnguoinop = $modelkk->ttnguoinop;
+            $model->idkk = $modelkk->id;
+            $model->save();
+        }else
+            return view('errors.notlogin');
     }
     /**
      * Show the form for creating a new resource.
@@ -182,9 +185,25 @@ class DvLtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($tt,$id)
     {
-        //
+        if (Session::has('admin')) {
+
+            $model = KkGDvLt::findOrFail($id);
+            $modelgiaph = KkGDvLtCt::where('mahs',$model->mahs)
+                ->get();
+            $modelcskd = CsKdDvLt::where('macskd',$model->macskd)
+                ->first();
+            //dd($modelcskd);
+            return view('quanly.dvlt.edit')
+                ->with('model',$model)
+                ->with('modelgiaph',$modelgiaph)
+                ->with('modelcskd',$modelcskd)
+                ->with('tt',$tt)
+                ->with('pageTitle','Chỉnh sửa kê khai giá dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
     }
 
     /**
@@ -196,7 +215,17 @@ class DvLtController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Session::has('admin')) {
+            $update = $request->all();
+            $model = KkGDvLt::findOrFail($id);
+            $model->sohsnhan = $update['sohsnhan'];
+            $model->ngaynhan = $update['ngaynhan'];
+            $model->save();
+
+            return redirect('xetduyetkkgdvlt/'.$update['tt']);
+
+        }else
+            return view('errors.notlogin');
     }
 
     /**

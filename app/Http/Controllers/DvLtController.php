@@ -20,11 +20,7 @@ use Illuminate\Support\Facades\Session;
 
 class DvLtController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+// <editor-fold defaultstate="collapsed" desc="--Xét duyệt kê khai giá dịch vụ lưu trú--">
     public function index($tt)
     {
         if (Session::has('admin')) {
@@ -147,44 +143,7 @@ class DvLtController extends Controller
         }else
             return view('errors.notlogin');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($tt,$id)
     {
         if (Session::has('admin')) {
@@ -206,13 +165,7 @@ class DvLtController extends Controller
             return view('errors.notlogin');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         if (Session::has('admin')) {
@@ -227,17 +180,7 @@ class DvLtController extends Controller
         }else
             return view('errors.notlogin');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+// </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="--Thông tin doanh nghiệp- Cho doanh nghiệp tự cập nhật được thông tin của mình--">
 
@@ -560,7 +503,6 @@ class DvLtController extends Controller
         }else
             return view('errors.notlogin');
     }
-
 
 // </editor-fold>
 

@@ -104,7 +104,7 @@
                                                     <td>{{$user->phone}}</td>
                                                     <td>{{$user->email}}</td>
                                                     @if($user->level == 'T')
-                                                        <td>Cấp Tỉnh</td>
+                                                        <td>Sở tài chính</td>
                                                     @elseif($user->level == 'H')
                                                         <td>Doanh nghiệp </td>
                                                     @else

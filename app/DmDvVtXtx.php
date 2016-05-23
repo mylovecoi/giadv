@@ -11,6 +11,7 @@ class DmDvVtXtx extends Model
         'id',
         'masothue',
         'madichvu',
+        'loaixe',
         'tendichvu',
         'qccl',
         'dvt',

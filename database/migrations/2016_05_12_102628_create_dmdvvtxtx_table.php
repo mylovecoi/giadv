@@ -16,6 +16,7 @@ class CreateDmdvvtxtxTable extends Migration
             $table->increments('id')->nullable();
             $table->string('masothue')->nullable();
             $table->string('madichvu')->nullable();
+            $table->string('loaixe')->nullable();
             $table->string('tendichvu')->nullable();
             $table->string('qccl')->nullable();
             $table->string('dvt')->nullable();

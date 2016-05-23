@@ -16,19 +16,19 @@ class CreateKkdvvtkhacTable extends Migration
             $table->increments('id');
             $table->string('masothue');
             $table->string('masokk');
-            $table->date('ngaynhap')->nullable();
             $table->string('socv')->nullable();
+            $table->date('ngaynhap')->nullable();
             $table->string('socvlk')->nullable();
+            $table->date('ngaynhaplk')->nullable();
             $table->date('ngayhieuluc')->nullable();
+            $table->text('ttnguoinop')->nullable();
             $table->date('ngaynhan')->nullable();
-            $table->string('trangthai')->nullable();
-            $table->text('ghichu')->nullable();
-            $table->date('ngaychuyen')->nullable();
+            $table->string('sohsnhan')->nullable();
+            $table->dateTime('ngaychuyen')->nullable();
             $table->text('lydo')->nullable();
-            $table->string('nguoinop')->nullable();
-            $table->string('sdtnn')->nullable();
-            $table->string('faxnn')->nullable();
-            $table->string('emailnn')->nullable();
+            $table->string('trangthai')->nullable();
+            $table->text('uudai')->nullable();
+            $table->text('ghichu')->nullable();
             $table->timestamps();
         });
     }

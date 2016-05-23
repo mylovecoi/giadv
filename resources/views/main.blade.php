@@ -111,19 +111,51 @@
 
                     <!--Quản lý dịch vụ vận tải-->
                     @if(can('dvvt','index'))
-                    <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ vận tải</span><span class="fa arrow"></span></a>
+                    <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ vận tải xe khách</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{url('dvvantai/dvxekhach')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe khách</span></a> </li>
-                            <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa-car"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe khách</span></a> </li>
-                            <li><a href="{{url('dvvantai/dvxb/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe buýt</span></a> </li>
-                            <li><a href="{{url('dvvantai/dvxb/kekhai')}}"><i class="fa fa-ambulance"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe buýt</span></a> </li>
-                            <li><a href="{{url('dvvantai/dvxtx/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe taxi</span></a> </li>
-                            <li><a href="{{url('dvvantai/dvxtx/kekhai')}}"><i class="fa fa-taxi"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe taxi</span></a> </li>
-                            <li><a href="{{url('dvvantai/dvkhac/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải chở hàng</span></a> </li>
-                            <li><a href="{{url('dvvantai/dvkhac/kekhai')}}"><i class="fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải chở hàng</span></a> </li>
+                            @if(session('admin')->level=='H' || session('admin')->level == 'X')
+                                <li><a href="{{url('dvvantai/ttdv/index')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
+                                <li><a href="{{url('dvvantai/dvxekhach')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe khách</span></a> </li>
+                                <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa-car"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe khách</span></a> </li>
+                            @elseif(session('admin')->level == 'T')
+                                <li><a href="{{url('dvvantai/xetduyetkkdvxk/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt kê khai giá dịch vụ xe khách</span></a> </li>
+                            @endif
                         </ul>
                     </li>
-                    @endif
+                    <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ vận tải xe buýt</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            @if(session('admin')->level=='H' || session('admin')->level == 'X')
+                                <li><a href="{{url('dvvantai/ttdv/index')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
+                                <li><a href="{{url('dvvantai/dvxb/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe buýt</span></a> </li>
+                                <li><a href="{{url('dvvantai/dvxb/kekhai')}}"><i class="fa fa-ambulance"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe buýt</span></a> </li>
+                            @elseif(session('admin')->level == 'T')
+                                <li><a href="{{url('xetduyetkkgdvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt kê khai giá dịch vụ xe buýt</span></a> </li>
+                            @endif
+                        </ul>
+                    </li>
+                    <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ vận tải xe taxi</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            @if(session('admin')->level=='H' || session('admin')->level == 'X')
+                                <li><a href="{{url('dvvantai/ttdv/index')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
+                                <li><a href="{{url('dvvantai/dvxtx/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải hành khách bằng xe taxi</span></a> </li>
+                                <li><a href="{{url('dvvantai/dvxtx/kekhai')}}"><i class="fa fa-taxi"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải hành khách bằng xe taxi</span></a> </li>
+                            @elseif(session('admin')->level == 'T')
+                                <li><a href="{{url('xetduyetkkgdvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt kê khai giá dịch vụ xe taxi</span></a> </li>
+                            @endif
+                        </ul>
+                    </li>
+                    <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ vận tải chở hàng</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            @if(session('admin')->level=='H' || session('admin')->level == 'X')
+                                <li><a href="{{url('dvvantai/ttdv/index')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
+                                <li><a href="{{url('dvvantai/dvkhac/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Danh mục dịch vận tải chở hàng</span></a> </li>
+                                <li><a href="{{url('dvvantai/dvkhac/kekhai')}}"><i class="fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải chở hàng</span></a> </li>
+                            @elseif(session('admin')->level == 'T')
+                                <li><a href="{{url('xetduyetkkgdvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt kê khai giá dịch vụ chở hàng</span></a> </li>
+                            @endif
+                        </ul>
+                    </li>
+                                @endif
                     <!--End Quản lý dịch vụ vận tải-->
 
                     <!--Báo cáo thống kê-->

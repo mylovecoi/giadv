@@ -16,6 +16,8 @@ class CreateKkdvvtxbctTable extends Migration
             $table->increments('id');
             $table->string('madichvu')->nullable();
             $table->string('tendichvu')->nullable();
+            $table->string('diemdau')->nullable();
+            $table->string('diemcuoi')->nullable();
             $table->string('qccl')->nullable();
             $table->string('dvtluot')->nullable();
             $table->string('dvtthang')->nullable();

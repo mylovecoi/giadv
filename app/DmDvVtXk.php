@@ -10,7 +10,10 @@ class DmDvVtXk extends Model
     protected $fillable = [
         'id',
         'masothue',
+        'diemdau',
+        'diemcuoi',
         'madichvu',
+        'loaixe',
         'tendichvu',
         'qccl',
         'dvt',

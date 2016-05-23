@@ -149,4 +149,74 @@ class DmDvVtXbController extends Controller
             echo 'ok';
         }
     }
+
+    function dmdv(Request $request)
+    {
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if (!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+        if (!isset($inputs['id'])) {
+            die(json_encode($result));
+        }
+        //Thêm mới dịch vụ
+        if ($inputs['id'] == 0) {
+            $model = new DmDvVtXb();
+            $model->masothue = session('admin')->mahuyen;
+            $model->madichvu = 'DVXB' . getdate()[0];
+            $model->diemdau = $inputs['diemdau'];
+            $model->diemcuoi = $inputs['diemcuoi'];
+            $model->tendichvu = $inputs['tendichvu'];
+            $model->dvtluot = $inputs['dvtluot'];
+            $model->dvtthang = $inputs['dvtthang'];
+            $model->qccl = $inputs['qccl'];
+            $model->ghichu = $inputs['ghichu'];
+            $model->save();
+        } else {
+            $id=$inputs['id'];
+            $model =  DmDvVtXb::findOrFail($id);
+            $model->diemdau = $inputs['diemdau'];
+            $model->diemcuoi = $inputs['diemcuoi'];
+            $model->tendichvu = $inputs['tendichvu'];
+            $model->dvtluot = $inputs['dvtluot'];
+            $model->dvtthang = $inputs['dvtthang'];
+            $model->qccl = $inputs['qccl'];
+            $model->ghichu = $inputs['ghichu'];
+            $model->save();
+        }
+
+        //Trả lại kết quả
+        $result['message'] = '<tbody id="noidung">';
+        $DMDV = DmDvVtXb::where('masothue', session('admin')->mahuyen)->get();
+
+        if (count($DMDV) > 0) {
+            foreach ($DMDV as $dv) {
+                $result['message'] .= '<tr>';
+                $result['message'] .= '<td name="diemdau">' . $dv->diemdau . '</td>';
+                $result['message'] .= '<td name="diemcuoi">' . $dv->diemcuoi . '</td>';
+                $result['message'] .= '<td name="tendichvu">' . $dv->tendichvu . '</td>';
+                $result['message'] .= '<td name="qccl">' . $dv->qccl . '</td>';
+                $result['message'] .= '<td name="dvtluot">' . $dv->dvtluot . '</td>';
+                $result['message'] .= '<td name="dvtthang">' . $dv->dvtthang . '</td>';
+                $result['message'] .= '<td name="ghichu">' . $dv->ghichu . '</td>';
+                $result['message'] .= '<td>' .
+                    '<button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'.$dv->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>&nbsp;' .
+                    '<button type="button" onclick="confirmDelete(' . $dv->id . ')" class="btn btn-danger btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>' .
+                    '</td>';
+                $result['message'] .= '</tr>';
+            }
+        }
+        $result['message'] .= '</tbody>';
+        $result['status'] = 'success';
+
+        die(json_encode($result));
+    }
 }

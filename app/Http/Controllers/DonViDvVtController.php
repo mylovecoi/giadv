@@ -28,6 +28,54 @@ class DonViDvVtController extends Controller
             return view('errors.notlogin');
     }
 
+    public function TtDnIndex(){
+        if (Session::has('admin')) {
+
+            $model = DonViDvVt::where('masothue',session('admin')->mahuyen)
+                ->first();
+    //dd($model);
+            return view('quanly.dvvt.ttdn.index')
+                ->with('model',$model)
+                ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ lưu trú');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function TtDnedit($id)
+    {
+        if (Session::has('admin')) {
+            $model = DonViDvVt::findOrFail($id);
+
+            return view('quanly.dvvt.ttdn.edit')
+                ->with('model',$model)
+                ->with('pageTitle','Chỉnh sửa thông tin doanh nghiệp cung cấp dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function TtDnupdate(Request $request, $id)
+    {
+        if (Session::has('admin')) {
+            $upd = $request->all();
+            $model = DonViDvVt::findOrFail($id);
+            $model->diachi = $upd['diachi'];
+            $model->dienthoai = $upd['dienthoai'];
+            $model->fax = $upd['fax'];
+            $model->dknopthue = $upd['dknopthue'];
+            $model->chucdanh = $upd['chucdanh'];
+            $model->nguoiky = $upd['nguoiky'];
+            $model->diadanh = $upd['diadanh'];
+            $model->dvxk = isset($upd['dvxk']) ? 1 : 0;
+            $model->dvxb = isset($upd['dvxb']) ? 1 : 0;
+            $model->dvxtx = isset($upd['dvxtx']) ? 1 : 0;
+            $model->dvk = isset($upd['dvk']) ? 1 : 0;
+            $model->save();
+            return redirect('dvvantai/ttdv/index');
+        } else
+            return view('errors.notlogin');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

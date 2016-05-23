@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\CbKkDvVtXk;
+use App\DmDvVtXk;
+use App\KkDvVtXkCt;
+use App\KkDvVtXkCtDf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\KkDvVtXk;
 use App\DonViDvVt;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class KkDvVtXkController extends Controller
@@ -20,19 +26,16 @@ class KkDvVtXkController extends Controller
     public function index()
     {
         if (Session::has('admin')) {
-
+            $datetime = Carbon::now()->toDateTimeString();
             if(session('admin')->level == 'T')
                 $model = KkDvVtXk::where('trangthai','<>','Chờ chuyển')
+                    ->where('trangthai','<>','Bị trả lại')
+                    ->orderBy('ngaynhap', 'esc')
                     ->get();
             else
                 $model = KkDvVtXk::where('masothue',session('admin')->mahuyen)
+                    ->orderBy('ngaynhap', 'esc')
                     ->get();
-
-            $modeldonvi = DonViDvVt::all();
-
-            foreach($model as $dn){
-                $this->getTenDV($modeldonvi,$dn);
-            }
 
             return view('quanly.dvvt.dvxk.kkdv.index')
                 ->with('model',$model)
@@ -42,11 +45,45 @@ class KkDvVtXkController extends Controller
             return view('errors.notlogin');
     }
 
-    public function getTenDV($atenDV,$array){
+    public function getTenDV($atenDV, $array){
         foreach($atenDV as $tenDV){
             if($tenDV->masothue == $array->masothue)
                 $array->tendonvi = $tenDV->tendonvi;
         }
+    }
+
+    public function indexXD($tt='CN')
+    {
+        if (Session::has('admin')) {
+            if($tt == 'CN')
+                $model = KkDvVtXk::where('trangthai','Chờ nhận')
+                    ->orderBy('ngaynhap', 'esc')
+                    ->get();
+            elseif($tt == 'CD')
+                $model = KkDvVtXk::where('trangthai','Chờ duyệt')
+                    ->orderBy('ngaynhap', 'esc')
+                    ->get();
+            elseif($tt == 'D')
+                $model = KkDvVtXk::where('trangthai','Duyệt')
+                    ->orderBy('ngaynhap', 'esc')
+                    ->get();
+            else
+                $model = CbKkDvVtXk::groupby('masothue')
+                    ->orderBy('ngaynhap', 'esc')
+                    ->get();
+
+            $modeldv = DonViDvVt::all();
+            foreach($model as $dv){
+                $this->getTenDV($modeldv, $dv);
+            }
+            //dd($model);
+            return view('quanly.dvvt.dvxk.index')
+                ->with('model',$model)
+                ->with('tt',$tt)
+                ->with('pageTitle','Xét duyệt kê khai giá dịch vụ vận tải bằng ô tô theo tuyến cố định');
+
+        }else
+            return view('errors.notlogin');
     }
     /**
      * Show the form for creating a new resource.
@@ -56,9 +93,47 @@ class KkDvVtXkController extends Controller
     public function create()
     {
         if (Session::has('admin')) {
-            return view('quanly.dvvt.dvxk.kkdv.create')
-                ->with('pageTitle','Kê khai mới giá dịch vụ vận tải bằng ô tô theo tuyến cố định');
+            $masothue=session('admin')->mahuyen;
+            KkDvVtXkCtDf::where('masothue', $masothue)->delete();
+            //$sql=" INSERT INTO kkdvvtxkctdf (masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt) SELECT masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt FROM dmdvvtxk where masothue='". session('admin')->mahuyen."'";
+            //DB::statement($sql);
 
+            $modelCB=CbKkDvVtXk::select('socv','ngaynhap','masokk')->where('masothue', $masothue)->first();
+            $solk='';
+            $ngaylk='';
+            $masokk='';
+
+            if (isset($modelCB)) {
+                //dd($modelCB);
+                $solk = $modelCB->socv;
+                $ngaylk = $modelCB->ngaynhap;
+                $masokk = $modelCB->masokk;
+            }
+            $mdDV=DmDvVtXk::where('masothue',$masothue)->get();
+            foreach($mdDV as $dv){
+                $mdkk = new KkDvVtXkCtDf();
+                $mdkk->masothue = $masothue;
+                $mdkk->diemdau = $dv->diemdau;
+                $mdkk->diemcuoi = $dv->diemcuoi;
+                $mdkk->madichvu = $dv->madichvu;
+                $mdkk->loaixe = $dv->loaixe;
+                $mdkk->tendichvu = $dv->tendichvu;
+                $mdkk->qccl = $dv->qccl;
+                $mdkk->dvt = $dv->dvt;
+                $mdCT = KkDvVtXkCt::select('giakk')->where('masokk', $masokk)->where('madichvu', $dv->madichvu)->first();
+
+                $mdkk->giakklk = count($mdCT)>0 ? $mdCT->giakk : 0;
+                $mdkk->giakk =0;
+                $mdkk->giahl =0;
+                $mdkk->save();
+            }
+
+            $model=KkDvVtXkCtDf::where('masothue', session('admin')->mahuyen)->get();
+            return view('quanly.dvvt.dvxk.kkdv.create')
+                ->with('pageTitle','Kê khai mới giá dịch vụ vận tải bằng ô tô theo tuyến cố định')
+                ->with('socvlk',$solk)
+                ->with('ngaycvlk',$ngaylk)
+                ->with('model',$model);
         }else
             return view('errors.notlogin');
     }
@@ -72,21 +147,31 @@ class KkDvVtXkController extends Controller
     public function store(Request $request)
     {
         if (Session::has('admin')) {
-            $ma=getdate();
+            $makk=session('admin')->mahuyen . '.' . getdate()[0];
             $insert = $request->all();
+
             $model = new KkDvVtXk();
-            $model->masokk = session('admin')->mahuyen . '.' . $ma[0];
+            $model->masokk = $makk;
             $model->ngaynhap = $insert['ngaynhap'];
             $model->socv = $insert['socv'];
-            //$model->socvlk = $insert['socv']; lấy trong bảng công bố
+            $model->socvlk = $insert['socvlk'];
+            $model->ngaynhaplk = $insert['ngaynhaplk'];
             $model->ngayhieuluc = $insert['ngayhieuluc'];
-            //$model->nguoinop=$insert['nguoinop'];
             $model->trangthai = 'Chờ chuyển';
             $model->masothue = session('admin')->mahuyen;
+            $model->uudai = $insert['uudai'];
             $model->ghichu = $insert['ghichu'];
             $model->save();
-            return redirect('dvvantai/kkdvxk');
 
+            DB::statement("Update KkDvVtXkCtDf set masokk='".$makk."' where masothue='". session('admin')->mahuyen."'");
+
+            $sql="INSERT INTO kkdvvtxkct (masokk,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt,giakk,giakklk,giahl)
+                  SELECT masokk,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt,giakk,giakklk,giahl FROM kkdvvtxkctdf where masokk='". $makk."'";
+            DB::statement($sql);
+
+            //DB::statement("INSERT INTO cbkkdvvtxk SELECT * FROM kkdvvtxk WHERE masokk='".$makk."'");
+
+            return redirect('dvvantai/kkdvxk');
         }else
             return view('errors.notlogin');
     }
@@ -101,8 +186,10 @@ class KkDvVtXkController extends Controller
     {
         if (Session::has('admin')) {
             $model = KkDvVtXk::findOrFail($id);
+            $modeldv=KkDvVtXkCt::where('masokk',$model->masokk)->get();
             return view('quanly.dvvt.dvxk.kkdv.edit')
                 ->with('model',$model)
+                ->with('modeldv',$modeldv)
                 ->with('pageTitle','Chỉnh sửa kê khai giá dịch vụ vận tài bằng ô tô theo tuyến cố định');
         }else
             return view('errors.notlogin');
@@ -122,10 +209,11 @@ class KkDvVtXkController extends Controller
             $model = KkDvVtXk::findOrFail($id);
             $model->ngaynhap = $update['ngaynhap'];
             $model->socv = $update['socv'];
+            $model->ngaynhaplk = $update['ngaynhaplk'];
+            $model->socvlk = $update['socvlk'];
             $model->ngayhieuluc = $update['ngayhieuluc'];
             $model->ghichu = $update['ghichu'];
-            //$model->nguoinop = $update['nguoinop'];
-            $model->ngaynhan = $update['ngaynhan'];
+            $model->uudai = $update['uudai'];
             $model->save();
             return redirect('dvvantai/kkdvxk');
         }else
@@ -141,7 +229,6 @@ class KkDvVtXkController extends Controller
     public function destroy($id)
     {
         if (Session::has('admin')) {
-
             $model = KkDvVtXk::findOrFail($id);
             $model->delete();
             return redirect('dvvantai/kkdvxk');
@@ -165,15 +252,46 @@ class KkDvVtXkController extends Controller
 
         if(isset($inputs['id'])){
             $model = KkDvVtXk::findOrFail($inputs['id']);
-            $model->trangthai = 'Chờ duyệt';
-            $model->nguoinop = $inputs['nguoinop'];
-            $model->ngaychuyen = $inputs['ngaychuyen'];
-            $model->sdtnn = $inputs['sdtnn'];
-            $model->faxnn = $inputs['faxnn'];
-            $model->emailnn = $inputs['emailnn'];
+            $model->trangthai = 'Chờ nhận';
+            $model->ttnguoinop = $inputs['ttnguoinop'];
+            $model->ngaychuyen = Carbon::now()->toDateTimeString();
             $model->save();
             $result['message'] = 'Chuyển thành công.';
             $result['status'] = 'success';
+        }
+        die(json_encode($result));
+    }
+
+    public function accept(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $id=$inputs['id'];
+            $model = KkDvVtXk::findOrFail($id);
+            $model->trangthai = 'Duyệt';
+            //$model->ngaychuyen = Carbon::now()->toDateTimeString();
+            $model->save();
+
+            $result['message'] = 'Xét duyệt thành công.';
+            $result['status'] = 'success';
+
+            $modelkk = KkDvVtXk::findOrFail($id);
+            $modeldel = CbKkDvVtXk::where('masothue',$modelkk->masothue)->delete();
+
+            DB::statement("INSERT INTO cbkkdvvtxk SELECT * FROM kkdvvtxk WHERE id='".$id."'");
+            DB::statement("Update cbkkdvvtxk set trangthai='Đang công bố' WHERE id='".$id."'");
         }
         die(json_encode($result));
     }
@@ -189,6 +307,32 @@ class KkDvVtXkController extends Controller
             return redirect('dvvantai/kkdvxk');
         }else
             return view('errors.notlogin');
+    }
+
+    public function nhanhs(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $input = $request->all();
+        $id=$input['id'];
+        if (Session::has('admin')) {
+            $model = KkDvVtXk::findOrFail($id);
+            $model->ngaynhan = $input['ngaynhan'];
+            $model->sohsnhan = $input['sohsnhan'];
+            $model->trangthai = 'Chờ duyệt';
+            $model->save();
+            $result['message'] = 'Trả lại thành công.';
+            $result['status'] = 'success';
+        }
+        die(json_encode($result));
     }
 
     public function boduyet($ids){
@@ -233,6 +377,116 @@ class KkDvVtXkController extends Controller
             $result['message'] = 'Trả lại thành công.';
             $result['status'] = 'success';
         }
+        die(json_encode($result));
+    }
+
+    public function updategiadv(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+
+            $inputs['giakk'] = str_replace(',','',$inputs['giakk']);
+            $inputs['giakk'] = str_replace('.','',$inputs['giakk']);
+            $inputs['giakklk'] = str_replace(',','',$inputs['giakklk']);
+            $inputs['giakklk'] = str_replace('.','',$inputs['giakklk']);
+            $inputs['giahl'] = str_replace(',','',$inputs['giahl']);
+            $inputs['giahl'] = str_replace('.','',$inputs['giahl']);
+
+            $model = KkDvVtXkCtDf::findOrFail($inputs['id']);
+            $model->giakk = $inputs['giakk'];
+            $model->giakklk = $inputs['giakklk'];
+            $model->giahl = $inputs['giahl'];
+            $model->save();
+            //Trả lại kết quả
+            $result['message'] = '<tbody id="noidung">';
+            $DMDV = KkDvVtXkCtDf::where('masothue', session('admin')->mahuyen)->get();
+
+                foreach($DMDV as $dv) {
+                    $result['message'] .= '<tr>';
+                    $result['message'] .= '<td name = "loaixe">'.$dv->loaixe.'</td>';
+                    $result['message'] .= '<td name = "tendichvu">'.$dv->tendichvu.'</td>';
+                    $result['message'] .= '<td name = "giakklk">'.number_format($dv->giakklk).'</td>';
+                    $result['message'] .= '<td name = "giakk">'.number_format($dv->giakk).'</td>';
+                    $result['message'] .= '<td name = "giahl">'.number_format($dv->giahl).'</td>';
+                    $result['message'] .= '<td>'
+                                    .'<button type="button" data-target="#modal-create" '
+                                    .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
+                                    .'onclick="editItem(this,'.$dv->id.')"><i'
+                                    .'class="fa fa-edit"></i>&nbsp;Kê khai giá'
+                                    .'</button>';
+                    $result['message'] .= '</td >';
+                    $result['message'] .= '</tr >';
+           }
+            $result['message'] .= '</tbody>';
+            $result['status'] = 'success';
+        }
+
+        die(json_encode($result));
+    }
+
+    public function updategiadvct(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+
+            $inputs['giakk'] = str_replace(',','',$inputs['giakk']);
+            $inputs['giakk'] = str_replace('.','',$inputs['giakk']);
+            $inputs['giakklk'] = str_replace(',','',$inputs['giakklk']);
+            $inputs['giakklk'] = str_replace('.','',$inputs['giakklk']);
+            $inputs['giahl'] = str_replace(',','',$inputs['giahl']);
+            $inputs['giahl'] = str_replace('.','',$inputs['giahl']);
+
+            $model = KkDvVtXkCt::findOrFail($inputs['id']);
+            $model->giakk = $inputs['giakk'];
+            $model->giakklk = $inputs['giakklk'];
+            $model->giahl = $inputs['giahl'];
+            $model->save();
+            //Trả lại kết quả
+            $result['message'] = '<tbody id="noidung">';
+            $DMDV = KkDvVtXkCt::where('masokk', $inputs['masokk'])->get();
+
+            foreach($DMDV as $dv) {
+                $result['message'] .= '<tr>';
+                $result['message'] .= '<td name = "loaixe">'.$dv->loaixe.'</td>';
+                $result['message'] .= '<td name = "tendichvu">'.$dv->tendichvu.'</td>';
+                $result['message'] .= '<td name = "giakklk">'.number_format($dv->giakklk).'</td>';
+                $result['message'] .= '<td name = "giakk">'.number_format($dv->giakk).'</td>';
+                $result['message'] .= '<td name = "giahl">'.number_format($dv->giahl).'</td>';
+                $result['message'] .= '<td>'
+                    .'<button type="button" data-target="#modal-create" '
+                    .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
+                    .'onclick="editItem(this,'.$dv->id.','.$dv->masokk.')"><i'
+                    .'class="fa fa-edit"></i>&nbsp;Kê khai giá'
+                    .'</button>';
+                $result['message'] .= '</td >';
+                $result['message'] .= '</tr >';
+            }
+            $result['message'] .= '</tbody>';
+            $result['status'] = 'success';
+        }
+
         die(json_encode($result));
     }
 }

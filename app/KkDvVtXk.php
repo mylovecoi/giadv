@@ -11,18 +11,18 @@ class KkDvVtXk extends Model
         'id',
         'masothue',
         'masokk',
-        'ngaynhap',
         'socv',
+        'ngaynhap',
         'socvlk',
+        'ngaynhaplk',
         'ngayhieuluc',
+        'ttnguoinop',
         'ngaynhan',
-        'trangthai',
-        'ghichu',
+        'sohsnhan',
         'ngaychuyen',
         'lydo',
-        'nguoinop',
-        'sdtnn',
-        'faxnn',
-        'emailnn'
+        'trangthai',
+        'uudai',
+        'ghichu'
     ];
 }

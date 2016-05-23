@@ -24,7 +24,7 @@ class HomeController extends Controller
     {
         if (Session::has('admin')) {
 
-            if(session('admin')->level = 'T') {
+            if(session('admin')->level == 'T') {
                 $hsltcn = KkGDvLt::where('trangthai', 'Chờ nhận')->count();
                 $hsltcd = KkGDvLt::where('trangthai','Chờ duyệt')->count();
 

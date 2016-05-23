@@ -11,6 +11,8 @@ class KkDvVtXbCt extends Model
         'id',
         'masokk',
         'madichvu',
+        'diemdau',
+        'diemcuoi',
         'tendichvu',
         'qccl',
         'dvtluot',

@@ -11,6 +11,7 @@ class DmDvVtKhac extends Model
         'id',
         'masothue',
         'madichvu',
+        'loaixe',
         'tendichvu',
         'qccl',
         'dvt',

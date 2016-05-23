@@ -23,8 +23,15 @@ class UsersController extends Controller
     {
         if (Session::has('admin')) {
 
-            $model = Users::where('level','<>','T')
-                ->get();
+            $model = Users::all();
+            $index_unset = 0;
+            foreach($model as $user) {
+                if( $user->username =='minhtran' || $user->username == 'sa') {
+                    unset($model[$index_unset]);
+                }
+                $index_unset++;
+            }
+            //dd($model);
 
             return view('system.users.index')
                 ->with('model',$model)

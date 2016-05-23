@@ -27,6 +27,7 @@ class HomeController extends Controller
             if(session('admin')->level == 'T') {
                 $hsltcn = KkGDvLt::where('trangthai', 'Chờ nhận')->count();
                 $hsltcd = KkGDvLt::where('trangthai','Chờ duyệt')->count();
+                $hslttl = KkGDvLt::where('trangthai','Bị trả lại')->count();
 
             }else{
                 $hsltcn = KkGDvLt::where('trangthai', 'Chờ nhận')
@@ -35,12 +36,16 @@ class HomeController extends Controller
                 $hsltcd = KkGDvLt::where('trangthai','Chờ duyệt')
                     ->where('masothue',session('admin')->mahuyen)
                     ->count();
+                $hslttl = KkGDvLt::where('trangthai','Bị trả lại')
+                    ->where('masothue',session('admin')->mahuyen)
+                    ->count();
             }
 
 
             return view('dashboard')
                 ->with('hsltcn',$hsltcn)
                 ->with('hsltcd',$hsltcd)
+                ->with('hslttl',$hslttl)
                 ->with('pageTitle', 'Tổng quan');
         }else
             return view('welcome');

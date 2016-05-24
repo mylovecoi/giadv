@@ -171,7 +171,21 @@ Route::group(['prefix'=>'dvvantai'],function(){
         Route::get('deldv/{id}','DmDvVtXbController@destroy');
         Route::get('chkdv/{masothue}/{madichvu}','DmDvVtXbController@chkDv');
         //Kê khai dịch vụ
-        Route::resource('kekhai','KkDvVtXbController');
+        //Route::resource('kekhai','KkDvVtXbController');
+        Route::group(['prefix'=>'kekhai'],function(){
+            Route::get('index','KkDvVtXbController@index');
+            Route::get('create','KkDvVtXbController@create');
+        });
+        /*
+        Route::get('kkdvxk','KkDvVtXkController@index');
+        Route::get('kkdvxk/create','KkDvVtXkController@create');
+        Route::get('kkdvxk/{id}/edit','KkDvVtXkController@edit');
+        Route::patch('kkdvxk/{id}/update','KkDvVtXkController@update');
+        Route::patch('kkdvxk/store','KkDvVtXkController@store');
+        Route::get('kkdvxk/updategiadv','KkDvVtXkController@updategiadv');
+        Route::get('kkdvxk/updategiadvct','KkDvVtXkController@updategiadvct');
+        Route::get('kkdvxk/nhanhs','KkDvVtXkController@nhanhs');
+        */
         Route::group(['prefix'=>'thaotac'],function(){
             Route::get('delete/{id}','KkDvVtXbController@destroy');
             Route::get('chuyen','KkDvVtXbController@chuyen');
@@ -182,8 +196,6 @@ Route::group(['prefix'=>'dvvantai'],function(){
         //Kê khai chi tiết
         Route::group(['prefix'=>'chitiet'],function(){
             Route::get('danhsach/{masokk}','KkDvVtXbCtController@index');
-            //Route::get('create/{idkk}/{madichvu}','KkDvVtXbCtController@create');
-            //Route::post('store','KkDvVtXbCtController@store');
             Route::get('edit/{masokk}','KkDvVtXbCtController@edit');
             Route::patch('update/{id}','KkDvVtXbCtController@update');
             Route::get('del/{id}','KkDvVtXbCtController@destroy');

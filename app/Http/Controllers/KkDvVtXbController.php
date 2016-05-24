@@ -23,15 +23,21 @@ class KkDvVtXbController extends Controller
 
             if(session('admin')->level == 'T')
                 $model = KkDvVtXb::where('trangthai','<>','Chờ chuyển')
+                    ->where('trangthai','<>','Bị trả lại')
+                    ->orderBy('ngaynhap', 'esc')
                     ->get();
             else
                 $model = KkDvVtXb::where('masothue',session('admin')->mahuyen)
+                    ->orderBy('ngaynhap', 'esc')
                     ->get();
 
+            /*
             $modeldonvi = DonViDvVt::all();
             foreach($model as $dn){
                 $this->getTenDV($modeldonvi,$dn);
             }
+            */
+
             return view('quanly.dvvt.dvxb.kkdv.index')
                 ->with('model',$model)
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải');

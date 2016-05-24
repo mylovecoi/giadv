@@ -77,7 +77,6 @@
                                 <b>KÊ KHAI GIÁ DỊCH VỤ VẬN TẢI BẰNG Ô TÔ THEO TUYẾN CỐ ĐỊNH</b>
                             </div>
                             <div class="actions">
-
                             </div>
                         </div>
                         <div class="portlet-body">
@@ -100,7 +99,7 @@
                                                 <th style="width: 15%">Thao tác</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="noidung">
                                             @foreach($model as $kk)
                                                 <tr>
                                                     <td><input type="checkbox" type="checkbox" name = "ck_value"  id="ck_value" value="{{$kk->id}}"/></td>

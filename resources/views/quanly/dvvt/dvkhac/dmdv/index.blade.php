@@ -49,7 +49,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
-                                        <table id="table" class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                        <table id="table_id" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                             <thead>
                                             <tr>
                                                 <th style="width: 10%">Loại xe</th>
@@ -147,7 +147,8 @@
                     success: function (data) {
                         //alert(data.message);
                         if (data.status == 'success') {
-                            $('#noidung').replaceWith(data.message);
+                            location.reload();
+                            //$('#noidung').replaceWith(data.message);
                         }
                     },
                     error: function(message){

@@ -40,7 +40,6 @@ class KkDvVtXkController extends Controller
             return view('quanly.dvvt.dvxk.kkdv.index')
                 ->with('model',$model)
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải bằng ô tô theo tuyến cố định');
-
         }else
             return view('errors.notlogin');
     }
@@ -52,7 +51,7 @@ class KkDvVtXkController extends Controller
         }
     }
 
-    public function indexXD($tt='CN')
+    public function indexXD($tt)
     {
         if (Session::has('admin')) {
             if($tt == 'CN')

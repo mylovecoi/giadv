@@ -63,13 +63,14 @@ class DonViDvVtController extends Controller
             $model->dienthoai = $upd['dienthoai'];
             $model->fax = $upd['fax'];
             $model->dknopthue = $upd['dknopthue'];
+            $model->giayphepkd = $upd['giayphepkd'];
             $model->chucdanh = $upd['chucdanh'];
             $model->nguoiky = $upd['nguoiky'];
             $model->diadanh = $upd['diadanh'];
-            $model->dvxk = isset($upd['dvxk']) ? 1 : 0;
-            $model->dvxb = isset($upd['dvxb']) ? 1 : 0;
-            $model->dvxtx = isset($upd['dvxtx']) ? 1 : 0;
-            $model->dvk = isset($upd['dvk']) ? 1 : 0;
+            //$model->dvxk = isset($upd['dvxk']) ? 1 : 0;
+            //$model->dvxb = isset($upd['dvxb']) ? 1 : 0;
+            //$model->dvxtx = isset($upd['dvxtx']) ? 1 : 0;
+            //$model->dvk = isset($upd['dvk']) ? 1 : 0;
             $model->save();
             return redirect('dvvantai/ttdv/index');
         } else

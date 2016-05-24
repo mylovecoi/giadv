@@ -34,11 +34,12 @@
                                     <ul class="list-group">
                                         <li class="list-group-item"><b>Tên doanh nghiệp:&nbsp;</b>{{$model->tendonvi}}</li>
                                         <li class="list-group-item"><b>Mã số thuế:&nbsp;</b>{{$model->masothue}}</li>
-                                        <li class="list-group-item"><b>Địa chỉ trụ sở chính:&nbsp;</b>{{$model->diachidn}}</li>
-                                        <li class="list-group-item"><b>Điện thoại trụ sở chính:&nbsp;</b>{{$model->teldn}}</li>
-                                        <li class="list-group-item"><b>Số fax trụ sở chính:&nbsp;</b>{{$model->faxdn}}</li>
-                                        <li class="list-group-item"><b>Nơi đăng ký nộp thuế:&nbsp;</b>{{$model->noidknopthue}}</li>
-                                        <li class="list-group-item"><b>Chức danh người ký:&nbsp;</b>{{$model->chucdanhky}}</li>
+                                        <li class="list-group-item"><b>Địa chỉ trụ sở chính:&nbsp;</b>{{$model->diachi}}</li>
+                                        <li class="list-group-item"><b>Điện thoại trụ sở chính:&nbsp;</b>{{$model->dienthoai}}</li>
+                                        <li class="list-group-item"><b>Số fax trụ sở chính:&nbsp;</b>{{$model->fax}}</li>
+                                        <li class="list-group-item"><b>Nơi đăng ký nộp thuế:&nbsp;</b>{{$model->dknopthue}}</li>
+                                        <li class="list-group-item"><b>Giấy phép kinh doanh:&nbsp;</b>{{$model->giayphepkd}}</li>
+                                        <li class="list-group-item"><b>Chức danh người ký:&nbsp;</b>{{$model->chucdanh}}</li>
                                         <li class="list-group-item"><b>Họ và tên người ký:&nbsp;</b>{{$model->nguoiky}}</li>
                                         <li class="list-group-item"><b>Địa danh:&nbsp;</b>{{$model->diadanh}}</li>
                                     </ul>

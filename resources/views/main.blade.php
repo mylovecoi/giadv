@@ -89,9 +89,7 @@
         <nav id="sidebar" role="navigation" class="navbar-default navbar-static-side">
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
-
                     <li> <a href="{{url('')}}"> <i class="fa fa-desktop fa-fw"></i> <span class="menu-title">Màn hình tổng quan</span> </a> </li>
-
                     <!--Quản lý dịch vụ lưu trú-->
                     @if(can('dvlt','index'))
                     <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ lưu trú</span><span class="fa arrow"></span></a>
@@ -139,7 +137,7 @@
                                     @if(session('admin')->level=='H' || session('admin')->level == 'X')
                                         <li><a href="{{url('dvvantai/dvxb/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Thông tin dịch vụ vận tải</span></a>
                                         </li>
-                                        <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
+                                        <li><a href="{{url('dvvantai/dvxb/kekhai/index')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
                                         </li>
                                     @elseif(session('admin')->level == 'T')
                                         <li><a href="{{url('dvvantai/xetduyetkkdvxk/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>

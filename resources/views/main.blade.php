@@ -155,7 +155,30 @@
                             @endif
                         </ul>
                     </li>
-                                @endif
+                    @endif
+                    @if(can('dvvt','index'))
+                    <li class=""><a href="#"><i class="fa fa-sitemap fa-fw">
+                                <div class="icon-bg bg-dark"></div>
+                            </i><span class="menu-title">Dịch vụ vận tải</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse" style="height: 0px;">
+                            <li class=""><a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Vận tải xe khách</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level collapse" style="height: 0px;">
+                                    @if(session('admin')->level=='H' || session('admin')->level == 'X')
+                                    <li><a href="{{url('dvvantai/ttdv/index')}}"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a>
+                                    </li>
+                                    <li><a href="{{url('dvvantai/dvxekhach')}}"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Thông tin dịch vụ vận tải</span></a>
+                                    </li>
+                                    <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
+                                    </li>
+                                    @elseif(session('admin')->level == 'T')
+                                    <li><a href="{{url('dvvantai/xetduyetkkdvxk/CN')}}"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>
+                                    </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    @endif
                     <!--End Quản lý dịch vụ vận tải-->
 
                     <!--Báo cáo thống kê-->

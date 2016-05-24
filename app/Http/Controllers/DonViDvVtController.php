@@ -127,6 +127,7 @@ class DonViDvVtController extends Controller
                 $modeluser->level = 'H';
                 $modeluser->mahuyen = $insert['masothue'];
                 $modeluser->pldv = 'DVVT';
+                $modeluser->permission =  getPermissionDefault('DVVT');
                 $modeluser->save();
             }
             return redirect('dvvantai/donvi');

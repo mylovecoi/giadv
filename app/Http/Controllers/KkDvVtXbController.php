@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\CbKkDvVtXb;
+use App\DmDvVtXb;
 use App\DonViDvVt;
 use App\KkDvVtXb;
+use App\KkDvVtXbCtDf;
+use App\KkDvVtXbCt;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -60,8 +64,47 @@ class KkDvVtXbController extends Controller
     public function create()
     {
         if (Session::has('admin')) {
+            $masothue=session('admin')->mahuyen;
+            KkDvVtXbCtDf::where('masothue', $masothue)->delete();
+            //$sql=" INSERT INTO kkdvvtxkctdf (masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt) SELECT masothue,diemdau,diemcuoi,madichvu,loaixe,tendichvu,qccl,dvt FROM dmdvvtxk where masothue='". session('admin')->mahuyen."'";
+            //DB::statement($sql);
+
+            $modelCB=CbKkDvVtXb::select('socv','ngaynhap','masokk')->where('masothue', $masothue)->first();
+            $solk='';
+            $ngaylk='';
+            $masokk='';
+
+            if (isset($modelCB)) {
+                $solk = $modelCB->socv;
+                $ngaylk = $modelCB->ngaynhap;
+                $masokk = $modelCB->masokk;
+            }
+            $mdDV=DmDvVtXb::where('masothue',$masothue)->get();
+            foreach($mdDV as $dv){
+                $mdkk = new KkDvVtXbCtDf();
+                $mdkk->masothue = $masothue;
+                $mdkk->diemdau = $dv->diemdau;
+                $mdkk->diemcuoi = $dv->diemcuoi;
+                $mdkk->madichvu = $dv->madichvu;
+                $mdkk->tendichvu = $dv->tendichvu;
+                $mdkk->qccl = $dv->qccl;
+                $mdkk->dvtluot = $dv->dvtluot;
+                $mdkk->dvtthang = $dv->dvtthang;
+                $mdCT = KkDvVtXbCt::select('giakkluot','giakkthang')->where('masokk', $masokk)->where('madichvu', $dv->madichvu)->first();
+                $mdkk->giakklkluot = count($mdCT)>0 ? $mdCT->giakkluot : 0;
+                $mdkk->giakklkthang = count($mdCT)>0 ? $mdCT->giakkthang : 0;
+                $mdkk->giakkluot =0;
+                $mdkk->giakkthang =0;
+                $mdkk->save();
+            }
+
+            $model=KkDvVtXbCtDf::where('masothue', session('admin')->mahuyen)->get();
+
             return view('quanly.dvvt.dvxb.kkdv.create')
-                ->with('pageTitle','Kê khai mới giá dịch vụ vận tải');
+                ->with('pageTitle','Kê khai mới giá dịch vụ vận tải')
+                ->with('socvlk',$solk)
+                ->with('ngaycvlk',$ngaylk)
+                ->with('model',$model);
 
         }else
             return view('errors.notlogin');

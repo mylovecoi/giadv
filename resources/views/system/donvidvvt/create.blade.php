@@ -90,31 +90,39 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Doanh nghiệp cung cấp dịch vụ<span class="require">*</span> </label>
-                                    <label class="col-sm-2 control-label">Dịch vụ xe khách</label>
-                                    <div class="col-sm-1 controls">
-                                        <input id="dvxk" type="checkbox" name="dvxk" class="form-control">
-                                    </div>
-
-                                    <label class="col-sm-2 control-label">Dịch vụ xe buýt</label>
-                                    <div class="col-sm-1 controls">
-                                        <input id="dvxb" type="checkbox" name="dvxb" class="form-control">
+                                    <label class="col-sm-3 control-label">Doanh nghiệp cung cấp dịch vụ</label>
+                                    <div class="col-sm-8 ">
+                                        <div class="row">
+                                            <div class="mbm col-sm-3">
+                                                <label>
+                                                    <input type="checkbox" value="1" name="roles[dvxk][index]"/> &nbsp; Dịch vụ xe khách
+                                                </label>
+                                            </div>
+                                            <div class="mbm col-sm-3">
+                                                <label>
+                                                    <input type="checkbox" value="1" name="roles[dvxb][index]"/> &nbsp; Dịch vụ xe buýt
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"></label>
-                                    <label class="col-sm-2 control-label">Dịch vụ xe taxi</label>
-                                    <div class="col-sm-1 controls">
-                                        <input id="dvxtx" type="checkbox" name="dvxtx" class="form-control">
-                                    </div>
-
-                                    <label class="col-sm-2 control-label">Dịch vụ chở hàng</label>
-                                    <div class="col-sm-1 controls">
-                                        <input id="dvk" type="checkbox" name="dvk" class="form-control">
+                                    <div class="col-sm-8 ">
+                                        <div class="row">
+                                            <div class="mbm col-sm-3">
+                                                <label>
+                                                    <input type="checkbox"  value="1" name="roles[dvxtx][index]"/> &nbsp; Dịch vụ xe taxi
+                                                </label>
+                                            </div>
+                                            <div class="mbm col-sm-3">
+                                                <label>
+                                                    <input type="checkbox"  value="1" name="roles[dvxch][index]"/> &nbsp; Dịch vụ xe chở hàng
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Tài khoản Admin <span class="require">*</span> </label>
                                     <div class="col-sm-6 controls">

@@ -28,6 +28,7 @@ class CreateDonvidvvtTable extends Migration
             $table->boolean('dvxb');
             $table->boolean('dvxtx');
             $table->boolean('dvk');
+            $table->string('dvcc')->nullable();
             $table->string('ghichu')->nullable();
             $table->timestamps();
         });

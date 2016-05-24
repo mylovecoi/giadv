@@ -65,7 +65,7 @@
                                                     <td>{{$donvi->dienthoai}}</td>
                                                     <td>{{$donvi->nguoiky}}</td>
                                                     <td>
-                                                        <a href="{{url('dvvantai/donvi/'.$donvi->id.'/edit')}}" class="btn btn-info btn-xs mbs">&nbsp;Chỉnh sửa</a>
+                                                        <a href="{{url('dvvantai/donvi/'.$donvi->id.'/edit')}}" class="btn btn-info btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
 
                                                         <button type="button" onclick="confirmDelete('{{$donvi->id}}')" class="btn btn-danger btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal">
                                                             <i class="fa fa-trash-o"></i>&nbsp; Xóa</button>

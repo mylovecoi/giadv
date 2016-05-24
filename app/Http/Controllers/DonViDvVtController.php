@@ -117,6 +117,9 @@ class DonViDvVtController extends Controller
             $model->dvxb = isset($insert['dvxb']) ? 1 : 0;
             $model->dvxtx = isset($insert['dvxtx']) ? 1 : 0;
             $model->dvk = isset($insert['dvk']) ? 1 : 0;
+
+            $insert['roles'] = isset($insert['roles']) ? $insert['roles'] : null;
+            $model->dvcc = json_encode($insert['roles']);
             if($model->save()){
                 $modeluser = new Users();
                 $modeluser->name = $insert['tendonvi'];
@@ -148,6 +151,7 @@ class DonViDvVtController extends Controller
 
             return view('system.donvidvvt.edit')
                 ->with('model',$model)
+                ->with('dvcc',json_decode($model->dvcc))
                 ->with('pageTitle','Chỉnh sửa thông tin doanh nghiệp cung cấp dịch vụ vận tải');
         }else
             return view('errors.notlogin');
@@ -179,6 +183,10 @@ class DonViDvVtController extends Controller
             $model->dvxb = isset($upd['dvxb']) ? 1 : 0;
             $model->dvxtx = isset($upd['dvxtx']) ? 1 : 0;
             $model->dvk = isset($upd['dvk']) ? 1 : 0;
+
+            $update['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
+            $model->dvcc = json_encode($update['roles']);
+
             $model->save();
             return redirect('dvvantai/donvi');
         } else

@@ -58,6 +58,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">Giấy phép kinh doanh<span class="require">*</span> </label>
+                            <div class="col-sm-6 controls">
+                                <textarea id="giayphepkd" class="form-control requiredl" name="giayphepkd" cols="30" rows="3" placeholder="Giấy chứng nhận kinh doanh số … do … cấp ngày … tháng …năm  ....">{{$model->giayphepkd}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Chức danh<span class="require">*</span> </label>
                             <div class="col-sm-6 controls">
                                 {!!Form::text('chucdanh', null, array('id' => 'chucdanh','class' => 'form-control required'))!!}
@@ -75,35 +81,7 @@
                                 {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control required'))!!}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"></label>
-                            <div class="col-sm-1 controls">
 
-                            </div>
-                            <label class="col-sm-2 control-label">Dịch vụ xe khách</label>
-                            <div class="col-sm-1 controls">
-                                {!!Form::checkbox('dvxk', 1, array('id' => 'dvxk','class' => 'form-control'))!!}
-                            </div>
-
-                            <label class="col-sm-2 control-label">Dịch vụ xe buýt</label>
-                            <div class="col-sm-1 controls">
-                                {!!Form::checkbox('dvxb', 1, array('id' => 'dvxb','class' => 'form-control'))!!}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"></label>
-
-                            <label class="col-sm-2 control-label">Dịch vụ xe taxi</label>
-                            <div class="col-sm-1 controls">
-                                {!!Form::checkbox('dvxtx', 1, array('id' => 'dvxtx','class' => 'form-control'))!!}
-                            </div>
-
-                            <label class="col-sm-2 control-label">Dịch vụ chở hàng</label>
-                            <div class="col-sm-1 controls">
-                                {!!Form::checkbox('dvk', 1, array('id' => 'dvk','class' => 'form-control'))!!}
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-sm 12" align="center">

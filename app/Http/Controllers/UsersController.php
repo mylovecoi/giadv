@@ -174,12 +174,22 @@ class UsersController extends Controller
         $check = Users::where('username','=',$request->all()['username'])->count();
         if($check == 0)
             return view('errors.invalid-user');
-        else
-            $ttuser = Users::where('username','=',$request->all()['username'])->first();
+        else {
+            $ttuser = Users::where('username', '=', $request->all()['username'])->first();
+            if($ttuser->pldv == 'DVVT')
+                $ttdn = DonViDvVt::where('masothue',$ttuser->mahuyen)
+                    ->first();
+        }
 
         if(md5($request->all()['password'])== $ttuser->password){
             if($ttuser->status == "Kích hoạt"){
                 Session::put('admin', $ttuser);
+
+                if($ttuser->pldv == 'DVVT'){
+                    $ttdnvt = DonViDvVt::where('masothue',$ttuser->mahuyen)
+                        ->first();
+                Session::put('ttdnvt',$ttdnvt);
+                }
                 return redirect('')
                     -> with('pageTitle', 'Tổng quan');
             }else

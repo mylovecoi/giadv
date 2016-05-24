@@ -77,12 +77,11 @@
                                 <b>KÊ KHAI GIÁ DỊCH VỤ VẬN TẢI BẰNG Ô TÔ THEO TUYẾN CỐ ĐỊNH</b>
                             </div>
                             <div class="actions">
+                                <a href="{{url('dvvantai/kkdvxk/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Kê khai mới</a>
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <div class="row mbm">
-                                <a href="{{url('dvvantai/kkdvxk/create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Kê khai mới</a>
-                            </div>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">

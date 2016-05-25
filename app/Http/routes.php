@@ -202,7 +202,7 @@ Route::group(['prefix'=>'dvvantai'],function(){
         //In kê khai
         Route::get('print/{masokk}','KkDvVtXbCtController@printKK');
 
-        //Xét duyệt dịch vụ xe khách - giao diện sở -
+        //Xét duyệt dịch vụ xe buýt - giao diện sở -
         Route::get('xetduyet/{tt}','KkDvVtXbController@indexXD');
         Route::get('duyet','KkDvVtXbController@accept');
         //End Xét duyệt
@@ -249,7 +249,7 @@ Route::group(['prefix'=>'dvvantai'],function(){
         //In kê khai
         Route::get('print/{masokk}','KkDvVtXtxCtController@printKK');
 
-        //Xét duyệt dịch vụ xe khách - giao diện sở -
+        //Xét duyệt dịch vụ xe taxi - giao diện sở -
         Route::get('xetduyet/{tt}','KkDvVtXtxController@indexXD');
         Route::get('duyet','KkDvVtXtxController@accept');
         //End Xét duyệt

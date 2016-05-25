@@ -135,7 +135,7 @@
 
                             </div>
 
-                            <b>Thông tin phòng-chất lượng quy cách</b>
+                            <b>Thông tin phòng - chất lượng quy cách</b>
 
                             <div class="row">
                                 <!--div class="col-md-6">
@@ -183,7 +183,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button type="button" id="capnhatph" name="capnhatph" class="btn btn-primary">Cập nhật</button>
+                                        <button type="button" id="capnhatph" name="capnhatph" class="btn btn-warning"><i class="fa fa-angle-double-down"></i>&nbsp;Cập nhật</button>
                                         &nbsp;
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                         </div>
                         <div class="form-actions text-right pal">
                             <div class="col-sm-12" align="center" >
-                                <button type="submit" class="btn btn-primary">Hoàn thành</button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;Hoàn thành</button>
                                 &nbsp;
                             </div>
                         </div>

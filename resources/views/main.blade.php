@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ url('vendors/iCheck/skins/all.css') }}">
     <link rel="stylesheet" href="{{ url('vendors/jquery-notific8/jquery.notific8.min.css') }}">
     <link rel="stylesheet" href="{{ url('vendors/bootstrap-daterangepicker/daterangepicker-bs3.css') }}">
+
     <!--Loading style-->
     <link rel="stylesheet" href="{{ url('css/themes/style1/zvinhtq.css') }}" class="default-style">
     <link rel="stylesheet" href="{{ url('css/style-responsive.css') }}">

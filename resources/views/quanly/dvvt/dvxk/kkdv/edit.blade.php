@@ -93,6 +93,45 @@
     </script>
 @stop
 
+@section('content-dv')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table id="tabletrocap" class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                    <thead>
+                    <tr>
+                        <th>Loại xe</th>
+                        <th>Mô tả dịch vụ</th>
+                        <th>Mức giá liền kề</th>
+                        <th>Mức giá kê khai</th>
+                        <th>Mức giá hành lý</br> vượt quy định</th>
+                        <th>Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody id="noidung">
+                    @foreach($modeldv as $dv)
+                        <tr>
+                            <td name="loaixe">{{$dv->loaixe}}</td>
+                            <td name="tendichvu">{{$dv->tendichvu}}</td>
+                            <td name="giakklk">{{number_format($dv->giakklk)}}</td>
+                            <td name="giakk">{{number_format($dv->giakk)}}</td>
+                            <td name="giahl">{{number_format($dv->giahl)}}</td>
+                            <td>
+                                <button type="button" data-target="#modal-create"
+                                        data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                        onclick="editItem(this,'{{$dv->id}}','{{$dv->masokk}}')"><i
+                                            class="fa fa-edit"></i>&nbsp;Kê khai giá
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@stop
+
 @section('content')
     <div class="page-content">
         <div id="" class="row">
@@ -102,101 +141,7 @@
                     <div class="panel-body pan">
                         {!! Form::open(['url'=>'dvvantai/kkdvxk/'.$model->id.'/update', 'id' => 'create-kkdvxk','class'=>'horizontal-form form-validate','method'=>'patch']) !!}
                         <div class="form-body pal">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group"><label for="inputLastName" class="control-label">Ngày kê khai<span class="require">*</span></label>
-                                        <div>
-                                            <input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" value="{{$model->ngaynhap}}" autofocus>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group"><label for="selGender" class="control-label">Ngày thực hiện mức giá kê khai</label>
-                                        <div><input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required" value="{{$model->ngayhieuluc}}"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group"><label for="inputEmail" class="control-label">Số công văn<span class="require">*</span></label>
-                                        <div>
-                                            <input type="text" name="socv" id="socv" class="form-control required" value="{{$model->socv}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group"><label for="inputEmail" class="control-label">Số công văn liền kề</label>
-                                        <div>
-                                            <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{$model->socvlk}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group"><label for="inputEmail" class="control-label">Ngày nhập số công văn liền kề</label>
-                                        <div>
-                                            <input type="date" name="ngaynhaplk" id="ngaynhaplk" class="form-control" value="{{$model->ngaynhaplk}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- input type="hidden" name="macskd" id="macskd" value="$modelcskd->macskd" -->
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table id="tabletrocap" class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                            <thead>
-                                            <tr>
-                                                <th>Loại xe</th>
-                                                <th>Mô tả dịch vụ</th>
-                                                <th>Mức giá liền kề</th>
-                                                <th>Mức giá kê khai</th>
-                                                <th>Mức giá hành lý</br> vượt quy định</th>
-                                                <th>Thao tác</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="noidung">
-                                            @foreach($modeldv as $dv)
-                                                <tr>
-                                                    <td name="loaixe">{{$dv->loaixe}}</td>
-                                                    <td name="tendichvu">{{$dv->tendichvu}}</td>
-                                                    <td name="giakklk">{{number_format($dv->giakklk)}}</td>
-                                                    <td name="giakk">{{number_format($dv->giakk)}}</td>
-                                                    <td name="giahl">{{number_format($dv->giahl)}}</td>
-                                                    <td>
-                                                        <button type="button" data-target="#modal-create"
-                                                                data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                                                onclick="editItem(this,'{{$dv->id}}','{{$dv->masokk}}')"><i
-                                                                    class="fa fa-edit"></i>&nbsp;Kê khai giá
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group"><label for="selGender" class="control-label">Các yếu tố chi phí cấu thành giá (đối với kê khai lần đầu); phân tích nguyên nhân, nêu rõ biến động của các yếu tố hình thành giá tác động làm tăng hoặc giảm giá (đối với kê khai lại).</label>
-                                        <div>
-                                            <textarea id="ghichu" class="form-control" name="ghichu" cols="30" rows="3">{{$model->ghichu}}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group"><label for="selGender" class="control-label">Các trường hợp ưu đãi, giảm giá; điều kiện áp dụng giá (nếu có).</label>
-                                        <div>
-                                            <textarea id="uudai" class="form-control" name="uudai" cols="30" rows="3">{{$model->uudai}}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('quanly.dvvt.template.editkkdv')
                         </div>
 
                         <div class="form-actions text-right pal">

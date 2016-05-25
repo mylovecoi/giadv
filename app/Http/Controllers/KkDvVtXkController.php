@@ -39,6 +39,7 @@ class KkDvVtXkController extends Controller
 
             return view('quanly.dvvt.dvxk.kkdv.index')
                 ->with('model',$model)
+                ->with('url','dvvantai/kkdvxk/edit/')
                 ->with('pageTitle','Kê khai giá dịch vụ vận tải bằng ô tô theo tuyến cố định');
         }else
             return view('errors.notlogin');
@@ -295,19 +296,6 @@ class KkDvVtXkController extends Controller
         die(json_encode($result));
     }
 
-    public function duyet($ids){
-        if (Session::has('admin')) {
-            $arrayid = explode('-',$ids);
-            foreach($arrayid as $id){
-                $model = KkDvVtXk::findOrFail($id);
-                $model->trangthai = 'Duyệt';
-                $model->save();
-            }
-            return redirect('dvvantai/kkdvxk');
-        }else
-            return view('errors.notlogin');
-    }
-
     public function nhanhs(Request $request){
         $result = array(
             'status' => 'fail',
@@ -332,19 +320,6 @@ class KkDvVtXkController extends Controller
             $result['status'] = 'success';
         }
         die(json_encode($result));
-    }
-
-    public function boduyet($ids){
-        if (Session::has('admin')) {
-            $arrayid = explode('-',$ids);
-            foreach($arrayid as $id){
-                $model = KkDvVtXk::findOrFail($id);
-                $model->trangthai = 'Chờ duyệt';
-                $model->save();
-            }
-            return redirect('dvvantai/kkdvxk');
-        }else
-            return view('errors.notlogin');
     }
 
     public function tralai(Request $request){

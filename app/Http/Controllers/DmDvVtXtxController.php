@@ -167,7 +167,7 @@ class DmDvVtXtxController extends Controller
         if ($inputs['id'] == 0) {
             $model = new DmDvVtXtx();
             $model->masothue = session('admin')->mahuyen;
-            $model->madichvu = 'DVXTX' . getdate()[0];
+            $model->madichvu = 'DVXTX'.session('admin')->mahuyen . getdate()[0];
             $model->loaixe = $inputs['loaixe'];
             $model->tendichvu = $inputs['tendichvu'];
             $model->dvt = $inputs['dvt'];

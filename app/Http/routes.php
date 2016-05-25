@@ -134,7 +134,7 @@ Route::group(['prefix'=>'dvvantai'],function(){
 
     Route::get('kkdvxk','KkDvVtXkController@index');
     Route::get('kkdvxk/create','KkDvVtXkController@create');
-    Route::get('kkdvxk/{id}/edit','KkDvVtXkController@edit');
+    Route::get('kkdvxk/edit/{id}','KkDvVtXkController@edit');
     Route::patch('kkdvxk/{id}/update','KkDvVtXkController@update');
     Route::patch('kkdvxk/store','KkDvVtXkController@store');
     Route::get('kkdvxk/updategiadv','KkDvVtXkController@updategiadv');
@@ -175,33 +175,37 @@ Route::group(['prefix'=>'dvvantai'],function(){
         Route::group(['prefix'=>'kekhai'],function(){
             Route::get('index','KkDvVtXbController@index');
             Route::get('create','KkDvVtXbController@create');
+            Route::patch('store','KkDvVtXbController@store');
+            Route::get('edit/{id}','KkDvVtXbController@edit');
+            Route::patch('update/{id}','KkDvVtXbController@update');
+            Route::get('updategiadv','KkDvVtXbController@updategiadv');
+            Route::get('updategiadvct','KkDvVtXbController@updategiadvct');
         });
-        /*
-        Route::get('kkdvxk','KkDvVtXkController@index');
-        Route::get('kkdvxk/create','KkDvVtXkController@create');
-        Route::get('kkdvxk/{id}/edit','KkDvVtXkController@edit');
-        Route::patch('kkdvxk/{id}/update','KkDvVtXkController@update');
-        Route::patch('kkdvxk/store','KkDvVtXkController@store');
-        Route::get('kkdvxk/updategiadv','KkDvVtXkController@updategiadv');
-        Route::get('kkdvxk/updategiadvct','KkDvVtXkController@updategiadvct');
-        Route::get('kkdvxk/nhanhs','KkDvVtXkController@nhanhs');
-        */
+        //End kê khai dịch vụ
         Route::group(['prefix'=>'thaotac'],function(){
             Route::get('delete/{id}','KkDvVtXbController@destroy');
             Route::get('chuyen','KkDvVtXbController@chuyen');
-            Route::get('duyet/{ids}','KkDvVtXbController@duyet');
-            Route::get('boduyet/{ids}','KkDvVtXbController@boduyet');
-            Route::get('tralai/{id}','KkDvVtXbController@tralai');
+            //Route::get('duyet/{ids}','KkDvVtXbController@duyet');
+            //Route::get('boduyet/{ids}','KkDvVtXbController@boduyet');
+            Route::get('tralai','KkDvVtXbController@tralai');
+            Route::get('nhanhs','KkDvVtXbController@nhanhs');
         });
-        //Kê khai chi tiết
+        //Kê khai chi tiết - bỏ
         Route::group(['prefix'=>'chitiet'],function(){
             Route::get('danhsach/{masokk}','KkDvVtXbCtController@index');
             Route::get('edit/{masokk}','KkDvVtXbCtController@edit');
             Route::patch('update/{id}','KkDvVtXbCtController@update');
             Route::get('del/{id}','KkDvVtXbCtController@destroy');
         });
+        //End Kê khai chi tiết - bỏ
+
         //In kê khai
         Route::get('print/{masokk}','KkDvVtXbCtController@printKK');
+
+        //Xét duyệt dịch vụ xe khách - giao diện sở -
+        Route::get('xetduyet/{tt}','KkDvVtXbController@indexXD');
+        Route::get('duyet','KkDvVtXbController@accept');
+        //End Xét duyệt
     });
     //End Dịch vụ vận tải bằng xe buýt
 
@@ -213,13 +217,25 @@ Route::group(['prefix'=>'dvvantai'],function(){
         Route::get('deldv/{id}','DmDvVtXtxController@destroy');
         Route::get('chkdv/{masothue}/{madichvu}','DmDvVtXtxController@chkDv');
         //Kê khai dịch vụ
-        Route::resource('kekhai','KkDvVtXtxController');
+        //Route::resource('kekhai','KkDvVtXtxController');
+        Route::group(['prefix'=>'kekhai'],function(){
+            Route::get('index','KkDvVtXtxController@index');
+            Route::get('create','KkDvVtXtxController@create');
+            Route::patch('store','KkDvVtXtxController@store');
+            Route::get('edit/{id}','KkDvVtXtxController@edit');
+            Route::patch('update/{id}','KkDvVtXtxController@update');
+            Route::get('updategiadv','KkDvVtXtxController@updategiadv');
+            Route::get('updategiadvct','KkDvVtXtxController@updategiadvct');
+        });
+        //End kê khai dịch vụ
+
         Route::group(['prefix'=>'thaotac'],function(){
             Route::get('delete/{id}','KkDvVtXtxController@destroy');
             Route::get('chuyen','KkDvVtXtxController@chuyen');
-            Route::get('duyet/{ids}','KkDvVtXtxController@duyet');
-            Route::get('boduyet/{ids}','KkDvVtXtxController@boduyet');
-            Route::get('tralai/{id}','KkDvVtXtxController@tralai');
+            //Route::get('duyet/{ids}','KkDvVtXtxController@duyet');
+            //Route::get('boduyet/{ids}','KkDvVtXtxController@boduyet');
+            Route::get('tralai','KkDvVtXtxController@tralai');
+            Route::get('nhanhs','KkDvVtXtxController@nhanhs');
         });
         //Kê khai chi tiết
         Route::group(['prefix'=>'chitiet'],function(){
@@ -232,6 +248,11 @@ Route::group(['prefix'=>'dvvantai'],function(){
         });
         //In kê khai
         Route::get('print/{masokk}','KkDvVtXtxCtController@printKK');
+
+        //Xét duyệt dịch vụ xe khách - giao diện sở -
+        Route::get('xetduyet/{tt}','KkDvVtXtxController@indexXD');
+        Route::get('duyet','KkDvVtXtxController@accept');
+        //End Xét duyệt
     });
     //End Dịch vụ vận tải bằng xe taxi
 
@@ -243,13 +264,25 @@ Route::group(['prefix'=>'dvvantai'],function(){
         Route::get('deldv/{id}','DmDvVtKhacController@destroy');
         Route::get('chkdv/{masothue}/{madichvu}','DmDvVtKhacController@chkDv');
         //Kê khai dịch vụ
-        Route::resource('kekhai','KkDvVtKhacController');
+        //Route::resource('kekhai','KkDvVtKhacController');
+        Route::group(['prefix'=>'kekhai'],function(){
+            Route::get('index','KkDvVtKhacController@index');
+            Route::get('create','KkDvVtKhacController@create');
+            Route::patch('store','KkDvVtKhacController@store');
+            Route::get('edit/{id}','KkDvVtKhacController@edit');
+            Route::patch('update/{id}','KkDvVtKhacController@update');
+            Route::get('updategiadv','KkDvVtKhacController@updategiadv');
+            Route::get('updategiadvct','KkDvVtKhacController@updategiadvct');
+        });
+        //End kê khai dịch vụ
+
         Route::group(['prefix'=>'thaotac'],function(){
             Route::get('delete/{id}','KkDvVtKhacController@destroy');
             Route::get('chuyen','KkDvVtKhacController@chuyen');
-            Route::get('duyet/{ids}','KkDvVtKhacController@duyet');
-            Route::get('boduyet/{ids}','KkDvVtKhacController@boduyet');
-            Route::get('tralai/{id}','KkDvVtKhacController@tralai');
+            //Route::get('duyet/{ids}','KkDvVtKhacController@duyet');
+            //Route::get('boduyet/{ids}','KkDvVtKhacController@boduyet');
+            Route::get('tralai','KkDvVtKhacController@tralai');
+            Route::get('nhanhs','KkDvVtKhacController@nhanhs');
         });
         //Kê khai chi tiết
         Route::group(['prefix'=>'chitiet'],function(){
@@ -262,6 +295,11 @@ Route::group(['prefix'=>'dvvantai'],function(){
         });
         //In kê khai
         Route::get('print/{masokk}','KkDvVtKhacCtController@printKK');
+
+        //Xét duyệt dịch vụ chở hàng - giao diện sở -
+        Route::get('xetduyet/{tt}','KkDvVtKhacController@indexXD');
+        Route::get('duyet','KkDvVtKhacController@accept');
+        //End Xét duyệt
     });
     //End Dịch vụ vận tải khác
 });

@@ -2,7 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: MyloveCoi
- * Date: 25/04/2016
+ * Date: 18/04/2016
  * Time: 10:43 AM
  */
  ?>
@@ -25,41 +25,41 @@
 
     <script>
         function confirmDelete(id) {
-            $('#frmDelete').attr('action', "/dvvantai/dvkhac/thaotac/delete/" + id);
-        }
-
-        function confirmTraLai(id) {
-            $('#frmTraLai').attr('action', "/dvvantai/dvkhac/thaotac/tralai/" + id);
+            $('#frmDelete').attr('action', "/dvvantai/dvxb/thaotac/delete/" + id);
         }
         function  getSelectedCheckboxes(){
+
             var ids = '';
             $.each($("input[name='ck_value']:checked"), function(){
                 ids += ($(this).attr('value')) + '-';
             });
             return ids = ids.substring(0, ids.length - 1);
+
         }
 
         function multiDuyet() {
-            //Bỏ
+
             var ids = getSelectedCheckboxes();
             if(ids == '') {
                 $('#btnMultiDuyet').attr('data-target', '#notid-modal-confirm');
             }else {
 
                 $('#btnMultiDuyet').attr('data-target', '#duyet-modal-confirm');
-                //$('#frmDuyet').attr('action', "{{ url('dvvantai/dvkhac/thaotac/duyet')}}/" + ids);
+                $('#frmDuyet').attr('action', "{{ url('dvvantai/dvxb/thaotac/duyet')}}/" + ids);
             }
+
         }
         function multiBoDuyet() {
-            //Bỏ
+
             var ids = getSelectedCheckboxes();
             if(ids == '') {
                 $('#btnMultiBoDuyet').attr('data-target', '#notid-modal-confirm');
             }else {
 
                 $('#btnMultiBoDuyet').attr('data-target', '#boduyet-modal-confirm');
-                //$('#frmBoDuyet').attr('action', "{{ url('dvvantai/dvkhac/thaotac/boduyet')}}/" + ids);
+                $('#frmBoDuyet').attr('action', "{{ url('dvvantai/dvxb/thaotac/boduyet')}}/" + ids);
             }
+
         }
 
     </script>
@@ -74,41 +74,58 @@
                     <div class="portlet box">
                         <div class="portlet-header">
                             <div class="caption" style="text-transform:uppercase" >
-                                <b>KÊ KHAI GIÁ DỊCH VỤ VẬN TẢI CHỞ HÀNG</b>
+                                <b>KÊ KHAI GIÁ DỊCH VỤ VẬN TẢI BẰNG Ô TÔ THEO TUYẾN CỐ ĐỊNH</b>
                             </div>
                             <div class="actions">
-                                <a href="{{url('dvvantai/dvkhac/kekhai/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Kê khai mới</a>
+                                <!-- Chờ xem thực tế đơn vị rồi làm
+                                <button id="btnMultiDuyet" type="button" onclick="multiDuyet()" class="btn btn-warning btn-xs" data-target="#duyet-modal-confirm" data-toggle="modal"><i class="fa fa-check-square-o"></i>&nbsp;
+                                        Duyệt</button>
+                                <button id="btnMultiBoDuyet" type="button" onclick="multiBoDuyet()" class="btn btn-pink btn-xs" data-target="#boduyet-modal-confirm" data-toggle="modal"><i class="fa fa-square-o"></i>&nbsp;
+                                        Bỏ duyệt</button>
+                                -->
                             </div>
                         </div>
-                        @include('quanly.dvvt.template.indexkkdv')
+                        @include('quanly.dvvt.template.indexkkdvth')
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
     <script>
 
         function InChiTiet(masokk){
-            var url='/dvvantai/dvkhac/print/'+ masokk;
+            var url='/dvvantai/dvxb/print/'+ masokk;
             window.open(url,'_blank');
         }
 
-        function confirmChuyen(id) {
-            $('#idkk').attr('value', id);
-        }
-
-        function confirmTraLai(id) {
-            $('#idtra').attr('value', id);
-        }
-
-        function LyDoTraLai(str){
-            $('#lydotra').attr('value', str);
-            $('#idtra').attr('value', 'null');
-        }
-
-        function TTNguoiChuyen(str){
-            $('#ttnguoinop').attr('value', str);
-            $('#idkk').attr('value', 'null');
+        function clickNhanHS(){
+            //alert($('#ngaynhan').val()=='');
+            if($('#ngaynhan').val()==''){
+                alert('Ngày nhận hồ sơ không hợp lệ');
+                return false;
+            }
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/dvvantai/dvxb/thaotac/nhanhs',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: $('#idnhan').val(),
+                    sohsnhan: $('#sohsnhan').val(),
+                    ngaynhan: $('#ngaynhan').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        //alert('Nhận bảng kê khai thành công.');
+                        location.reload();
+                    }
+                },
+                error: function (message) {
+                    alert(message);
+                }
+            })
         }
 
         function clickTraDVVT() {
@@ -116,7 +133,7 @@
             if ($('#idtra').attr('value') != 'null') {
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    url: '/dvvantai/dvkhac/thaotac/tralai',
+                    url: '/dvvantai/dvxb/thaotac/tralai',
                     type: 'GET',
                     data: {
                         _token: CSRF_TOKEN,
@@ -137,11 +154,71 @@
             }
         }
 
+        function clickDuyetHS() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: '/dvvantai/dvxb/duyet',
+                type: 'GET',
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: $('#idduyet').val()
+                },
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == 'success') {
+                        location.reload();
+                    }
+                },
+                error: function (message) {
+                    alert(message);
+                }
+            })
+        }
+
+        function confirmNhan(id){
+            $('#idnhan').attr('value', id);
+            var date = new Date();
+            currentDate = date.getDate();     // Get current date
+            month       = date.getMonth() + 1; // current month
+            year        = date.getFullYear();
+            //alert("current date is " + currentDate + "/" + month + "/" + year);
+            $('#ngaynhan').attr('value',date);
+        }
+
+        function confirmNhanCS(str){
+            var aKQ=str.split('?');
+            $('#idnhan').attr('value', aKQ[0]);
+            $('#sohsnhan').attr('value', aKQ[1]);
+            $('#ngaynhan').attr('value', aKQ[2]);
+        }
+
+        function confirmChuyen(id) {
+            $('#idkk').attr('value', id);
+        }
+
+        function comfirmDuyet(id){
+            $('#idduyet').attr('value', id);
+        }
+
+        function confirmTraLai(id) {
+            $('#idtra').attr('value', id);
+        }
+
+        function LyDoTraLai(str){
+            $('#lydotra').attr('value', str);
+            $('#idtra').attr('value', 'null');
+        }
+
+        function TTNguoiChuyen(str){
+            $('#ttnguoinop').attr('value', str);
+            $('#idkk').attr('value', 'null');
+        }
+
         function clickChuyenDVVT() {
             if ($('#idkk').attr('value') != 'null') {
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
-                    url: '/dvvantai/dvkhac/thaotac/chuyen',
+                    url: '/dvvantai/dvxb/thaotac/chuyen',
                     type: 'GET',
                     data: {
                         _token: CSRF_TOKEN,
@@ -161,6 +238,15 @@
                 })
             }
         }
+
+        $(document).ready(function () {
+            $('#select_loaihoso').change(function () {
+                var tt = 'CN';
+                tt = $('#select_loaihoso').val();
+                var url = '/dvvantai/dvxb/xetduyet/' + tt;
+                window.location.href = url;
+            });
+        });
     </script>
     @include('includes.e.modal-confirm')
 

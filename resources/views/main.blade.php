@@ -140,7 +140,7 @@
                                         <li><a href="{{url('dvvantai/dvxb/kekhai/index')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
                                         </li>
                                     @elseif(session('admin')->level == 'T')
-                                        <li><a href="{{url('dvvantai/xetduyetkkdvxk/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>
+                                        <li><a href="{{url('dvvantai/dvxb/xetduyet/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>
                                         </li>
                                     @endif
                                 </ul>
@@ -152,10 +152,10 @@
                                     @if(session('admin')->level=='H' || session('admin')->level == 'X')
                                         <li><a href="{{url('dvvantai/dvxtx/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Thông tin dịch vụ vận tải</span></a>
                                         </li>
-                                        <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
+                                        <li><a href="{{url('dvvantai/dvxtx/kekhai/index')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
                                         </li>
                                     @elseif(session('admin')->level == 'T')
-                                        <li><a href="{{url('dvvantai/xetduyetkkdvxk/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>
+                                        <li><a href="{{url('dvvantai/dvxtx/xetduyet/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>
                                         </li>
                                     @endif
                                 </ul>
@@ -167,10 +167,10 @@
                                     @if(session('admin')->level=='H' || session('admin')->level == 'X')
                                         <li><a href="{{url('dvvantai/dvkhac/danhmuc')}}"><i class="fa fa-th-list"></i><span class="submenu-title">Thông tin dịch vụ vận tải</span></a>
                                         </li>
-                                        <li><a href="{{url('dvvantai/kkdvxk')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
+                                        <li><a href="{{url('dvvantai/dvkhac/kekhai/index')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Kê khai giá dịch vụ vận tải</span></a>
                                         </li>
                                     @elseif(session('admin')->level == 'T')
-                                        <li><a href="{{url('dvvantai/xetduyetkkdvxk/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>
+                                        <li><a href="{{url('dvvantai/dvkhac/xetduyet/CN')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Xét duyệt giá dịch vụ vận tải</span></a>
                                         </li>
                                     @endif
                                 </ul>

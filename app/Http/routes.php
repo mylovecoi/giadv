@@ -279,8 +279,6 @@ Route::group(['prefix'=>'dvvantai'],function(){
         Route::group(['prefix'=>'thaotac'],function(){
             Route::get('delete/{id}','KkDvVtKhacController@destroy');
             Route::get('chuyen','KkDvVtKhacController@chuyen');
-            //Route::get('duyet/{ids}','KkDvVtKhacController@duyet');
-            //Route::get('boduyet/{ids}','KkDvVtKhacController@boduyet');
             Route::get('tralai','KkDvVtKhacController@tralai');
             Route::get('nhanhs','KkDvVtKhacController@nhanhs');
         });

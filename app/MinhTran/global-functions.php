@@ -85,6 +85,28 @@ function getPermissionDefault($level) {
     return json_encode($roles[$level]);
 }
 
+function getDvCcDefault($level) {
+    $roles = array();
+
+    $roles['T'] = array(
+        'dvxk' => array(
+            'index' => 1
+        ),
+        'dvxb' => array(
+            'index' => 1
+        ),
+        'dvxtx' => array(
+            'index' => 1
+        ),
+        'dvxch' => array(
+            'index' => 1
+        ),
+    );
+
+
+    return json_encode($roles[$level]);
+}
+
 function getDayVn($date) {
     if($date != null || $date != '')
         $newday = date('d/m/Y',strtotime($date));
@@ -112,6 +134,19 @@ function getDbl($obj) {
 function can($module = null, $action = null)
 {
     $permission = !empty(session('admin')->permission) ? session('admin')->permission : getPermissionDefault(session('admin')->level);
+    $permission = json_decode($permission, true);
+
+    //check permission
+    if(isset($permission[$module][$action]) && $permission[$module][$action] == 1) {
+        return true;
+    }else
+        return false;
+
+}
+
+function canDvCc($module = null, $action = null)
+{
+    $permission = !empty(session('ttdnvt')->dvcc) ? session('ttdnvt')->dvcc : getDvCcDefault('T');
     $permission = json_decode($permission, true);
 
     //check permission

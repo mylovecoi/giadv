@@ -51,7 +51,7 @@
                     <div class="portlet box">
                         <div class="portlet-header">
                             <div class="caption">
-                                <b>KÊ KHAI GIÁ DỊCH VỤ LƯU TRÚ - {{$modelcskd->tencskd}}</b>
+                                <b>Kê khai giá dịch vụ lưu trú - {{$modelcskd->tencskd}}</b>
                             </div>
                             <div class="actions">
                                 <a href="{{url('kkgdvlt/'.$modelcskd->id.'/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>&nbsp;Kê khai giá</a>

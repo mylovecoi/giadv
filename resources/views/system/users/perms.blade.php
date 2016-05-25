@@ -45,7 +45,7 @@
                                                 <td>Thêm mới</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" {{ (isset($permission->dvlt->create) && $permission->dvlt->create == 1) ? 'checked' : '' }} value="1" name="roles[dvlt][edit]"/></td>
+                                                <td><input type="checkbox" {{ (isset($permission->dvlt->edit) && $permission->dvlt->edit == 1) ? 'checked' : '' }} value="1" name="roles[dvlt][edit]"/></td>
                                                 <td>Chỉnh sửa</td>
                                             </tr>
                                             <tr>
@@ -82,7 +82,7 @@
                                                 <td>Thêm mới</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" {{ (isset($permission->dvvt->create) && $permission->dvvt->create == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][edit]"/></td>
+                                                <td><input type="checkbox" {{ (isset($permission->dvvt->edit) && $permission->dvvt->edit == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][edit]"/></td>
                                                 <td>Chỉnh sửa</td>
                                             </tr>
                                             <tr>

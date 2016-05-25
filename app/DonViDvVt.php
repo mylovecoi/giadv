@@ -23,6 +23,7 @@ class DonViDvVt extends Model
         'dvxb',
         'dvxtx',
         'dvk',
+        'dvcc',
         'ghichu'
     ];
 }

@@ -30,7 +30,7 @@
                     <div class="portlet box">
                         <div class="portlet-header">
                             <div class="caption">
-                                <b>CƠ SỞ KINH DOANH CUNG CẤP DỊCH VỤ LƯU TRÚ - {{$modeldn->tendn}}</b>
+                                <b>Thông tin cơ sở kinh doanh dịch vụ lưu trú - {{$modeldn->tendn}}</b>
                             </div>
                             <div class="actions">
 

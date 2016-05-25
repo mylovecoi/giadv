@@ -30,7 +30,7 @@
                     <div class="portlet box">
                         <div class="portlet-header">
                             <div class="caption">
-                                <b>CƠ SỞ KINH DOANH CUNG CẤP DỊCH VỤ LƯU TRÚ - {{$modeldn->tendn}}</b>
+                                <b>Thông tin cơ sở kinh doanh dịch vụ lưu trú - {{$modeldn->tendn}}</b>
                             </div>
                             <div class="actions">
                                 <a href="{{url('ttcskddvlt/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>&nbsp;Kê khai cơ sở kinh doanh</a>
@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
-                                        <table id="table_id"class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                        <table id="table_id" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                             <thead>
                                             <tr>
                                                 <th style="width: 1%; padding: 10px; background: #efefef"><input type="checkbox" class="checkall"/></th>
@@ -101,9 +101,9 @@
                                                 <td>{{$cskd->telkd}}</td>
                                                 <td>{{$cskd->diachikd}}</td>
                                                 <td>
-                                                    <a href="{{url('ttcskddvlt/'.$cskd->id.'/edit')}}" class="btn btn-info btn-xs mbs">&nbsp;Chỉnh sửa</a>
+                                                    <a href="{{url('ttcskddvlt/'.$cskd->id.'/edit')}}" class="btn btn-default btn-xs mbs"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</a>
 
-                                                    <button type="button" onclick="confirmDelete('{{$cskd->id}}')" class="btn btn-danger btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal">
+                                                    <button type="button" onclick="confirmDelete('{{$cskd->id}}')" class="btn btn-default btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal">
                                                         <i class="fa fa-trash-o"></i>&nbsp; Xóa</button>
                                                 </td>
                                             </tr>

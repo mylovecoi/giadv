@@ -41,11 +41,12 @@
                             <div class="caption">
                                 <b>THÔNG TIN DỊCH VỤ VẬN TẢI HÀNH KHÁCH BẰNG XE TAXI</b>
                             </div>
+                            <div class="actions">
+                                <button type="button" id="_btnThemDV" class="btn btn-success btn-xs" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Kê khai dịch vụ</button>
+                            </div>
                         </div>
                         <div class="portlet-body">
-                            <div class="actions">
-                                <button type="button" id="_btnThemDV" class="btn btn-success mbs" onclick="addDVXK()" ><i class="fa fa-plus"></i>&nbsp;Thêm mới dịch vụ</button>
-                            </div>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">

@@ -77,7 +77,7 @@
                                 <b>KÊ KHAI GIÁ DỊCH VỤ VẬN TẢI CHỞ HÀNG</b>
                             </div>
                             <div class="actions">
-                                <a href="{{url('dvvantai/dvkhac/kekhai/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Kê khai mới</a>
+                                <a href="{{url('dvvantai/dvkhac/kekhai/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Kê khai giá mới</a>
                             </div>
                         </div>
                         @include('quanly.dvvt.template.indexkkdv')

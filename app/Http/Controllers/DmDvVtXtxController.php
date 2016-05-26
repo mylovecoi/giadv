@@ -198,8 +198,8 @@ class DmDvVtXtxController extends Controller
                 $result['message'] .= '<td name="dvt">' . $dv->dvt . '</td>';
                 $result['message'] .= '<td name="ghichu">' . $dv->ghichu . '</td>';
                 $result['message'] .= '<td>' .
-                    '<button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'.$dv->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>&nbsp;' .
-                    '<button type="button" onclick="confirmDelete(' . $dv->id . ')" class="btn btn-danger btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>' .
+                    '<button type="button" class="btn btn-default btn-xs mbs" onclick="editDVXK(this,'.$dv->id.')"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa</button>' .
+                    '<button type="button" onclick="confirmDelete(' . $dv->id . ')" class="btn btn-default btn-xs mbs" data-target="#delete-modal-confirm" data-toggle="modal"><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>' .
                     '</td>';
                 $result['message'] .= '</tr>';
             }

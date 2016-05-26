@@ -40,7 +40,7 @@ class KkDvVtXkController extends Controller
             return view('quanly.dvvt.dvxk.kkdv.index')
                 ->with('model',$model)
                 ->with('url','dvvantai/kkdvxk/edit/')
-                ->with('pageTitle','Kê khai giá dịch vụ vận tải bằng ô tô theo tuyến cố định');
+                ->with('pageTitle','Kê khai giá dịch vụ vận tải');
         }else
             return view('errors.notlogin');
     }
@@ -80,7 +80,7 @@ class KkDvVtXkController extends Controller
             return view('quanly.dvvt.dvxk.index')
                 ->with('model',$model)
                 ->with('tt',$tt)
-                ->with('pageTitle','Xét duyệt kê khai giá dịch vụ vận tải bằng ô tô theo tuyến cố định');
+                ->with('pageTitle','Xét duyệt kê khai giá dịch vụ vận tải');
 
         }else
             return view('errors.notlogin');
@@ -130,7 +130,7 @@ class KkDvVtXkController extends Controller
 
             $model=KkDvVtXkCtDf::where('masothue', session('admin')->mahuyen)->get();
             return view('quanly.dvvt.dvxk.kkdv.create')
-                ->with('pageTitle','Kê khai mới giá dịch vụ vận tải bằng ô tô theo tuyến cố định')
+                ->with('pageTitle','Kê khai mới giá dịch vụ vận tải')
                 ->with('socvlk',$solk)
                 ->with('ngaycvlk',$ngaylk)
                 ->with('model',$model);
@@ -190,7 +190,7 @@ class KkDvVtXkController extends Controller
             return view('quanly.dvvt.dvxk.kkdv.edit')
                 ->with('model',$model)
                 ->with('modeldv',$modeldv)
-                ->with('pageTitle','Chỉnh sửa kê khai giá dịch vụ vận tài bằng ô tô theo tuyến cố định');
+                ->with('pageTitle','Chỉnh sửa kê khai giá dịch vụ vận tải');
         }else
             return view('errors.notlogin');
     }

@@ -275,6 +275,7 @@ class DvLtController extends Controller
             $model->loaihang = $insert['loaihang'];
             $model->diachikd = $insert['diachikinhdoanh'];
             $model->telkd = $insert['telephonekinhdoanh'];
+            $model->toado = getAddMap($insert['diachikinhdoanh']);
             if($model->save())
                 $this->StorePh($ma);
 

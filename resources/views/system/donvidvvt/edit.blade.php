@@ -81,12 +81,12 @@
                                         <div class="row">
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox" {{ (isset($dvcc->dvxk->index) && $dvcc->dvxk->index == 1) ? 'checked' : '' }} value="1" name="roles[dvxk][index]"/> &nbsp; Dịch vụ xe khách
+                                                    <input type="checkbox" {{($model->dvxk == 1) ? 'checked' : '' }} value="1" name="dvxk"/> &nbsp; Dịch vụ xe khách
                                                 </label>
                                             </div>
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox" {{ (isset($dvcc->dvxb->index) && $dvcc->dvxb->index == 1) ? 'checked' : '' }} value="1" name="roles[dvxb][index]"/> &nbsp; Dịch vụ xe buýt
+                                                    <input type="checkbox" {{ ($model->dvxb == 1) ? 'checked' : '' }} value="1" name="dvxb"/> &nbsp; Dịch vụ xe buýt
                                                 </label>
                                             </div>
                                         </div>
@@ -98,12 +98,12 @@
                                         <div class="row">
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox" {{ (isset($dvcc->dvxtx->index) && $dvcc->dvxtx->index == 1) ? 'checked' : '' }} value="1" name="roles[dvxtx][index]"/> &nbsp; Dịch vụ xe taxi
+                                                    <input type="checkbox" {{ ($model->dvxtx == 1) ? 'checked' : '' }} value="1" name="dvxtx"/> &nbsp; Dịch vụ xe taxi
                                                 </label>
                                             </div>
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox" {{ (isset($dvcc->dvxch->index) && $dvcc->dvxch->index == 1) ? 'checked' : '' }} value="1" name="roles[dvxch][index]"/> &nbsp; Dịch vụ xe chở hàng
+                                                    <input type="checkbox" {{ ($model->dvk) ? 'checked' : '' }} value="1" name="dvk"/> &nbsp; Dịch vụ xe chở hàng
                                                 </label>
                                             </div>
                                         </div>

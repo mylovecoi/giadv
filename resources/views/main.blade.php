@@ -58,9 +58,46 @@
     <!--CORE JAVASCRIPT-->
     <script type="text/javascript" src="{{ url('js/main.js') }}"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
+    <script type="text/javascript">
+        function time() {
+            var today = new Date();
+            var weekday=new Array(7);
+            weekday[0]="Chủ nhật";
+            weekday[1]="Thứ hai";
+            weekday[2]="Thứ ba";
+            weekday[3]="Thứ tư";
+            weekday[4]="Thứ năm";
+            weekday[5]="Thứ sáu";
+            weekday[6]="Thứ bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            var h=today.getHours();
+            var m=today.getMinutes();
+            var s=today.getSeconds();
+            m=checkTime(m);
+            s=checkTime(s);
+            nowTime = h+":"+m+":"+s;
+            if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = day+', '+ dd+'/'+mm+'/'+yyyy;
+
+            tmp='<span class="date"> '+today+' | '+nowTime+'</span>';
+
+            document.getElementById("clock").innerHTML=tmp;
+
+            clocktime=setTimeout("time()","1000","JavaScript");
+            function checkTime(i)
+            {
+                if(i<10){
+                    i="0" + i;
+                }
+                return i;
+            }
+        }
+    </script>
     @yield('custom-script')
 </head>
-<body class="header-fixed">
+<body class="header-fixed" onload="time()">
 <div>
     <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP-->
     <!--BEGIN TOPBAR-->
@@ -80,6 +117,9 @@
                             <li class="divider"></li>
                             <li><a href="{{url('logout')}}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
                         </ul>
+                    </li>
+                    <li class="dropdown"><a data-hover="dropdown" href="#"
+                                            class="dropdown-toggle"><i class="fa fa-file-o"></i><span class="badge badge-green">Help</span></a>
                     </li>
                 </ul>
             </div>
@@ -115,9 +155,10 @@
                             </i><span class="menu-title">Dịch vụ vận tải</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse" style="height: 0px;">
                             @if(session('admin')->level=='H' || session('admin')->level == 'X')
-                                <li><a href="{{url('dvvantai/ttdv/index')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
+                            <li><a href="{{url('dvvantai/ttdv/index')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Thông tin doanh nghiệp</span></a></li>
                             @endif
                             <!--Dịch vụ vận tải xe khách-->
+                            @if(session('admin')->level == 'T' || session('ttdnvt')->dvxk == 1)
                             <li class=""><a href="#"><i class="fa fa-desktop fa-fw"></i><span class="submenu-title">Vận tải xe khách</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level collapse" style="height: 0px;">
                                     @if(session('admin')->level=='H' || session('admin')->level == 'X')
@@ -131,8 +172,10 @@
                                     @endif
                                 </ul>
                             </li>
+                            @endif
 
                             <!--Dịch vụ vận tải xe buýt-->
+                            @if(session('admin')->level == 'T' || session('ttdnvt')->dvxb == 1)
                             <li class=""><a href="#"><i class="fa fa-desktop fa-fw"></i><span class="submenu-title">Vận tải xe buýt</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level collapse" style="height: 0px;">
                                     @if(session('admin')->level=='H' || session('admin')->level == 'X')
@@ -146,8 +189,10 @@
                                     @endif
                                 </ul>
                             </li>
+                            @endif
 
                             <!--Dịch vụ vận tải xe taxi-->
+                            @if(session('admin')->level == 'T' || session('ttdnvt')->dvxtx == 1)
                             <li class=""><a href="#"><i class="fa fa-desktop fa-fw"></i><span class="submenu-title">Vận tải xe taxi</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level collapse" style="height: 0px;">
                                     @if(session('admin')->level=='H' || session('admin')->level == 'X')
@@ -161,8 +206,10 @@
                                     @endif
                                 </ul>
                             </li>
+                            @endif
 
                             <!-- Dịch vụ vận tải chở hàng -->
+                            @if(session('admin')->level == 'T' || session('ttdnvt')->dvk == 1)
                             <li class=""><a href="#"><i class="fa fa-desktop fa-fw"></i><span class="submenu-title">Vận tải chở hàng</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level collapse" style="height: 0px;">
                                     @if(session('admin')->level=='H' || session('admin')->level == 'X')
@@ -176,6 +223,7 @@
                                     @endif
                                 </ul>
                             </li>
+                            @endif
                         </ul>
                     </li>
                     @endif
@@ -221,10 +269,7 @@
                 </ol>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li class="btn btn-info btn-xs mbs">
-                        <?php $now = getdate();?>
-                        <i class="fa fa-calendar"></i>&nbsp;<b>
-                            Ngày {{$now["mday"]}} tháng {{$now["mon"]}} năm {{$now["year"]}} - {{$now["hours"]}} : {{$now["minutes"]}}
-                           </b>&nbsp;&nbsp;
+                        <b><div id="clock"></div></b>
                     </li>
 
                 </ol>

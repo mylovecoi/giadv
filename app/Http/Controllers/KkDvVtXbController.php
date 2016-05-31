@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CbKkDvVtXb;
 use App\DmDvVtXb;
 use App\DonViDvVt;
+use App\GeneralConfigs;
 use App\KkDvVtXb;
 use App\KkDvVtXbCtDf;
 use App\KkDvVtXbCt;
@@ -492,7 +493,11 @@ class KkDvVtXbController extends Controller
             $model->ngaynhan = $input['ngaynhan'];
             $model->sohsnhan = $input['sohsnhan'];
             $model->trangthai = 'Chờ duyệt';
-            $model->save();
+            if($model->save()){
+                $modelconfig = GeneralConfigs::first();
+                $modelconfig->sodvvt = getGeneralConfigs()['sodvvt'] + 1;
+                $modelconfig->save();
+            }
             $result['message'] = 'Trả lại thành công.';
             $result['status'] = 'success';
         }

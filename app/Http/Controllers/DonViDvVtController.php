@@ -36,7 +36,7 @@ class DonViDvVtController extends Controller
     //dd($model);
             return view('quanly.dvvt.ttdn.index')
                 ->with('model',$model)
-                ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ lưu trú');
+                ->with('pageTitle','Thông tin doanh nghiệp cung cấp dịch vụ vận tải');
 
         }else
             return view('errors.notlogin');

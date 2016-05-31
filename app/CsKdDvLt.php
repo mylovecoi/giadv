@@ -15,5 +15,6 @@ class CsKdDvLt extends Model
         'loaihang',
         'diachikd',
         'telkd',
+        'toado'
     ];
 }

@@ -95,12 +95,12 @@
                                         <div class="row">
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox" value="1" name="roles[dvxk][index]"/> &nbsp; Dịch vụ xe khách
+                                                    <input type="checkbox" value="1" name="dvxk"/> &nbsp; Dịch vụ xe khách
                                                 </label>
                                             </div>
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox" value="1" name="roles[dvxb][index]"/> &nbsp; Dịch vụ xe buýt
+                                                    <input type="checkbox" value="1" name="dvxb"/> &nbsp; Dịch vụ xe buýt
                                                 </label>
                                             </div>
                                         </div>
@@ -112,12 +112,12 @@
                                         <div class="row">
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox"  value="1" name="roles[dvxtx][index]"/> &nbsp; Dịch vụ xe taxi
+                                                    <input type="checkbox"  value="1" name="dvxtx"/> &nbsp; Dịch vụ xe taxi
                                                 </label>
                                             </div>
                                             <div class="mbm col-sm-3">
                                                 <label>
-                                                    <input type="checkbox"  value="1" name="roles[dvxch][index]"/> &nbsp; Dịch vụ xe chở hàng
+                                                    <input type="checkbox"  value="1" name="dvk"/> &nbsp; Dịch vụ xe chở hàng
                                                 </label>
                                             </div>
                                         </div>

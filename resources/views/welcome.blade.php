@@ -39,7 +39,7 @@
     <br>
     <br>
     <br>
-    <h1>GIẢI PHÁP QUẢN LÝ GIÁ DỊCH VỤ</h1>
+    <h1>GIẢI PHÁP QUẢN LÝ CƠ SỞ DỮ LIỆU VỀ GIÁ</h1>
 
     <h3 class="mtn"></b></h3>
     <br>

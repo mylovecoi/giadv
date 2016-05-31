@@ -67,6 +67,7 @@ class DonViDvVtController extends Controller
             $model->chucdanh = $upd['chucdanh'];
             $model->nguoiky = $upd['nguoiky'];
             $model->diadanh = $upd['diadanh'];
+            $model->toado = $upd['toado'];
             //$model->dvxk = isset($upd['dvxk']) ? 1 : 0;
             //$model->dvxb = isset($upd['dvxb']) ? 1 : 0;
             //$model->dvxtx = isset($upd['dvxtx']) ? 1 : 0;
@@ -185,7 +186,7 @@ class DonViDvVtController extends Controller
             $model->dvk = isset($upd['dvk']) ? 1 : 0;
             //$update['roles'] = isset($upd['roles']) ? $upd['roles'] : null;
             //$model->dvcc = json_encode($update['roles']);
-
+            $model->toado = getAddMap($upd['diachi']);
             $model->save();
             return redirect('dvvantai/donvi');
         } else

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="Thu, 19 Nov 1900 08:52:00 GMT">
-    <link rel="shortcut icon" href="{{ url('vendors/pageloader/images/loader4.GIF')}}" type="image/x-icon">
+    <!--link rel="shortcut icon" href="{{ url('vendors/pageloader/images/loader4.GIF')}}" type="image/x-icon"-->
+    <link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/icons/favicon.png">
     <link rel="apple-touch-icon" href="images/icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">

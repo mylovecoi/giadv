@@ -117,7 +117,8 @@
                                             '3.5'=> '3,5 sao',
                                             '4'=> '4 sao',
                                             '4.5'=> '4,5 sao',
-                                            '5' => '5 sao'
+                                            '5' => '5 sao',
+                                            'k' => 'Khác (Nhà nghỉ...)'
                                             ),null,
                                             array('id' => 'loaihang', 'class' => 'form-control'))
                                             !!}
@@ -140,7 +141,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label for="selGender" class="control-label">Tọa độ Google Map
+                                            </label>
+                                        <div>{!!Form::text('toado', null, array('id' => 'toado','class' => 'form-control'))!!}</div>
+                                    </div>
+                                </div>
+                            </div>
                             {!!Form::hidden('macskd', null, array('id' => 'macskd','class' => 'form-control'))!!}
 
                             <b>Thông tin phòng-chất lượng quy cách</b>

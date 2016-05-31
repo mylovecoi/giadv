@@ -321,6 +321,7 @@ class DvLtController extends Controller
             $model->loaihang = $update['loaihang'];
             $model->diachikd = $update['diachikd'];
             $model->telkd = $update['telkd'];
+            $model->toado = $update['toado'];
             $model->save();
 
             return redirect('ttcskddvlt');

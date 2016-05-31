@@ -25,13 +25,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputLastName" class="control-label">Cơ sở kinh doanh</label>
                                         <div>
-                                            <input type="text" name="ngaynhap" id="ngaynhap" class="form-control required" readonly value="{{$modelcskd->tencskd}}">
+                                            <input type="text" name="ngaynhap" id="ngaynhap" class="form-control" readonly value="{{$modelcskd->tencskd}}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="selGender" class="control-label">Loại hạng</label>
-                                        <div><input type="text" name="ngayhieuluc" id="ngayhieuluc" class="form-control required" readonly value="{{$modelcskd->loaihang}}"></div>
+                                        <div><input type="text" name="ngayhieuluc" id="ngayhieuluc" class="form-control" readonly value="{{$modelcskd->loaihang}}"></div>
                                     </div>
                                 </div>
                             </div>
@@ -39,13 +39,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputLastName" class="control-label">Số điện thoại CSKD</label>
                                         <div>
-                                            <input type="text" name="ngaynhap" id="ngaynhap" class="form-control required" readonly value="{{$modelcskd->telkd}}">
+                                            <input type="text" name="ngaynhap" id="ngaynhap" class="form-control" readonly value="{{$modelcskd->telkd}}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="selGender" class="control-label">Địa chỉ CSKD</label>
-                                        <div><input type="text" name="ngayhieuluc" id="ngayhieuluc" class="form-control required" readonly value="{{$modelcskd->diachikd}}"></div>
+                                        <div><input type="text" name="ngayhieuluc" id="ngayhieuluc" class="form-control" readonly value="{{$modelcskd->diachikd}}"></div>
                                     </div>
                                 </div>
                             </div>
@@ -53,13 +53,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputLastName" class="control-label">Ngày kê khai</label>
                                         <div>
-                                            <input type="date" name="ngaynhap" id="ngaynhap" class="form-control required" readonly value="{{$model->ngaynhap}}">
+                                            <input type="date" name="ngaynhap" id="ngaynhap" class="form-control" readonly value="{{$model->ngaynhap}}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="selGender" class="control-label">Ngày thực hiện mức giá kê khai</label>
-                                        <div><input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control required" readonly value="{{$model->ngayhieuluc}}"></div>
+                                        <div><input type="date" name="ngayhieuluc" id="ngayhieuluc" class="form-control" readonly value="{{$model->ngayhieuluc}}"></div>
                                     </div>
                                 </div>
                             </div>
@@ -67,14 +67,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Số công văn</label>
                                         <div>
-                                            <input type="text" name="socv" id="socv" class="form-control required" readonly value="{{$model->socv}}">
+                                            <input type="text" name="socv" id="socv" class="form-control" readonly value="{{$model->socv}}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Ngày giờ chuyển</label>
                                         <div>
-                                            <input type="text" name="socv" id="socv" class="form-control required" readonly value="{{getDateTime($model->ngaychuyen)}}">
+                                            <input type="text" name="socv" id="socv" class="form-control" readonly value="{{getDateTime($model->ngaychuyen)}}">
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Số công văn liền kề</label>
                                         <div>
-                                            <input type="text" name="socvlk" id="socvlk" class="form-control required" readonly value="{{$model->socvlk}}">
+                                            <input type="text" name="socvlk" id="socvlk" class="form-control" readonly value="{{$model->socvlk}}">
                                             <!--Bổ xung sau-->
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Ngày nhập số công văn liền kề</label>
                                         <div>
-                                            <div><input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control required" readonly value="{{$model->ngaycvlk}}"></div>
+                                            <div><input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" readonly value="{{$model->ngaycvlk}}"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                             <div class="col-md-6">
                                 <div class="form-group"><label for="inputEmail" class="control-label">Số hồ sơ nhận</label>
                                     <div>
-                                        <input type="text" name="sohsnhan" id="sohsnhan" class="form-control required" data-mask="fdecimal" value="{{$model->sohsnhan}}" autofocus>
+                                        <input type="text" name="sohsnhan" id="sohsnhan" class="form-control" data-mask="fdecimal" value="{{$model->sohsnhan}}" autofocus>
                                         <!--Bổ xung sau-->
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                             <div class="col-md-6">
                                 <div class="form-group"><label for="inputEmail" class="control-label">Ngày nhận hồ sơ</label>
                                     <div>
-                                        <input type="date" name="ngaynhan" id="ngaynhan" class="form-control required" value="{{$model->ngaynhan}}">
+                                        <input type="date" name="ngaynhan" id="ngaynhan" class="form-control" value="{{$model->ngaynhan}}">
                                     </div>
                                 </div>
                             </div>

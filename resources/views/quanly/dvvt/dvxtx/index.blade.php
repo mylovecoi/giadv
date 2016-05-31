@@ -175,12 +175,23 @@
 
         function confirmNhan(id){
             $('#idnhan').attr('value', id);
-            var date = new Date();
-            currentDate = date.getDate();     // Get current date
-            month       = date.getMonth() + 1; // current month
-            year        = date.getFullYear();
-            //alert("current date is " + currentDate + "/" + month + "/" + year);
-            $('#ngaynhan').attr('value',date);
+            var sohs =  {!! (getGeneralConfigs()['sodvvt'] + 1); !!};
+            var today = new Date();
+            //alert(sohs);
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd='0'+dd
+            }
+
+            if(mm<10) {
+                mm='0'+mm
+            }
+
+            $('#ngaynhan').attr('value', yyyy+'-'+ mm+'-'+dd);
+            $('#sohsnhan').attr('value', sohs);
         }
 
         function confirmNhanCS(str){

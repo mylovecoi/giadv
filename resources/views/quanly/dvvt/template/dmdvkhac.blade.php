@@ -7,7 +7,9 @@
 <label class="form-control-label">Loại xe<span class="require">*</span></label>
 {!! Form::select('loaixe',[
     'Xe tải 5 tạ' => 'Xe tải 5 tạ',
-    'Xe tải 1 tấn' => 'Xe tải 1 tấn',
+    'Xe tải 1,25 tấn' => 'Xe tải 1,25 tấn',
+    'Xe tải 2,5 tấn' => 'Xe tải 2,5 tấn',
+    'Xe tải 3,5 tấn' => 'Xe tải 3,5 tấn',
     'Xe tải 5 tấn' => 'Xe tải 5 tấn',
     'Xe tải 8 tấn' => 'Xe tải 8 tấn',
     'Xe tải 10 tấn' => 'Xe tải 10 tấn',

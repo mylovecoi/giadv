@@ -186,7 +186,7 @@
         function editDVXK(e,id){
             var tr = $(e).closest('tr');
             $('#diemdau').attr('value',$(tr).find('td[name=diemdau]').text());
-            $('#loaixe').attr('value',$(tr).find('td[name=loaixe]').text());
+            $('#loaixe').val($(tr).find('td[name=loaixe]').text());
             $('#diemcuoi').attr('value',$(tr).find('td[name=diemcuoi]').text());
             $('#tendichvu').attr('value',$(tr).find('td[name=tendichvu]').text());
             $('#qccl').attr('value',$(tr).find('td[name=qccl]').text());

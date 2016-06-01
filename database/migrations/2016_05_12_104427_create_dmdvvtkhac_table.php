@@ -17,6 +17,8 @@ class CreateDmdvvtkhacTable extends Migration
             $table->string('masothue')->nullable();
             $table->string('madichvu')->nullable();
             $table->string('loaixe')->nullable();
+            $table->string('diemdau')->nullable();
+            $table->string('diemcuoi')->nullable();
             $table->string('tendichvu')->nullable();
             $table->string('qccl')->nullable();
             $table->string('dvt')->nullable();

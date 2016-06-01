@@ -169,6 +169,8 @@ class DmDvVtKhacController extends Controller
             $model->masothue = session('admin')->mahuyen;
             $model->madichvu = 'DVXTX'.session('admin')->mahuyen . getdate()[0];
             $model->loaixe = $inputs['loaixe'];
+            $model->diemdau = $inputs['diemdau'];
+            $model->diemcuoi = $inputs['diemcuoi'];
             $model->tendichvu = $inputs['tendichvu'];
             $model->dvt = $inputs['dvt'];
             $model->qccl = $inputs['qccl'];
@@ -179,6 +181,8 @@ class DmDvVtKhacController extends Controller
             $model =  DmDvVtKhac::findOrFail($id);
             $model->tendichvu = $inputs['tendichvu'];
             $model->loaixe = $inputs['loaixe'];
+            $model->diemdau = $inputs['diemdau'];
+            $model->diemcuoi = $inputs['diemcuoi'];
             $model->dvt = $inputs['dvt'];
             $model->qccl = $inputs['qccl'];
             $model->ghichu = $inputs['ghichu'];
@@ -193,6 +197,8 @@ class DmDvVtKhacController extends Controller
             foreach ($DMDV as $dv) {
                 $result['message'] .= '<tr>';
                 $result['message'] .= '<td name="loaixe">' . $dv->loaixe . '</td>';
+                $result['message'] .= '<td name="diemdau">' . $dv->diemdau . '</td>';
+                $result['message'] .= '<td name="diemcuoi">' . $dv->diemcuoi . '</td>';
                 $result['message'] .= '<td name="tendichvu">' . $dv->tendichvu . '</td>';
                 $result['message'] .= '<td name="qccl">' . $dv->qccl . '</td>';
                 $result['message'] .= '<td name="dvt">' . $dv->dvt . '</td>';

@@ -12,6 +12,8 @@ class KkDvVtKhacCt extends Model
         'masokk',
         'madichvu',
         'loaixe',
+        'diemdau',
+        'diemcuoi',
         'tendichvu',
         'qccl',
         'dvt',

@@ -54,10 +54,12 @@
                                             <thead>
                                             <tr>
                                                 <th style="width: 10%">Loại xe</th>
-                                                <th style="width: 25%">Mô tả dịch vụ</th>
-                                                <th style="width: 25%">Quy cách chất lượng</th>
+                                                <th style="width: 10%">Điểm xuất phát</th>
+                                                <th style="width: 10%">Điểm đến</th>
+                                                <th style="width: 20%">Mô tả dịch vụ</th>
+                                                <th style="width: 15%">Quy cách chất lượng</th>
                                                 <th style="width: 10%">Đơn vị tính</th>
-                                                <th style="width: 20%">Ghi chú</th>
+                                                <th style="width: 15%">Ghi chú</th>
                                                 <th style="width: 10%">Thao tác</th>
                                             </tr>
                                             </thead>
@@ -65,6 +67,8 @@
                                             @foreach($model as $dv)
                                                 <tr>
                                                     <td name="loaixe">{{$dv->loaixe}}</td>
+                                                    <td name="diemdau">{{$dv->diemdau}}</td>
+                                                    <td name="diemcuoi">{{$dv->diemcuoi}}</td>
                                                     <td name="tendichvu">{{$dv->tendichvu}}</td>
                                                     <td name="qccl">{{$dv->qccl}}</td>
                                                     <td name="dvt">{{$dv->dvt}}</td>
@@ -141,6 +145,8 @@
                         qccl: $('#qccl').val(),
                         dvt: dvt,
                         loaixe: loaixe,
+                        diemdau: $('#diemdau').val(),
+                        diemcuoi: $('#diemcuoi').val(),
                         ghichu: $('#ghichu').val(),
                         id: $('#iddv').val()
                     },
@@ -165,7 +171,9 @@
 
         function editDVXK(e,id){
             var tr = $(e).closest('tr');
-            $('#loaixe').attr('value',$(tr).find('td[name=loaixe]').text());
+            $('#loaixe').val($(tr).find('td[name=loaixe]').text());
+            $('#diemdau').attr('value',$(tr).find('td[name=diemdau]').text());
+            $('#diemcuoi').attr('value',$(tr).find('td[name=diemcuoi]').text());
             $('#tendichvu').attr('value',$(tr).find('td[name=tendichvu]').text());
             $('#qccl').attr('value',$(tr).find('td[name=qccl]').text());
             $('#dvt').attr('value',$(tr).find('td[name=dvt]').text());
@@ -177,6 +185,8 @@
         function addDVXK(){
             $('#iddv').attr('value',0);
             $('#loaixe').attr('value','');
+            $('#diemdau').attr('value','');
+            $('#diemcuoi').attr('value','');
             $('#tendichvu').attr('value','');
             $('#qccl').attr('value','');
             $('#dvt').attr('value','');

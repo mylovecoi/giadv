@@ -81,6 +81,12 @@
                                 {!!Form::text('diadanh', null, array('id' => 'diadanh','class' => 'form-control required'))!!}
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tọa độ Google Map</label>
+                            <div class="col-sm-6 controls">
+                                {!!Form::text('toado', null, array('id' => 'toado','class' => 'form-control required'))!!}
+                            </div>
+                        </div>
 
 
                         <div class="form-group">

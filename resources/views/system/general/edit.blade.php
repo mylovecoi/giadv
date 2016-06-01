@@ -82,10 +82,10 @@
                             </div>
                         </div-->
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Người lập biểu<span class="require">*</span></label>
+                            <label class="col-sm-3 control-label">Thông tin liên hệ</label>
                             <div class="col-sm-6 controls">
                                 <textarea id="ttlh" class="form-control" name="ttlh" cols="30" rows="10"
-                                          placeholder="-Phụ thu, Thuế VAT">{{$model->ttlh}}</textarea>
+                                          placeholder="Thông tin, số điện thoại liên lạc với các bộ phận">{{$model->ttlh}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">

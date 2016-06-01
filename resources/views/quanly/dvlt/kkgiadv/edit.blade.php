@@ -164,7 +164,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Số công văn
-                                            <span class="require">*</span></label>
+                                            </label>
                                         <div>
                                             <input type="text" name="socv" id="socv" class="form-control required" value="{{$model->socv}}">
                                         </div>
@@ -174,7 +174,7 @@
                                     <div class="form-group"><label for="inputEmail" class="control-label">Số công văn liền kề
                                             <span class="require">*</span></label>
                                         <div>
-                                            <input type="text" name="socvlk" id="socvlk" class="form-control required" value="{{$model->socvlk}}">
+                                            <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{$model->socvlk}}">
                                             <!--Bổ xung sau-->
                                         </div>
                                     </div>
@@ -183,9 +183,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Ngày nhập số công văn liền kề
-                                            <span class="require">*</span></label>
+                                            </label>
                                         <div>
-                                            <div><input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control required" value="{{$model->ngaycvlk}}"></div>
+                                            <div><input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" value="{{$model->ngaycvlk}}"></div>
                                         </div>
                                     </div>
                                 </div>

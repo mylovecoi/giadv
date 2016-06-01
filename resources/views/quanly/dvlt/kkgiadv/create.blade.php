@@ -174,7 +174,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Số công văn liền kề
-                                            <span class="require">*</span></label>
+                                            </label>
                                         <div>
                                             <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
                                             <!--Bổ xung sau-->
@@ -185,7 +185,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group"><label for="inputEmail" class="control-label">Ngày nhập số công văn liền kề
-                                            <span class="require">*</span></label>
+                                            </label>
                                         <div>
                                             <div><input type="date" name="ngaycvlk" id="ngaycvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->ngaynhap : '' }}"></div>
                                         </div>

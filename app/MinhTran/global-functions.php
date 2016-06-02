@@ -231,7 +231,11 @@ function getAddMap($diachi){
     $str = str_replace(' ','+',$str);
     $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$str.'&sensor=false');
     $output = json_decode($geocode);
-    $kq = $output->results[0]->geometry->location->lat. ',' .$output->results[0]->geometry->location->lng;
+    if($output->status == 'OK'){
+        $kq = $output->results[0]->geometry->location->lat. ',' .$output->results[0]->geometry->location->lng;
+    }else{
+        $kq = '';
+    }
     return $kq;
 }
 ?>

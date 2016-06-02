@@ -103,6 +103,7 @@ class DonViDvVtController extends Controller
     {
         if (Session::has('admin')) {
             $insert = $request-> all();
+            dd(getAddMap($insert['diachi']));
             $model = new DonViDvVt();
             $model->tendonvi = $insert['tendonvi'];
             $model->masothue = $insert['masothue'];
@@ -119,6 +120,7 @@ class DonViDvVtController extends Controller
             $model->dvxtx = isset($insert['dvxtx']) ? 1 : 0;
             $model->dvk = isset($insert['dvk']) ? 1 : 0;
             $model->toado = getAddMap($insert['diachi']);
+
             //$insert['roles'] = isset($insert['roles']) ? $insert['roles'] : null;
             //$model->dvcc = json_encode($insert['roles']);
             if($model->save()){

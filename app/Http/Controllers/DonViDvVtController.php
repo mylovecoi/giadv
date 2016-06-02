@@ -103,7 +103,7 @@ class DonViDvVtController extends Controller
     {
         if (Session::has('admin')) {
             $insert = $request-> all();
-            dd(getAddMap($insert['diachi']));
+            //dd(getAddMap($insert['diachi']));
             $model = new DonViDvVt();
             $model->tendonvi = $insert['tendonvi'];
             $model->masothue = $insert['masothue'];

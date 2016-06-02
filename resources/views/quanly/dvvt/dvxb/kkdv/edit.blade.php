@@ -27,10 +27,11 @@
                     <thead>
                     <tr>
                         <th style="width: 30%">Mô tả dịch vụ</th>
-                        <th style="width: 15%">Mức giá vé lượt liền kề</th>
-                        <th style="width: 15%">Mức giá vé lượt kê khai</th>
-                        <th style="width: 15%">Mức giá vé tháng liền kề</th>
-                        <th style="width: 15%">Mức giá vé tháng kê khai</th>
+                        <th style="width: 20%">Quy cách chất lượng</th>
+                        <th style="width: 10%">Mức giá vé lượt liền kề</th>
+                        <th style="width: 10%">Mức giá vé lượt kê khai</th>
+                        <th style="width: 10%">Mức giá vé tháng liền kề</th>
+                        <th style="width: 10%">Mức giá vé tháng kê khai</th>
                         <th style="width: 10%">Thao tác</th>
                     </tr>
                     </thead>
@@ -38,6 +39,7 @@
                     @foreach($modeldv as $dv)
                         <tr>
                             <td name="tendichvu">{{$dv->tendichvu}}</td>
+                            <td name="qccl">{{$dv->qccl}}</td>
                             <td name="giakklkluot">{{number_format($dv->giakklkluot)}}</td>
                             <td name="giakkluot">{{number_format($dv->giakkluot)}}</td>
                             <td name="giakklkthang">{{number_format($dv->giakklkthang)}}</td>
@@ -45,8 +47,7 @@
                             <td>
                                 <button type="button" data-target="#modal-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                        onclick="editItem(this,'{{$dv->id}}')"><i
-                                            class="fa fa-edit"></i>&nbsp;Kê khai giá
+                                        onclick="editItem(this,'{{$dv->id}}')"><i class="fa fa-edit"></i>&nbsp;Kê khai giá
                                 </button>
                             </td>
                         </tr>
@@ -65,7 +66,7 @@
         <div id="" class="row">
             <div class="col-lg-12">
                 <div class="panel panel">
-                    <div class="panel-heading"><b>KÊ KHAI GIÁ DỊCH VỤ VẬN TẢI HÀNH KHÁCH BẰNG XE BUÝT THEO TUYẾN CỐ ĐỊNH</b></div>
+                    <div class="panel-heading"><b>KÊ KHAI GIÁ DỊCH VỤ VẬN TẢI HÀNH KHÁCH BẰNG XE BUÝT THEO TUYẾN CỐ ĐỊNH 12124</b></div>
                     <div class="panel-body pan">
                         {!! Form::open(['url'=>'dvvantai/dvxb/kekhai/update/'.$model->id, 'id' => 'create-kkdvxb', 'class'=>'horizontal-form form-validate','method'=>'patch']) !!}
                         <div class="form-body pal">

@@ -366,6 +366,7 @@ class KkDvVtXbController extends Controller
             foreach($DMDV as $dv) {
                 $result['message'] .= '<tr>';
                 $result['message'] .= '<td name="tendichvu">'.$dv->tendichvu.'</td>';
+                $result['message'] .= '<td name="qccl">'.$dv->qccl.'</td>';
                 $result['message'] .= '<td name="giakklkluot">'.number_format($dv->giakklkluot).'</td>';
                 $result['message'] .= '<td name="giakkluot">'.number_format($dv->giakkluot).'</td>';
                 $result['message'] .= '<td name="giakklkthang">'.number_format($dv->giakklkthang).'</td>';
@@ -420,6 +421,7 @@ class KkDvVtXbController extends Controller
             foreach($DMDV as $dv) {
                 $result['message'] .= '<tr>';
                 $result['message'] .= '<td name="tendichvu">'.$dv->tendichvu.'</td>';
+                $result['message'] .= '<td name="qccl">'.$dv->qccl.'</td>';
                 $result['message'] .= '<td name="giakklkluot">'.number_format($dv->giakklkluot).'</td>';
                 $result['message'] .= '<td name="giakkluot">'.number_format($dv->giakkluot).'</td>';
                 $result['message'] .= '<td name="giakklkthang">'.number_format($dv->giakklkthang).'</td>';

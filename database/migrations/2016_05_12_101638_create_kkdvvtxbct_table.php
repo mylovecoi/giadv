@@ -15,6 +15,7 @@ class CreateKkdvvtxbctTable extends Migration
         Schema::create('kkdvvtxbct', function (Blueprint $table) {
             $table->increments('id');
             $table->string('madichvu')->nullable();
+            $table->string('masokk')->nullable();
             $table->string('tendichvu')->nullable();
             $table->string('diemdau')->nullable();
             $table->string('diemcuoi')->nullable();

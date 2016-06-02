@@ -434,7 +434,7 @@ class KKDvVtKhacController extends Controller
             $model->save();
             //Trả lại kết quả
             $result['message'] = '<tbody id="noidung">';
-            $DMDV = KkDvVtKhacCt::where('masokk', $inputs['masokk'])->get();
+            $DMDV = KkDvVtKhacCt::where('masokk', $model->masokk)->get();
 
             foreach($DMDV as $dv) {
                 $result['message'] .= '<tr>';

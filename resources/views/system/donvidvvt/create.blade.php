@@ -45,47 +45,47 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Điện thoại<span class="require">*</span> </label>
+                                    <label class="col-sm-3 control-label">Điện thoại</label>
                                     <div class="col-sm-6 controls">
-                                        <input id="dienthoai" type="text" name="dienthoai" class="form-control required">
+                                        <input id="dienthoai" type="text" name="dienthoai" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Số Fax<span class="require">*</span> </label>
+                                    <label class="col-sm-3 control-label">Số Fax</label>
                                     <div class="col-sm-6 controls">
-                                        <input id="fax" type="text" name="fax" class="form-control required">
+                                        <input id="fax" type="text" name="fax" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Nơi đăng ký nộp thuế<span class="require">*</span> </label>
+                                    <label class="col-sm-3 control-label">Nơi đăng ký nộp thuế</label>
                                     <div class="col-sm-6 controls">
-                                        <input id="dknopthue" type="text" name="dknopthue" class="form-control required">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Giấy phép kinh doanh<span class="require">*</span> </label>
-                                    <div class="col-sm-6 controls">
-                                        <textarea id="giayphepkd" class="form-control requiredl" name="giayphepkd" cols="30" rows="3" placeholder="Giấy chứng nhận kinh doanh số … do … cấp ngày … tháng …năm  ...."></textarea>
+                                        <input id="dknopthue" type="text" name="dknopthue" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Chức danh<span class="require">*</span> </label>
+                                    <label class="col-sm-3 control-label">Giấy phép kinh doanh</label>
                                     <div class="col-sm-6 controls">
-                                        <input id="chucdanh" type="text" name="chucdanh" class="form-control required">
+                                        <textarea id="giayphepkd" class="form-control" name="giayphepkd" cols="30" rows="3" placeholder="Giấy chứng nhận kinh doanh số … do … cấp ngày … tháng …năm  ...."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Chức danh</label>
+                                    <div class="col-sm-6 controls">
+                                        <input id="chucdanh" type="text" name="chucdanh" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Người ký<span class="require">*</span> </label>
+                                    <label class="col-sm-3 control-label">Người ký</label>
                                     <div class="col-sm-6 controls">
-                                        <input id="nguoiky" type="text" name="nguoiky" class="form-control required">
+                                        <input id="nguoiky" type="text" name="nguoiky" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Địa danh<span class="require">*</span> </label>
+                                    <label class="col-sm-3 control-label">Địa danh</label>
                                     <div class="col-sm-6 controls">
-                                        <input id="diadanh" type="text" name="diadanh" class="form-control required">
+                                        <input id="diadanh" type="text" name="diadanh" class="form-control">
                                     </div>
                                 </div>
 

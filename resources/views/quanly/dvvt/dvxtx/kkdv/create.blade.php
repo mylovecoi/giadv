@@ -31,7 +31,6 @@
                         <th>Mô tả dịch vụ</th>
                         <th>Mức giá liền kề</th>
                         <th>Mức giá kê khai</th>
-                        <th>Mức giá hành lý</br> vượt quy định</th>
                         <th>Thao tác</th>
                     </tr>
                     </thead>
@@ -42,7 +41,6 @@
                             <td name="tendichvu">{{$dv->tendichvu}}</td>
                             <td name="giakklk">{{number_format($dv->giakklk)}}</td>
                             <td name="giakk">{{number_format($dv->giakk)}}</td>
-                            <td name="giahl">{{number_format($dv->giahl)}}</td>
                             <td>
                                 <button type="button" data-target="#modal-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"

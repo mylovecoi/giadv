@@ -115,6 +115,8 @@ class KKDvVtKhacController extends Controller
                 $mdkk->masothue = $masothue;
                 $mdkk->madichvu = $dv->madichvu;
                 $mdkk->loaixe = $dv->loaixe;
+                $mdkk->diemdau = $dv->diemdau;
+                $mdkk->diemcuoi = $dv->diemcuoi;
                 $mdkk->tendichvu = $dv->tendichvu;
                 $mdkk->qccl = $dv->qccl;
                 $mdkk->dvt = $dv->dvt;
@@ -163,8 +165,8 @@ class KKDvVtKhacController extends Controller
 
             DB::statement("Update KkDvVtKhacCtDf set masokk='".$makk."' where masothue='". $masothue."'");
 
-            $sql="INSERT INTO kkdvvtkhacct (masokk,madichvu,loaixe,tendichvu,qccl,dvt,giakk,giakklk)
-                  SELECT masokk,madichvu,loaixe,tendichvu,qccl,dvt,giakk,giakklk FROM kkdvvtkhacctdf where masokk='". $makk."'";
+            $sql="INSERT INTO kkdvvtkhacct (masokk,madichvu,loaixe,diemdau,diemcuoi,tendichvu,qccl,dvt,giakk,giakklk)
+                  SELECT masokk,madichvu,loaixe,diemdau,diemcuoi,tendichvu,qccl,dvt,giakk,giakklk FROM kkdvvtkhacctdf where masokk='". $makk."'";
             DB::statement($sql);
 
             //DB::statement("INSERT INTO cbkkdvvtxk SELECT * FROM kkdvvtxk WHERE masokk='".$makk."'");

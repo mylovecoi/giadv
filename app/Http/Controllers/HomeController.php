@@ -46,7 +46,7 @@ class HomeController extends Controller
                 $hsxtxcd = KkDvVtXtx::where('trangthai','Chờ duyệt')->count();
                 $hsxtxtl = KkDvVtXtx::where('trangthai','Bị trả lại')->count();
                     //Dịch vụ vận tải chở hàng
-                $hschcn = 0;
+                $hschcc = 0;
                 $hschcn = KkDvVtKhac::where('trangthai','Chờ nhận')->count();
                 $hschcd = KkDvVtKhac::where('trangthai','Chờ duyệt')->count();
                 $hschtl = KkDvVtKhac::where('trangthai','Bị trả lại')->count();

@@ -19,22 +19,30 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pl)
     {
         if (Session::has('admin')) {
 
-            $model = Users::all();
-            $index_unset = 0;
-            foreach($model as $user) {
-                if( $user->username =='minhtran' || $user->username == 'sa') {
-                    unset($model[$index_unset]);
+            if($pl == 'quan-ly'){
+                $model = Users::where('level','T')
+                    ->get();
+                $index_unset = 0;
+                foreach($model as $user) {
+                    if( $user->sadmin =='ssa') {
+                        unset($model[$index_unset]);
+                    }
+                    $index_unset++;
                 }
-                $index_unset++;
+            }elseif($pl == 'dich-vu-luu-tru') {
+                $model = Users::where('pldv','DVLT')
+                    ->get();
+            }elseif($pl == 'dich-vu-van-tai'){
+                $model = Users::where('pldv','DVVT')
+                    ->get();
             }
-            //dd($model);
-
             return view('system.users.index')
                 ->with('model',$model)
+                ->with('pl',$pl)
                 ->with('pageTitle','Danh sách tài khoản');
 
         }else

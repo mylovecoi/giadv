@@ -53,6 +53,16 @@
             }
 
         }
+        $(function(){
+
+            $('#select_phanloai').change(function() {
+                var hs_type = $('#select_phanloai').val();
+                var url = '/user/'+hs_type;
+
+                //var url = current_path_url;
+                window.location.href = url;
+            });
+        })
     </script>
 
 @stop
@@ -78,6 +88,19 @@
                             </div>
                         </div>
                         <div class="portlet-body">
+                            <div class="row mbm">
+                                <div class="col-md-1">
+                                    <div class="form-control-static"  style="white-space: nowrap;">Tài khoản</div>
+                                </div>
+                                <div class="col-md-5">
+                                    <select id="select_phanloai" name="select_phanloai" class="form-control required">
+                                        <option value="quan-ly" {{ ($pl == 'quan-ly') ? 'selected' : '' }}>Quản lý</option>
+                                        <option value="dich-vu-luu-tru" {{ ($pl == 'dich-vu-luu-tru') ? 'selected' : '' }}>Dịch vụ lưu trú</option>
+                                        <option value="dich-vu-van-tai" {{ ($pl == 'dich-vu-van-tai') ? 'selected' : '' }}>Dịch vụ vận tải</option>
+                                    </select>
+
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">

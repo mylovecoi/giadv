@@ -64,7 +64,7 @@
                                         </table>
                                     </div>
                                     <div class="col-md-3">
-                                        <h4>Cước vận tải</h4>
+                                        <h4>Dịch vụ vận tải</h4>
                                         <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                             <thead class="primary">
                                             <tr>

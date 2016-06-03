@@ -247,7 +247,7 @@
                         <ul class="nav nav-second-level">
                             <li><a href="{{url('dndvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Danh sách doanh nghiệp cung cấp dịch vụ lưu trú</span></a></li>
                             <li><a href="{{url('dvvantai/donvi')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Danh sách doanh nghiệp cung cấp dịch vụ vận tải</span></a></li>
-                            <li><a href="{{url('user')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Quản lý tài khoản</span></a> </li>
+                            <li><a href="{{url('user/quan-ly')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Quản lý tài khoản</span></a> </li>
                             <li><a href="{{url('general')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Cấu hình hệ thống</span></a> </li>
 
                         </ul>

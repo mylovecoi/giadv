@@ -21,7 +21,7 @@ Route::get('/logout', 'UsersController@logout');
 Route::get('/user/cp', 'UsersController@cp');
 Route::post('/user/cpw', 'UsersController@cpw');
 
-Route::get('user','UsersController@index');
+Route::get('user/{pl}','UsersController@index');
 Route::resource('user','UsersController');
 Route::get('user/delete/{id}','UsersController@destroy');
 Route::get('/user/lock/{id}','UsersController@lockuser');

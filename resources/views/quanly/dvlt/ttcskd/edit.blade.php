@@ -199,7 +199,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button type="button" id="capnhatph" name="capnhatph" class="btn btn-primary">Cập nhật</button>
+                                        <button type="button" id="capnhatph" name="capnhatph" class="btn btn-warning"><i class="fa fa-angle-double-down"></i>&nbsp;Cập nhật</button>
                                         &nbsp;
                                     </div>
                                 </div>
@@ -212,11 +212,11 @@
                                             <thead>
                                             <tr>
                                                 <!--th>Ký hiệu loại phòng</th-->
-                                                <th>Loại phòng</th>
-                                                <th>Quy cách chất lượng</th>
-                                                <th>Số hiệu phòng</th>
+                                                <th width="10%">Loại phòng</th>
+                                                <th width="30%">Quy cách chất lượng</th>
+                                                <th width="30%">Số hiệu phòng</th>
                                                 <th>Ghi chú</th>
-                                                <th>Thao tác</th>
+                                                <th width="15%">Thao tác</th>
                                             </tr>
                                             </thead>
                                             <tbody id="ttphong">
@@ -241,7 +241,7 @@
                         </div>
                         <div class="form-actions text-right pal">
                             <div class="col-sm-12" align="center" >
-                                <button type="submit" class="btn btn-primary">Hoàn thành</button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;Hoàn thành</button>
                                 &nbsp;
                             </div>
                         </div>

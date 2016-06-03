@@ -27,6 +27,10 @@
                                             <div class="col-lg-3">
                                                 <div class="list-group">
                                                     <li class="list-group-item active"><b>Dịch vụ lưu trú</b></li>
+                                                    @if(session('admin')->level!= 'T')
+                                                        <li class="list-group-item">Chờ chuyển<span
+                                                                    class="badge badge-info pull-right">{{number_format($hsltcc)}}</span></li>
+                                                    @endif
                                                     <li class="list-group-item">Chờ nhận<span
                                                                 class="badge badge-info pull-right">{{number_format($hsltcn)}}</span></li>
                                                     <li class="list-group-item">Chờ duyệt<span
@@ -41,7 +45,11 @@
                                             <div class="col-lg-3">
                                                 <div class="list-group">
                                                     <li class="list-group-item active"><b>Dịch vụ vận tải xe khách</b></li>
-                                                    <li class="list-group-item">Chờ duyệt<span
+                                                    @if(session('admin')->level!= 'T')
+                                                        <li class="list-group-item">Chờ chuyển<span
+                                                                    class="badge badge-info pull-right">{{number_format($hsxkcc)}}</span></li>
+                                                    @endif
+                                                    <li class="list-group-item">Chờ nhận<span
                                                                 class="badge badge-info pull-right">{{number_format($hsxkcn)}}</span></li>
                                                     <li class="list-group-item">Chờ duyệt<span
                                                                 class="badge badge-info pull-right">{{number_format($hsxkcd)}}</span></li>
@@ -54,7 +62,11 @@
                                             <div class="col-lg-3">
                                                 <div class="list-group">
                                                     <li class="list-group-item active"><b>Dịch vụ vận tải xe buýt</b></li>
-                                                    <li class="list-group-item">Chờ duyệt<span
+                                                    @if(session('admin')->level!= 'T')
+                                                        <li class="list-group-item">Chờ chuyển<span
+                                                                    class="badge badge-info pull-right">{{number_format($hsxbcc)}}</span></li>
+                                                    @endif
+                                                    <li class="list-group-item">Chờ nhận<span
                                                                 class="badge badge-info pull-right">{{number_format($hsxbcn)}}</span></li>
                                                     <li class="list-group-item">Chờ duyệt<span
                                                                 class="badge badge-info pull-right">{{number_format($hsxbcd)}}</span></li>
@@ -67,7 +79,11 @@
                                             <div class="col-lg-3">
                                                 <div class="list-group">
                                                     <li class="list-group-item active"><b>Dịch vụ vận tải xe taxi</b></li>
-                                                    <li class="list-group-item">Chờ duyệt<span
+                                                    @if(session('admin')->level!= 'T')
+                                                        <li class="list-group-item">Chờ chuyển<span
+                                                                    class="badge badge-info pull-right">{{number_format($hsxtxcc)}}</span></li>
+                                                    @endif
+                                                    <li class="list-group-item">Chờ nhận<span
                                                                 class="badge badge-info pull-right">{{number_format($hsxtxcn)}}</span></li>
                                                     <li class="list-group-item">Chờ duyệt<span
                                                                 class="badge badge-info pull-right">{{number_format($hsxtxcd)}}</span></li>
@@ -80,7 +96,11 @@
                                             <div class="col-lg-3">
                                                 <div class="list-group">
                                                     <li class="list-group-item active"><b>Dịch vụ vận tải chở hàng</b></li>
-                                                    <li class="list-group-item">Chờ duyệt<span
+                                                    @if(session('admin')->level!= 'T')
+                                                        <li class="list-group-item">Chờ chuyển<span
+                                                                    class="badge badge-info pull-right">{{number_format($hschcc)}}</span></li>
+                                                    @endif
+                                                    <li class="list-group-item">Chờ nhận<span
                                                                 class="badge badge-info pull-right">{{number_format($hschcn)}}</span></li>
                                                     <li class="list-group-item">Chờ duyệt<span
                                                                 class="badge badge-info pull-right">{{number_format($hschcd)}}</span></li>

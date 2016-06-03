@@ -114,6 +114,7 @@
                                                 <option value="4">4 sao</option>
                                                 <option value="4.5">4.5 sao</option>
                                                 <option value="5">5 sao</option>
+                                                <option value="K">Khác (Nhà nghỉ)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -196,9 +197,9 @@
                                             <thead>
                                             <tr>
                                                 <!--th>Ký hiệu loại phòng</th-->
-                                                <th>Loại phòng</th>
-                                                <th>Quy cách chất lượng</th>
-                                                <th>Số hiệu phòng</th>
+                                                <th width="20%">Loại phòng</th>
+                                                <th width="30%">Quy cách chất lượng</th>
+                                                <th width="30%">Số hiệu phòng</th>
                                                 <th>Ghi chú</th>
                                                 <th>Thao tác</th>
                                             </tr>

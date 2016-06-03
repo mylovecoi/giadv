@@ -199,10 +199,10 @@
                                         <table id="tabletrocap" class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                             <thead>
                                             <tr>
-                                                <th>Loại phòng<br>Quy cách chất lượng</th>
-                                                <th>Số hiệu phòng</th>
-                                                <th>Mức giá liền kề</th>
-                                                <th>Mức giá kê khai</th>
+                                                <th width="35%">Loại phòng<br>Quy cách chất lượng</th>
+                                                <th width="35%">Số hiệu phòng</th>
+                                                <th width="10%">Mức giá liền kề</th>
+                                                <th width="10%">Mức giá kê khai</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                             </thead>
@@ -211,7 +211,7 @@
                                                 <tr>
                                                     <td>{{$ph->loaip.'-'.$ph->qccl}}</td>
                                                     <td>{{$ph->sohieu}}</td>
-                                                    <td>{{number_format($ph->gialk)}}</td>
+                                                    <td align="right">{{number_format($ph->gialk)}}</td>
                                                     <td></td>
                                                     <td>
                                                         <button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem({{$ph->id}});"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>
@@ -227,7 +227,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group"><label for="selGender" class="control-label">Thông tin kê khai</label>
                                         <div>
-                                        <textarea id="ghichu" class="form-control" name="ghichu" cols="30" rows="3"
+                                        <textarea id="ghichu" class="form-control" name="ghichu" cols="30" rows="10"
                                                   placeholder="-Phụ thu, Thuế VAT"></textarea>
                                         </div>
                                     </div>

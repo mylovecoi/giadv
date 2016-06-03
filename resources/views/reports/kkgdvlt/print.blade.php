@@ -78,14 +78,14 @@
 
 <p>{{$modeldn->tendn}} gửi Bảng kê khai giá dịch vụ lưu trú và kê khai thực hiện kể từ ngày <span>{{getDayVn($modelkk->ngayhieuluc)}}</span></p>
 @if($modelkk->socvlk != '')
-<p>Bảng kê khai giá gửi kèm theo công văn này sẽ thay thế cho Bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}}- ngày {{getDayVn($modelkk->ngaycvlk)}}.</p>
+<p>Bảng kê khai giá gửi kèm theo công văn này sẽ thay thế cho Bảng kê khai giá kèm theo công văn số {{$modelkk->socvlk}}- ngày {{ date("d",strtotime($modelkk->ngaycvlk))}} tháng {{ date("m",strtotime($modelkk->ngaycvlk))}} năm {{ date("Y",strtotime($modelkk->ngaycvlk))}}.</p>
 @endif
 
 <p>{{$modeldn->tendn}} xin chịu trách nhiệm trước pháp luật về tính đúng đắn của mức giá mà chúng tôi kê khai.</p>
 
 <p>Đề nghị quý cơ quan ghi nhận ngày nộp Biểu mẫu kê khai giá của {{$modeldn->tendn}} theo quy định</p>
 
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
+<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto;">
     <tr>
         <td style="text-align: left;" width="30%">
             <b><i>Nơi nhận:</i></b><br>
@@ -94,6 +94,7 @@
         </td>
         <td style="text-align: center; text-transform: uppercase;" width="70%">
             <b>{{$modeldn->chucdanhky}}</b><br>
+
         </td>
     </tr>
 </table>
@@ -132,10 +133,10 @@
 <p style="text-align: right; font-size: 16px;"><i>Đơn vị tính: Đồng/phòng/ngày đêm</i></p>
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
-        <th>Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
-        <th>Số hiệu<br>Phòng</th>
-        <th>Mức giá kê<br>khai trước<br>liền kề</th>
-        <th>Mức giá kê<br>khai</th>
+        <th width="30%">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
+        <th width="40%">Số hiệu<br>Phòng</th>
+        <th width="10%">Mức giá kê<br>khai trước<br>liền kề</th>
+        <th width="10%">Mức giá kê<br>khai</th>
         <th>Ghi chú</th>
     </tr>
     @foreach($modelkkct as $ctkk)
@@ -148,20 +149,20 @@
         </tr>
     @endforeach
 </table>
-<p>{!! nl2br(e($modelkk->ghichu)) !!}</p>
-@if($modelkk->socvlk != '')
-    <p>Mức giá kê khai trước liền kề tại công văn số {{$modelkk->socvlk}} ngày {{getDayVn($modelkk->ngaycvlk)}} của {{$modeldn->tendn}}</p>
+<p>{!! nl2br(e($modelkk->ghichu)) !!}
+@if($modelkk->socvlk != '')<br>
+    - Mức giá kê khai trước liền kề tại công văn số {{$modelkk->socvlk}} ngày {{getDayVn($modelkk->ngaycvlk)}} của {{$modeldn->tendn}}</p>
 @endif
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
+<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto; text-align: center;">
     <tr>
         <td style="text-align: left;" width="30%">
 
         </td>
         <td style="text-align: center;text-transform: uppercase; " width="70%">
             <b>{{$modeldn->chucdanhky}}</b><br>
+
         </td>
     </tr>
-
 </table>
 <table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:100px auto; text-align: center;">
     <tr>
@@ -196,27 +197,27 @@
 <p style="text-align: center;">Thực hiện từ ngày {{ date("d",strtotime($modelkk->ngayhieuluc))}} tháng {{ date("m",strtotime($modelkk->ngayhieuluc))}} năm {{ date("Y",strtotime($modelkk->ngayhieuluc))}} <br>(Theo bảng giá đã kê khai với cơ quan tài chính  ngày {{ date("d",strtotime($modelkk->ngaynhap))}} tháng {{ date("m",strtotime($modelkk->ngaynhap))}} năm {{ date("Y",strtotime($modelkk->ngaynhap))}} )</p>
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
-        <th>Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
-        <th>Số hiệu<br>Phòng</th>
-        <th>Mức giá niêm<br>yết</th>
+        <th width="30%">Loại phòng/ Quy<br>cách chất lượng<br>phòng</th>
+        <th width="40%">Số hiệu<br>Phòng</th>
+        <th width="15%">Mức giá niêm<br>yết</th>
         <th>Ghi chú</th>
     </tr>
     @foreach($modelkkct as $ctkk)
         <tr>
-            <th style="text-align: left">{{$ctkk->loaip.'-'.$ctkk->qccl}}</th>
+            <th style="text-align: left">{{$ctkk->loaip.' - '.$ctkk->qccl}}</th>
             <th style="text-align: left">{{$ctkk->sohieu}}</th>
             <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
             <th>{{$ctkk->ghichu}}</th>
         </tr>
     @endforeach
 </table>
-<p>
+<p>{!! nl2br(e($modelkk->ghichu)) !!}<br>
     Cơ sở kinh doanh chúng tôi cam kết thực hiện niêm yết giá và bán theo giá niêm yết.<br>
     Nếu sai cơ sở chúng tôi xin hoàn toàn chịu trách nhiệm trước pháp luật.<br>
     Khi cần quý khách có thể liên hệ theo các số điện thoại sau, nếu cơ sở chúng tôi không thực hiện đúng bảng giá đã niêm yết:<br>
     {!! nl2br(e(getGeneralConfigs()['ttlh'])) !!}
 </p>
-<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:20px auto; text-align: center;">
+<table width="96%" border="0" cellspacing="0" cellpadding="8" style="margin:10px auto; text-align: center;">
     <tr>
         <td style="text-align: left;" width="30%">
 

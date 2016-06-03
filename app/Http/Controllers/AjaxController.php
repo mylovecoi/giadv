@@ -566,8 +566,8 @@ class AjaxController extends Controller
                     $result['message'] .= '<tr>';
                     $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
-                    $result['message'] .= '<td>'.number_format($phong->mucgialk).'</td>';
-                    $result['message'] .= '<td>'.number_format($phong->mucgiakk).'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgialk).'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgiakk).'</td>';
                     $result['message'] .= '<td>'.
                         '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'
                         .'</td>';
@@ -666,8 +666,8 @@ class AjaxController extends Controller
                     $result['message'] .= '<tr>';
                     $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
-                    $result['message'] .= '<td>'.number_format($phong->mucgialk).'</td>';
-                    $result['message'] .= '<td>'.number_format($phong->mucgiakk).'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgialk).'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgiakk).'</td>';
                     $result['message'] .= '<td>'.
                         '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'
                         .'</td>';

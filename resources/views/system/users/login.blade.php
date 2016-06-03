@@ -1,62 +1,148 @@
 <!DOCTYPE html>
+<!-- 
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
+Version: 3.9.0
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
 <html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-    <title>{{$pageTitle}}</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="Thu, 19 Nov 1900 08:52:00 GMT">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-    <!--Loading bootstrap css-->
-    <!--link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700&subset=vietnamese' rel='stylesheet' type='text/css'-->
-    <link rel="stylesheet" href="{{ url('vendors/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css') }}">
-    <link rel="stylesheet" href="{{ url('vendors/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url('vendors/bootstrap/css/bootstrap.min.css') }}">
-    <!--Loading style vendors-->
-    <link rel="stylesheet" href="{{ url('vendors/animate.css/animate.css') }}">
-    <link rel="stylesheet" href="{{ url('vendors/iCheck/skins/all.css') }}">
-    <!--Loading style-->
-    <link rel="stylesheet" href="{{ url('css/themes/style1/zvinhtq.css') }}" class="default-style">
-    <link rel="stylesheet" href="{{ url('css/style-responsive.css') }}">
-    <script type="text/javascript" src="{{ url('js/jquery-1.10.2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('js/jquery-migrate-1.2.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('js/jquery-ui.js') }}"></script>
-    <!--loading bootstrap js-->
-    <script type="text/javascript" src="{{ url('vendors/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js') }}"></script>
-    <script type="text/javascript" src="{{ url('js/html5shiv.js') }}"></script>
-    <script type="text/javascript" src="{{ url('js/respond.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('vendors/iCheck/icheck.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('vendors/iCheck/custom.min.js') }}"></script>
+	<meta charset="utf-8"/>
+	<title>{{$pageTitle}}</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta content="" name="description"/>
+	<meta content="" name="author"/>
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link href="{{url('assets/global/plugins/select2/select2.css')}}" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/admin/pages/css/login-soft.css')}}" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<!-- BEGIN THEME STYLES -->
+	<link href="{{url('assets/global/css/components.css')}}" id="style_components" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/global/css/plugins.css')}}" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/admin/layout/css/layout.css')}}" rel="stylesheet" type="text/css"/>
+	<link id="style_color" href="{{url('assets/admin/layout/css/themes/darkblue.css')}}" rel="stylesheet" type="text/css"/>
+	<link href="{{url('assets/admin/layout/css/custom.css')}}" rel="stylesheet" type="text/css"/>
+	<!-- END THEME STYLES -->
+	<!--link rel="shortcut icon" href="favicon.ico"/-->
+	<link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
 </head>
-<body id="signin-page">
-<div class="page-form">
-    <div class="header-content">
-        <h1>Đăng nhập</h1>
-    </div>
-    <div class="body-content">
-        {!! Form::open(['url'=>'/signin', 'class'=>'form-horizontal form-validate']) !!}
-        <div class="form-group">
-            <div class="input-icon right"><i class="fa fa-user"></i>
-                <input type="text" placeholder="Username" name="username" class="form-control" autofocus>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="input-icon right"><i class="fa fa-key"></i>
-                <input type="password" placeholder="Password" name="password" class="form-control">
-            </div>
-        </div>
-        <div class="form-group pull-center">
-            <button type="submit" class="btn btn-success">Đăng Nhập &nbsp;<i class="fa fa-chevron-circle-right"></i>
-            </button>
-        </div>
-        <div class="clearfix"></div>
-        {!! Form::close() !!}
-    </div>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+<!-- BEGIN LOGO -->
+<div class="logo">
+	<a href="">
+		<img src="{{ url('images/LIFESOFT.png')}}"  width="200" alt="Công ty TNHH phát triển phần mềm Cuộc Sống"/>
+	</a>
 </div>
+<!-- END LOGO -->
+<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+<div class="menu-toggler sidebar-toggler">
+</div>
+<!-- END SIDEBAR TOGGLER BUTTON -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+	<!-- BEGIN LOGIN FORM -->
+		{!! Form::open(['url'=>'/signin', 'class'=>'form-horizontal form-validate']) !!}
+		<h3 class="form-title">Login</h3>
+		<div class="alert alert-danger display-hide">
+			<button class="close" data-close="alert"></button>
+			<span>
+			Nhập thông tin username và password. </span>
+		</div>
+		<div class="form-group">
+			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+			<label class="control-label visible-ie8 visible-ie9">Username</label>
+			<div class="input-icon">
+				<i class="fa fa-user"></i>
+				<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" autofocus/ >
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Password</label>
+			<div class="input-icon">
+				<i class="fa fa-lock"></i>
+				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+			</div>
+		</div>
+		<div class="form-actions">
+			<label class="checkbox">
+				<!--input type="checkbox" name="remember" value="1"/> Remember me--> </label>
+			<button type="submit" class="btn blue pull-right">
+				Login <i class="m-icon-swapright m-icon-white"></i>
+			</button>
+		</div>
+		{!! Form::close() !!}
+</div>
+<!-- END LOGIN -->
+<!-- BEGIN COPYRIGHT -->
+<div class="copyright">
+	2016 &copy; LifeSoft <a href="" >Tiện ích hơn - Hiệu quả hơn</a>
+</div>
+<!-- END COPYRIGHT -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="{{url('assets/global/plugins/respond.min.js')}}"></script>
+<script src="{{url('assets/global/plugins/excanvas.min.js')}}"></script>
+<![endif]-->
+<script src="{{url('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/global/plugins/jquery-migrate.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/global/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/global/plugins/jquery.cokie.min.js')}}" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="{{url('assets/global/plugins/jquery-validation/js/jquery.validate.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/global/plugins/backstretch/jquery.backstretch.min.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js')}}"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{url('assets/global/scripts/metronic.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/admin/layout/scripts/layout.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/admin/layout/scripts/demo.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/admin/pages/scripts/login-soft.js')}}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+	jQuery(document).ready(function() {
+		Metronic.init(); // init metronic core components
+		Layout.init(); // init current layout
+		Login.init();
+		Demo.init();
+		// init background slide images
+		$.backstretch([
+					"{{url('assets/admin/pages/media/bg/3.jpg')}}",
+					"{{url('assets/admin/pages/media/bg/2.jpg')}}",
+					"{{url('assets/admin/pages/media/bg/1.jpg')}}",
+					"{{url('assets/admin/pages/media/bg/4.jpg')}}"
+				], {
+					fade: 1000,
+					duration: 8000
+				}
+		);
+	});
+</script>
+<!-- END JAVASCRIPTS -->
 </body>
+<!-- END BODY -->
 </html>

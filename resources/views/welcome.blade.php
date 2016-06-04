@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="Thu, 19 Nov 1900 08:52:00 GMT">
-    <link rel="shortcut icon" href="images/icons/loading.gif" type="image/x-icon">
+    <!--link rel="shortcut icon" href="images/icons/loading.gif" type="image/x-icon"-->
+    <link rel="shortcut icon" href="{{ url('images/LIFESOFT.png')}}" type="image/x-icon">
     <!--Loading bootstrap css-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700&subset=vietnamese' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
@@ -30,7 +31,7 @@
 
 <br><br>
 <div class="row">
-    <img src="{{url('images/LIFESOFT1.png')}}" width="300" alt="Công ty TNHH phát triển phần mềm Cuộc Sống">
+    <img src="{{url('images/LIFESOFT1.png')}}" width="200" alt="Công ty TNHH phát triển phần mềm Cuộc Sống">
 </div>
 <div class="row">
     <h3><b></b></h3>

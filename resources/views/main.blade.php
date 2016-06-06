@@ -133,6 +133,8 @@
                 <ul id="side-menu" class="nav">
                     <li> <a href="{{url('')}}"> <i class="fa fa-desktop fa-fw"></i> <span class="menu-title">Màn hình tổng quan</span> </a> </li>
                     <!--Quản lý dịch vụ lưu trú-->
+                    @if(session('admin')->sadmin != 'sa')
+
                     @if(can('dvlt','index'))
                     <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ lưu trú</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -240,7 +242,7 @@
                     </li>
                     @endif
                     <!--End Báo cáo thống kê-->
-
+                    @endif
                     <!--Quản trị hệ thống-->
                     @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
                     <li id="navhethong"><a href="{{url('')}}"><i class="fa fa-gears fa-fw"></i><span class="menu-title">Quản trị hệ thống</span><span class="fa arrow"></span></a>

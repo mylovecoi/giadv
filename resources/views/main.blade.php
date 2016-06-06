@@ -119,7 +119,7 @@
                             <li><a href="{{url('logout')}}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a data-hover="dropdown" href="#"
+                    <li class="dropdown"><a data-hover="dropdown" href="#" target="_blank"
                                             class="dropdown-toggle"><i class="fa fa-file-o"></i><span class="badge badge-green">Help</span></a>
                     </li>
                 </ul>

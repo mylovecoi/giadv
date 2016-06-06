@@ -131,9 +131,10 @@
         <nav id="sidebar" role="navigation" class="navbar-default navbar-static-side">
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
+                    @if(session('admin')->sadmin != 'sa')
                     <li> <a href="{{url('')}}"> <i class="fa fa-desktop fa-fw"></i> <span class="menu-title">Màn hình tổng quan</span> </a> </li>
                     <!--Quản lý dịch vụ lưu trú-->
-                    @if(session('admin')->sadmin != 'sa')
+
 
                     @if(can('dvlt','index'))
                     <li id="navdvlt"><a href="{{url('')}}"><i class="fa fa-desktop fa-fw"></i><span class="menu-title">Dịch vụ lưu trú</span><span class="fa arrow"></span></a>

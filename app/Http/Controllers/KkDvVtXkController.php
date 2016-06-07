@@ -430,12 +430,9 @@ class KkDvVtXkController extends Controller
 
         if(isset($inputs['id'])){
 
-            $inputs['giakk'] = str_replace(',','',$inputs['giakk']);
-            $inputs['giakk'] = str_replace('.','',$inputs['giakk']);
-            $inputs['giakklk'] = str_replace(',','',$inputs['giakklk']);
-            $inputs['giakklk'] = str_replace('.','',$inputs['giakklk']);
-            $inputs['giahl'] = str_replace(',','',$inputs['giahl']);
-            $inputs['giahl'] = str_replace('.','',$inputs['giahl']);
+            $inputs['giakk'] = getDbl($inputs['giakk']);
+            $inputs['giakklk'] = getDbl($inputs['giakklk']);
+            $inputs['giahl'] = getDbl($inputs['giahl']);
 
             $model = KkDvVtXkCt::findOrFail($inputs['id']);
             $model->giakk = $inputs['giakk'];
@@ -444,7 +441,7 @@ class KkDvVtXkController extends Controller
             $model->save();
             //Trả lại kết quả
             $result['message'] = '<tbody id="noidung">';
-            $DMDV = KkDvVtXkCt::where('masokk', $inputs['masokk'])->get();
+            $DMDV = KkDvVtXkCt::where('masokk', $model->masokk)->get();
 
             foreach($DMDV as $dv) {
                 $result['message'] .= '<tr>';
@@ -456,7 +453,7 @@ class KkDvVtXkController extends Controller
                 $result['message'] .= '<td>'
                     .'<button type="button" data-target="#modal-create" '
                     .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
-                    .'onclick="editItem(this,'.$dv->id.','.$dv->masokk.')"><i'
+                    .'onclick="editItem(this,'.$dv->id.')"><i'
                     .'class="fa fa-edit"></i>&nbsp;Kê khai giá'
                     .'</button>';
                 $result['message'] .= '</td >';

@@ -119,7 +119,7 @@
                             <td>
                                 <button type="button" data-target="#modal-create"
                                         data-toggle="modal" class="btn btn-default btn-xs mbs"
-                                        onclick="editItem(this,'{{$dv->id}}','{{$dv->masokk}}')"><i
+                                        onclick="editItem(this,'{{$dv->id}}')"><i
                                             class="fa fa-edit"></i>&nbsp;Kê khai giá
                                 </button>
                             </td>
@@ -158,7 +158,6 @@
     </div>
 
     @include('includes.script.create-header-scripts')
-
     <!--Modal Wide Width-->
     <div id="modal-create" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
         <div class="modal-dialog">
@@ -191,13 +190,12 @@
     </div>
 
     <script>
-        function editItem(e, id, makk){
+        function editItem(e, id){
             var tr=$(e).closest('tr');
             $('#giakklk').attr('value',tr.find('td[name=giakklk]').text());
             $('#giakk').attr('value',tr.find('td[name=giakk]').text());
             $('#giahl').attr('value',tr.find('td[name=giahl]').text());
             $('#iddv').attr('value',id);
-            $('#makk').attr('value',makk);
         }
 
         function updategia(){
@@ -207,7 +205,6 @@
                 type: 'GET',
                 data: {
                     _token: CSRF_TOKEN,
-                    masokk:$('#makk').val(),
                     giakklk: $('#giakklk').val(),
                     giakk: $('#giakk').val(),
                     giahl: $('#giahl').val(),

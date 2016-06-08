@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="{{ url('vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css') }}">
     <link rel="stylesheet" href="{{ url('vendors/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url('vendors/bootstrap/css/bootstrap.min.css') }}">
+    <!--Toastr-->
+    <link rel="stylesheet" href="{{ url('css/toastr.css') }}">
+    <!--End Toastr-->
     <!--LOADING STYLESHEET FOR PAGE-->
     @yield('custom-style')
     <!--Loading style vendors-->
@@ -96,6 +99,9 @@
             }
         }
     </script>
+    <!--Toastr-->
+    <script type="text/javascript" src="{{ url('js/toastr.js') }}"></script>
+    <!--End Toastr-->
     @yield('custom-script')
 </head>
 <body class="header-fixed" onload="time()">
@@ -119,9 +125,15 @@
                             <li><a href="{{url('logout')}}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
                         </ul>
                     </li>
+                    <!--Trang công bố-->
+                    <li class="dropdown"><a data-hover="dropdown" href="#" target="_blank"
+                                            class="dropdown-toggle"><i class="fa fa-tachometer fa-fw"></i><span class="badge badge-orange">View</span></a>
+                    </li>
+                    <!--Hướng dẫn-->
                     <li class="dropdown"><a data-hover="dropdown" href="#" target="_blank"
                                             class="dropdown-toggle"><i class="fa fa-file-o"></i><span class="badge badge-green">Help</span></a>
                     </li>
+
                 </ul>
             </div>
         </nav>
@@ -131,7 +143,7 @@
         <nav id="sidebar" role="navigation" class="navbar-default navbar-static-side">
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
-                    @if(session('admin')->sadmin != 'sa')
+                @if(session('admin')->sadmin != 'sa')
                     <li> <a href="{{url('')}}"> <i class="fa fa-desktop fa-fw"></i> <span class="menu-title">Màn hình tổng quan</span> </a> </li>
                     <!--Quản lý dịch vụ lưu trú-->
 
@@ -243,7 +255,7 @@
                     </li>
                     @endif
                     <!--End Báo cáo thống kê-->
-                    @endif
+                @endif
                     <!--Quản trị hệ thống-->
                     @if(session('admin')->sadmin == 'ssa' || session('admin')->sadmin == 'sa')
                     <li id="navhethong"><a href="{{url('')}}"><i class="fa fa-gears fa-fw"></i><span class="menu-title">Quản trị hệ thống</span><span class="fa arrow"></span></a>

@@ -374,11 +374,10 @@ class DvLtController extends Controller
 
             $modelph = TtCsKdDvLt::where('macskd',$modelcskd->macskd)
                 ->get();
-            //dd($modelph);
 
             $modelcb = CbKkGDvLt::where('macskd',$modelcskd->macskd)
                 ->first();
-            //dd($modelcb);
+
             if(isset($modelcb)) {
                 $modelgcb  = KkGDvLtCt::where('mahs',$modelcb->mahs)
                     ->get();
@@ -391,15 +390,31 @@ class DvLtController extends Controller
                 }
             }
 
+            foreach($modelph as $ttph){
+                $dsph = new KkGDvLtCtDf();
+                $dsph->macskd = $modelcskd->macskd;
+                $dsph->maloaip = $ttph->maloaip;
+                $dsph->loaip = $ttph->loaip;
+                $dsph->qccl = $ttph->qccl;
+                $dsph->sohieu = $ttph->sohieu;
+                $dsph->ghichu = $ttph->ghichu;
+                $dsph->mucgialk = $ttph->gialk;
+                $dsph->save();
+            }
+            $modeldsph = KkGDvLtCtDf::where('macskd',$modelcskd->macskd)
+                ->get();
+
             return view('quanly.dvlt.kkgiadv.create')
                 ->with('modelcskd',$modelcskd)
-                ->with('modelph',$modelph)
+                ->with('modelph',$modelph)//Thay thế
+                ->with('modeldsph',$modeldsph)
                 ->with('modelcb',$modelcb)
                 ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
 
         }else
             return view('errors.notlogin');
     }
+
 
     public function KkGDvLtStore(Request $request,$id){
         if (Session::has('admin')) {

@@ -473,7 +473,7 @@ class AjaxController extends Controller
         $inputs = $request->all();
 
         if(isset($inputs['id'])){
-            $modelph = TtCsKdDvLt::where('id',$inputs['id'])
+            /*$modelph = TtCsKdDvLt::where('id',$inputs['id'])
                 ->first();
             $modelgiakk = KkGDvLtCtDf::where('macskd',$modelph->macskd)
                 ->where('maloaip',$modelph->maloaip)
@@ -494,7 +494,11 @@ class AjaxController extends Controller
                     $mucgiakk = 0;
                     $mucgialk = 0;
                 }
-            }
+            }*/
+            $model = KkGDvLtCtDf::where('id',$inputs['id'])
+                ->first();
+            ($model->mucgialk != null)? $mucgialk = $model->mucgialk : $mucgialk = 0;
+            ($model->mucgiakk != null)? $mucgiakk = $model->mucgiakk : $mucgiakk = 0;
 
             $result['message'] = '<div class="form-horizontal" id="ttgiaph">';
             $result['message'] .= '<div class="form-group">';
@@ -510,7 +514,7 @@ class AjaxController extends Controller
             $result['message'] .= '</div>';
             $result['message'] .= '</div>';
             $result['message'] .= '</div>';
-            $result['message'] .= '<input type="hidden" id="idedit" name="idedit" value="'.$modelph->id.'">';
+            $result['message'] .= '<input type="hidden" id="idedit" name="idedit" value="'.$model->id.'">';
             $result['status'] = 'success';
 
         }
@@ -538,7 +542,7 @@ class AjaxController extends Controller
         $inputs['mucgiakk'] = str_replace('.','',$inputs['mucgiakk']);
 
         if(isset($inputs['id'])){
-            $modelph = TtCsKdDvLt:: where('id',$inputs['id'])->first();
+            /*$modelph = TtCsKdDvLt:: where('id',$inputs['id'])->first();
 
             $modelgiaph = new KkGDvLtCtDf();
             $modelgiaph->maloaip = $modelph->maloaip;
@@ -558,18 +562,29 @@ class AjaxController extends Controller
             foreach($model as $ph){
                 $this->getGiaphtam($modelgiaphtam,$ph);
             }
-            //dd($model);
+            //dd($model);*/
+            $modelph = KkGDvLtCtDf::where('id',$inputs['id'])
+                ->first();
+            $modelph->mucgialk = $inputs['mucgialk'];
+            $modelph->mucgiakk = $inputs['mucgiakk'];
+            $modelph->save();
+
+            $model = KkGDvLtCtDf::where('macskd',$modelph->macskd)
+                ->get();
 
             $result['message'] = '<tbody id="ttphong">';
             if(count($model) > 0){
-                foreach($model as $phong){
+                foreach($model as $key=>$phong){
                     $result['message'] .= '<tr>';
+                    $result['message'] .= '<td>'.($key + 1).'</td>';
                     $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
                     $result['message'] .= '<td>'.$phong->sohieu.'</td>';
                     $result['message'] .= '<td align="right">'.number_format($phong->mucgialk).'</td>';
                     $result['message'] .= '<td align="right">'.number_format($phong->mucgiakk).'</td>';
                     $result['message'] .= '<td>'.
-                        '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'
+                        '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
+                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
+                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="del('.$phong->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
                         .'</td>';
                     $result['message'] .= '</tr>';
                 }
@@ -581,7 +596,7 @@ class AjaxController extends Controller
         die(json_encode($result));
     }
 
-    public function getGiaphtam($phs,$array){
+    /*public function getGiaphtam($phs,$array){
         foreach($phs as $ph){
             if($ph->maloaip == $array->maloaip){
                 $array->mucgiakk = $ph->mucgiakk;
@@ -589,7 +604,223 @@ class AjaxController extends Controller
             }
         }
 
+    }*/
+        //Edit thông tin phòng trong kê khai
+    public function editkkgttph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+
+            $model = KkGDvLtCtDf::where('id',$inputs['id'])
+                ->first();
+            //dd($model);
+            $result['message'] = '<div class="modal-body" id="ttphedit">';
+            $result['message'] .= '<div class="row">';
+            $result['message'] .= '<div class="col-md-6">';
+            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Loại phòng<span class="require">*</span></label>';
+            $result['message'] .= '<div><input type="text" name="loaipedit" id="loaipedit" class="form-control" value="'.$model->loaip.'"></div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+
+            $result['message'] .= '<div class="row">';
+            $result['message'] .= '<div class="col-md-6">';
+            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Quy cách chất lượng<span class="require">*</span></label>';
+            $result['message'] .= '<div><textarea id="qccledit" class="form-control" name="qccledit" cols="30" rows="5">'.$model->qccl.'</textarea></div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '<div class="col-md-6">';
+            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Số hiệu<span class="require">*</span></label>';
+            $result['message'] .= '<div><textarea id="sohieuedit" class="form-control" name="sohieuedit" cols="30" rows="5">'.$model->sohieu.'</textarea></div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+
+            $result['message'] .= '<div class="row">';
+            $result['message'] .= '<div class="col-md-12">';
+            $result['message'] .= '<div class="form-group"><label for="selGender" class="control-label">Ghi chú<span class="require">*</span></label>';
+            $result['message'] .= '<div><textarea id="ghichuedit" class="form-control" name="ghichuedit" cols="30" rows="3">'.$model->ghichu.'</textarea></div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+            $result['message'] .= '</div>';
+
+            $result['message'] .= '<input type="hidden" id="idedit" name="idedit" value="'.$model->id.'">';
+
+
+            $result['message'] .= '</div>';
+            $result['status'] = 'success';
+
+        }
+        die(json_encode($result));
     }
+        //End Edit thông tin phòng trong kê khai
+
+        //Update thông tin phòng trong kê khai
+    public function updatekkgttph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['loaip'])){
+            $modelph = KkGDvLtCtDf:: where('id',$inputs['id'])->first();
+            $modelph->loaip = $inputs['loaip'];
+            $modelph->qccl = $inputs['qccl'];
+            $modelph->sohieu = $inputs['sohieu'];
+            $modelph->ghichu = $inputs['ghichu'];
+            $modelph->save();
+
+            $model = KkGDvLtCtDf::where('macskd',$modelph->macskd)
+                ->get();
+            //dd($model);
+            $result['message'] = '<tbody id="ttphong">';
+            if(count($model) > 0){
+                foreach($model as $key=>$phong){
+                    $result['message'] .= '<tr>';
+                    $result['message'] .= '<td>'.($key + 1).'</td>';
+                    $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
+                    $result['message'] .= '<td>'.$phong->sohieu.'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgialk).'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgiakk).'</td>';
+                    $result['message'] .= '<td>'.
+                        '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
+                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
+                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="del('.$phong->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
+                        .'</td>';
+                    $result['message'] .= '</tr>';
+                }
+                $result['message'] .= '</tbody>';
+                $result['status'] = 'success';
+            }
+        }
+
+        die(json_encode($result));
+    }
+        //End Update thông tin phòng trong kê khai
+
+        //Delete Thông tin phòng trong kê khai
+    public function delkkgttph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['id'])){
+            $modelph = KkGDvLtCtDf:: where('id',$inputs['id'])->first();
+            $modelph->delete();
+
+            $model = KkGDvLtCtDf::where('macskd',$modelph->macskd)
+                ->get();
+            //dd($model);
+            $result['message'] = '<tbody id="ttphong">';
+            if(count($model) > 0){
+                foreach($model as $key=>$phong){
+                    $result['message'] .= '<tr>';
+                    $result['message'] .= '<td>'.($key + 1).'</td>';
+                    $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
+                    $result['message'] .= '<td>'.$phong->sohieu.'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgialk).'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgiakk).'</td>';
+                    $result['message'] .= '<td>'.
+                        '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
+                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
+                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="del('.$phong->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
+                        .'</td>';
+                    $result['message'] .= '</tr>';
+                }
+                $result['message'] .= '</tbody>';
+                $result['status'] = 'success';
+            }
+        }
+
+        die(json_encode($result));
+    }
+        //End Delete Thông tin phòng trong kê khai
+
+        //Thêm mới thông tin phòng trong kê khai
+    public function themmoikkgttph(Request $request){
+        $result = array(
+            'status' => 'fail',
+            'message' => 'error',
+        );
+        if(!Session::has('admin')) {
+            $result = array(
+                'status' => 'fail',
+                'message' => 'permission denied',
+            );
+            die(json_encode($result));
+        }
+        //dd($request);
+        $inputs = $request->all();
+
+        if(isset($inputs['loaip'])){
+            $modelph = new KkGDvLtCtDf();
+            $modelph->loaip = $inputs['loaip'];
+            $modelph->qccl = $inputs['qccl'];
+            $modelph->sohieu = $inputs['sohieu'];
+            $modelph->ghichu = $inputs['ghichu'];
+            $modelph->macskd = $inputs['macskd'];
+            $modelph->maloaip = getdate()[0];
+            $modelph->save();
+
+            $model = KkGDvLtCtDf::where('macskd',$inputs['macskd'])
+                ->get();
+            //dd($model);
+            $result['message'] = '<tbody id="ttphong">';
+            if(count($model) > 0){
+                foreach($model as $key=>$phong){
+                    $result['message'] .= '<tr>';
+                    $result['message'] .= '<td>'.($key + 1).'</td>';
+                    $result['message'] .= '<td>'.$phong->loaip.'-'.$phong->qccl.'</td>';
+                    $result['message'] .= '<td>'.$phong->sohieu.'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgialk).'</td>';
+                    $result['message'] .= '<td align="right">'.number_format($phong->mucgiakk).'</td>';
+                    $result['message'] .= '<td>'.
+                        '<button type="button" data-target="#modal-create" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editItem('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Kê khai giá</button>'.
+                        '<button type="button" data-target="#modal-edit" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="editTtPh('.$phong->id.');"><i class="fa fa-edit"></i>&nbsp;Chỉnh sửa thông tin</button>'.
+                        '<button type="button" data-target="#modal-delete" data-toggle="modal" class="btn btn-default btn-xs mbs" onclick="del('.$phong->id.');" ><i class="fa fa-trash-o"></i>&nbsp;Xóa</button>'
+                        .'</td>';
+                    $result['message'] .= '</tr>';
+                }
+                $result['message'] .= '</tbody>';
+                $result['status'] = 'success';
+            }
+        }
+
+        die(json_encode($result));
+    }
+        //End thêm mói thông tin phòng trong kê khai
+
 
     public function chinhsuagiaph(Request $request){
         $result = array(

@@ -85,6 +85,11 @@ Route::get('kkgdvlt/{id}','DvLtController@KkGDvLtIndex');
 Route::get('kkgdvlt/{id}/create','DvLtController@KkGDvLtCreate');
 Route::get('/ajax/editgiaph/', 'AjaxController@editgiaph');
 Route::get('/ajax/updategiaph/', 'AjaxController@updategiaph');
+Route::get('/ajax/editkkgttph/','AjaxController@editkkgttph');//Edit thông tin phòng trong kê khai giá
+Route::get('/ajax/updatekkgttph','AjaxController@updatekkgttph');//Update thông tin phòng trong kê khai giá;
+Route::get('/ajax/delkkgttph','AjaxController@delkkgttph');//del thông tin phòng trong kê khai giá
+Route::get('/ajax/themmoikkgttph','AjaxController@themmoikkgttph');
+
 Route::post('kkgdvlt/{id}','DvLtController@KkGDvLtStore');
 Route::get('kkgdvlt/{idcskd}/{id}/edit','DvLtController@KkGDvLtEdit');
 Route::get('/ajax/chinhsuagiaph/', 'AjaxController@chinhsuagiaph');

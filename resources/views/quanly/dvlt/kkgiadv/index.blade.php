@@ -81,7 +81,7 @@
                                                 <td>{{getDayVn($ttkk->ngaynhap)}}</td>
                                                 <td>{{getDayVn($ttkk->ngayhieuluc)}}</td>
                                                 <td>{{$ttkk->socv}}
-                                                    @if($ttkk->trangthai!= 'Chờ nhận' || $ttkk->trangthai != 'Chờ chuyển')
+                                                    @if($ttkk->trangthai == 'Chờ duyệt' || $ttkk->trangthai == 'Duyệt')
                                                         <br>Số hồ sơ nhận: {{$ttkk->sohsnhan}}
                                                         <br>Ngày nhận: {{getDayVn($ttkk->ngaynhan)}}
                                                     @endif

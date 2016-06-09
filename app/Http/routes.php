@@ -88,12 +88,15 @@ Route::get('/ajax/updategiaph/', 'AjaxController@updategiaph');
 Route::get('/ajax/editkkgttph/','AjaxController@editkkgttph');//Edit thông tin phòng trong kê khai giá
 Route::get('/ajax/updatekkgttph','AjaxController@updatekkgttph');//Update thông tin phòng trong kê khai giá;
 Route::get('/ajax/delkkgttph','AjaxController@delkkgttph');//del thông tin phòng trong kê khai giá
-Route::get('/ajax/themmoikkgttph','AjaxController@themmoikkgttph');
-
+Route::get('/ajax/themmoikkgttph','AjaxController@themmoikkgttph');//Create thông tin phòng trong kê khai giá
 Route::post('kkgdvlt/{id}','DvLtController@KkGDvLtStore');
 Route::get('kkgdvlt/{idcskd}/{id}/edit','DvLtController@KkGDvLtEdit');
 Route::get('/ajax/chinhsuagiaph/', 'AjaxController@chinhsuagiaph');
 Route::get('/ajax/capnhatgiaph/', 'AjaxController@capnhatgiaph');
+Route::get('/ajax/chinhsuakkgttph/','AjaxController@chinhsuakkgttph');//Chỉnh sửa thông tin phòng trong kê khai giá edit
+Route::get('/ajax/capnhatkkgttph/','AjaxController@capnhatkkgttph');//Cập nhật thông tin phòng trong kê khai giá edit
+Route::get('/ajax/xoakkgttph/','AjaxController@xoakkgttph');//Xóa thông tin phòng trong kê khai edit
+Route::get('/ajax/boxungkkgttph/','AjaxController@boxungkkgttph');//Bổ xung thông tin phòng trong kê khai edit
 Route::patch('kkgdvlt/{idcskd}/{id}','DvLtController@KkGDvLtUpdate');
 Route::post('kkgdvlt/delete/{id}','DvLtController@KkGDvLtDelete');
 Route::post('kkgdvlt/chuyen/{id}','DvLtController@KkGDvLtChuyen');

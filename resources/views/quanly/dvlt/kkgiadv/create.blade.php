@@ -299,10 +299,11 @@
                                             <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th width="35%">Loại phòng<br>Quy cách chất lượng</th>
-                                                <th width="35%">Số hiệu phòng</th>
-                                                <th width="10%">Mức giá liền kề</th>
-                                                <th width="10%">Mức giá kê khai</th>
+                                                <th width="30%">Loại phòng<br>Quy cách chất lượng</th>
+                                                <th width="30%">Số hiệu phòng</th>
+                                                <th width="16%">Ghi chú</th>
+                                                <th width="7%">Mức giá liền kề</th>
+                                                <th width="7%">Mức giá kê khai</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                             </thead>
@@ -312,6 +313,7 @@
                                                     <td align="center">{{$key + 1}}</td>
                                                     <td>{{$ph->loaip.'-'.$ph->qccl}}</td>
                                                     <td>{{$ph->sohieu}}</td>
+                                                    <td>{{$ph->ghichu}}</td>
                                                     <td align="right">{{number_format($ph->mucgialk)}}</td>
                                                     <td align="right">{{number_format($ph->mucgiakk)}}</td>
                                                     <td>

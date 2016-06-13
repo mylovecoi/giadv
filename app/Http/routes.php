@@ -328,4 +328,12 @@ Route::get('reports/dvlt', function(){
 Route::post('reports/dvlt/BC1','ReportsController@dvltbc1');
 Route::post('reports/dvlt/BC2','ReportsController@dvltbc2');
 
+Route::group(['prefix'=>'reports'],function(){
+    Route::get('danhsach','ReportsDvVtController@index');
+    //Route::get('create/{idkk}/{madichvu}','KkDvVtKhacCtController@create');
+    //Route::post('store','KkDvVtKhacCtController@store');
+    //Route::get('edit/{masokk}','KkDvVtKhacCtController@edit');
+    //Route::patch('update/{id}','KkDvVtKhacCtController@update');
+    //Route::get('del/{id}','KkDvVtKhacCtController@destroy');
+});
 // </editor-fold>

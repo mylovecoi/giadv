@@ -250,7 +250,7 @@
                     <li id="navbaocao"><a href="{{url('')}}"><i class="fa fa-file fa-fw"></i><span class="menu-title">Báo cáo tổng hợp</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="{{url('reports/dvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Dịch vụ lưu trú</span></a></li>
-
+                            <li><a href="{{url('reports/danhsach')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Dịch vụ vận tải</span></a></li>
                         </ul>
                     </li>
                     @endif

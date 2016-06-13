@@ -30,6 +30,11 @@ Route::get('user/permission/{id}','UsersController@permission');
 Route::post('/user/permission', 'UsersController@uppermission');
 Route::get('/user/checkuser/{user}','UsersController@checkuser');
 Route::get('/ajax/getTTdn','AjaxController@getTTdn');
+
+Route::get('user/{pl}/create','UsersController@create');
+Route::post('user/store-quan-ly','UsersController@storeql');
+Route::post('user/store-dvlt','UsersController@storedvlt');
+Route::post('user/store-dvvt','UsersController@storedvvt');
 //End Danh sách User
 
 //Danh sách doanh nghiệp dịch vụ lưu trú

@@ -55,24 +55,31 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($pl)
     {
         if (Session::has('admin')) {
-            $modeldn = DnDvLt::all();
-            return view('system.users.create')
-                ->with('modeldn',$modeldn)
-                ->with('pageTitle','Thêm mới tài khoản');
+            if($pl== 'quan-ly'){
+                return view('system.users.createql')
+                    ->with('pageTitle','Thêm mới tài khoản');
+
+            }elseif($pl == 'dich-vu-luu-tru'){
+                $modeldn = DnDvLt::all();
+                return view('system.users.createdvlt')
+                    ->with('modeldn',$modeldn)
+                    ->with('pageTitle','Thêm mới tài khoản');
+
+
+            }elseif($pl == 'dich-vu-van-tai'){
+                $modeldn = DonViDvVt::all();
+                return view('system.users.createdvvt')
+                    ->with('modeldn',$modeldn)
+                    ->with('pageTitle','Thêm mới tài khoản');
+            }
 
         }else
             return view('errors.notlogin');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if (Session::has('admin')) {
@@ -90,6 +97,72 @@ class UsersController extends Controller
             $model->save();
 
             return redirect('user');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function storeql(Request $request){
+        if (Session::has('admin')) {
+
+            $insert = $request->all();
+            $model = new Users();
+            $model->name = $insert['name'];
+            $model->phone = $insert['phone'];
+            $model->email = $insert['email'];
+            $model->username = $insert['user'];
+            $model->password = md5($insert['password']);
+            $model->status = $insert['status'];
+            $model->level = 'T';
+            $model->status = $insert['status'];
+            $model->save();
+
+            return redirect('user/quan-ly');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function storedvlt(Request $request){
+        if (Session::has('admin')) {
+
+            $insert = $request->all();
+            $model = new Users();
+            $model->name = $insert['name'];
+            $model->phone = $insert['phone'];
+            $model->email = $insert['email'];
+            $model->username = $insert['user'];
+            $model->password = md5($insert['password']);
+            $model->status = $insert['status'];
+            $model->level = 'H';
+            $model->mahuyen = $insert['mahuyen'];
+            $model->status = $insert['status'];
+            $model->pldv = 'DVLT';
+            $model->save();
+
+            return redirect('user/dich-vu-luu-tru');
+
+        }else
+            return view('errors.notlogin');
+    }
+    public function storedvvt(Request $request){
+        if (Session::has('admin')) {
+
+            $insert = $request->all();
+            $model = new Users();
+            $model->name = $insert['name'];
+            $model->phone = $insert['phone'];
+            $model->email = $insert['email'];
+            $model->username = $insert['user'];
+            $model->password = md5($insert['password']);
+            $model->status = $insert['status'];
+            $model->level = 'H';
+            $model->mahuyen = $insert['mahuyen'];
+            $model->status = $insert['status'];
+            $model->pldv = 'DVVT';
+            $model->save();
+
+            return redirect('user/dich-vu-van-tai');
 
         }else
             return view('errors.notlogin');
@@ -142,12 +215,19 @@ class UsersController extends Controller
             $model->phone = $update['phone'];
             $model->email = $update['email'];
             $model->status = $update['status'];
-            $model->mahuyen = $update['mahuyen'];
-            $model->level = $update['level'];
+            //$model->mahuyen = $update['mahuyen'];
+            //$model->level = $update['level'];
 
             $model->save();
 
-            return redirect('user');
+            if($model->level == 'T')
+                $pl = 'quan-ly';
+            elseif($model->pldv == 'DVLT')
+                $pl='dich-vu-luu-tru';
+            else
+                $pl='dich-vu-van-tai';
+
+            return redirect('user/'.$pl);
 
         }else
             return view('errors.notlogin');
@@ -165,7 +245,13 @@ class UsersController extends Controller
 
             $model = Users::findOrFail($id);
             $model->delete();
-            return redirect('user');
+            if($model->level == 'T')
+                $pl = 'quan-ly';
+            elseif($model->pldv == 'DVLT')
+                $pl='dich-vu-luu-tru';
+            else
+                $pl='dich-vu-van-tai';
+            return redirect('user/'.$pl);
 
         }else
             return view('errors.notlogin');
@@ -212,7 +298,7 @@ class UsersController extends Controller
             $model->status = "Vô hiệu";
             $model->save();
         }
-        return redirect('user');
+        return redirect('user/quan-ly');
 
     }
 
@@ -225,7 +311,7 @@ class UsersController extends Controller
             $model->status = "Kích hoạt";
             $model->save();
         }
-        return redirect('user');
+        return redirect('user/quan-ly');
 
     }
 

@@ -271,7 +271,6 @@
                                             </label>
                                         <div>
                                             <input type="text" name="socvlk" id="socvlk" class="form-control" value="{{isset($modelcb) ? $modelcb->socv : '' }}">
-                                            <!--Bổ xung sau-->
                                         </div>
                                     </div>
                                 </div>

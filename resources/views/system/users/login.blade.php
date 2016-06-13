@@ -62,7 +62,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGIN -->
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
-		{!! Form::open(['url'=>'/signin', 'class'=>'form-horizontal form-validate']) !!}
+		{!! Form::open(['url'=>'/signin','id' => 'form-login', 'class'=>'form-horizontal form-validate']) !!}
 		<h3 class="form-title">Login</h3>
 		<div class="alert alert-danger display-hide">
 			<button class="close" data-close="alert"></button>
@@ -81,13 +81,13 @@ License: You must have a valid license purchased only from themeforest(the above
 			<label class="control-label visible-ie8 visible-ie9">Password</label>
 			<div class="input-icon">
 				<i class="fa fa-lock"></i>
-				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+				<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" id="password"/>
 			</div>
 		</div>
 		<div class="form-actions">
 			<label class="checkbox">
 				<!--input type="checkbox" name="remember" value="1"/> Remember me--> </label>
-			<button type="submit" class="btn blue pull-right">
+			<button type="submit" class="btn blue pull-right" id="submits">
 				Login <i class="m-icon-swapright m-icon-white"></i>
 			</button>
 		</div>
@@ -142,7 +142,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		);
 	});
 </script>
-<!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
 </html>

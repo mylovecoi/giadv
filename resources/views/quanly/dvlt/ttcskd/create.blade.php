@@ -49,7 +49,7 @@
                 success: function (data) {
                     //$('#modal-wide-width').dialog('close');
                     if(data.status == 'success') {
-                        alert('Cập nhật thông tin thành công');
+                        toastr.success('Cập nhật thông tin thành công');
                         $('#ttphong').replaceWith(data.message);
                         //$("#modal-wide-width").dialog("close");
                         //$('#modal-wide-width').fadeOut();
@@ -72,7 +72,7 @@
                 dataType: 'JSON',
                 success: function (data) {
                     //if(data.status == 'success') {
-                    alert('Xóa thông tin thành công');
+                    toastr.info('Xóa thông tin thành công');
                     $('#ttphong').replaceWith(data.message);
 
                     //}
@@ -247,7 +247,7 @@
                         //console.log(data);
                         //alert(data.message);
                          if(data.status == 'success') {
-                             alert('Cập nhật thông tin thành công');
+                             toastr.success('Cập nhật thông tin thành công');
                              $('#ttphong').replaceWith(data.message);
                              //$('#maloaip').val('');
                              $('#loaip').val('');

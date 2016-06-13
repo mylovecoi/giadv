@@ -78,7 +78,8 @@
                                 <b>DANH SÁCH TÀI KHOẢN</b>
                             </div>
                             <div class="actions">
-                                <a href="{{url('user/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Thêm mới tài khoản</a>
+                                <a href="{{url('user/'.$pl.'/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <!--a href="{{url('user/create')}}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Thêm mới tài khoản</a-->
 
                                 <button id="btnMultiLockUser" type="button" onclick="multiLock()" class="btn btn-primary btn-xs" data-target="#lockuser-modal-confirm" data-toggle="modal"><i class="fa fa-lock"></i>&nbsp;
                                     Khóa tài khoản</button>
@@ -113,7 +114,9 @@
                                                     <th>Phone</th>
                                                     <th>Email</th>
                                                     <th>Cấp sử dụng</th>
+                                                    @if($pl !='quan-ly')
                                                     <th>Dịch vụ cung cấp</th>
+                                                    @endif
                                                     <th style="width: 11%">Trạng thái </th>
                                                     <th style="width: 20%">Thao tác</th>
                                                 </tr>
@@ -127,15 +130,15 @@
                                                     <td>{{$user->phone}}</td>
                                                     <td>{{$user->email}}</td>
                                                     @if($user->level == 'T')
-                                                        <td>Sở tài chính</td>
+                                                        <td>Đơn vị quản lý</td>
                                                     @elseif($user->level == 'H')
                                                         <td>Doanh nghiệp </td>
                                                     @else
                                                         <td>Cơ sở kinh doanh</td>
                                                     @endif
-
+                                                    @if($pl !='quan-ly')
                                                     <td>{{$user->pldv}}</td>
-
+                                                    @endif
                                                     @if($user->status == "Kích hoạt")
                                                         <td align="center"><span class="badge badge-warning">{{$user->status}}</span></td>
                                                     @else

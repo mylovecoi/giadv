@@ -40,6 +40,7 @@
                                                 <td><input type="checkbox" {{ (isset($permission->dvlt->index) && $permission->dvlt->index == 1) ? 'checked' : '' }} value="1" name="roles[dvlt][index]"/></td>
                                                 <td>Xem</td>
                                             </tr>
+                                            @if($model->level != 'T')
                                             <tr>
                                                 <td><input type="checkbox" {{ (isset($permission->dvlt->create) && $permission->dvlt->create == 1) ? 'checked' : '' }} value="1" name="roles[dvlt][create]"/></td>
                                                 <td>Thêm mới</td>
@@ -52,6 +53,7 @@
                                                 <td><input type="checkbox" {{ (isset($permission->dvlt->delete) && $permission->dvlt->delete == 1) ? 'checked' : '' }} value="1" name="roles[dvlt][delete]"/></td>
                                                 <td>Xóa</td>
                                             </tr>
+                                            @endif
                                             <tr>
                                                 <td><input type="checkbox" {{ (isset($permission->dvlt->approve) && $permission->dvlt->approve == 1) ? 'checked' : '' }} value="1" name="roles[dvlt][approve]"/></td>
                                                 @if($model->level == 'T')
@@ -77,6 +79,7 @@
                                                 <td><input type="checkbox" {{ (isset($permission->dvvt->index) && $permission->dvvt->index == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][index]"/></td>
                                                 <td>Xem</td>
                                             </tr>
+                                            @if($model->level != 'T')
                                             <tr>
                                                 <td><input type="checkbox" {{ (isset($permission->dvvt->create) && $permission->dvvt->create == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][create]"/></td>
                                                 <td>Thêm mới</td>
@@ -89,6 +92,7 @@
                                                 <td><input type="checkbox" {{ (isset($permission->dvvt->delete) && $permission->dvvt->delete == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][delete]"/></td>
                                                 <td>Xóa</td>
                                             </tr>
+                                            @endif
                                             <tr>
                                                 <td><input type="checkbox" {{ (isset($permission->dvvt->approve) && $permission->dvvt->approve == 1) ? 'checked' : '' }} value="1" name="roles[dvvt][approve]"/></td>
                                                 @if($model->level == 'T')

@@ -87,7 +87,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="form-actions">
 			<label class="checkbox">
 				<!--input type="checkbox" name="remember" value="1"/> Remember me--> </label>
-			<button type="submit" class="btn blue pull-right" id="submits">
+			<button type="submit" class="btn blue pull-right" id="login_button">
 				Login <i class="m-icon-swapright m-icon-white"></i>
 			</button>
 		</div>
@@ -140,6 +140,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					duration: 8000
 				}
 		);
+	});
+</script>
+<script>
+	$("#password").keydown(function(event){
+		if(event.keyCode == 13){
+			$("#login_button").click();
+		}
 	});
 </script>
 </body>

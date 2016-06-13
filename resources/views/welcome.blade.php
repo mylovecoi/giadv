@@ -49,7 +49,6 @@
     <br>
     <br>
     <br>
-    <br>
 </div>
 <div class="row mtxl mbxl"></div>
 <div class="row mtxl mbxl"></div>
@@ -60,7 +59,7 @@
 
     <p>Địa chỉ: T14 – Cụm 591 – Liên Ninh – Thanh trì – Hà Nội</p>
 
-    <p><b>Tel</b>: 04.36343951 - Email: phanmemcuocsong@gmail.com</p>
+    <p><b>Tel</b>: 04.36343951 - <b>Email</b>: phanmemcuocsong@gmail.com</p>
 </div>
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>

@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\CsKdDvLt;
-use App\DnDvLt;
-use App\KkGDvLt;
-use App\KkGDvLtCt;
+
+use App\DonViDvVt;
+use App\KkDvVtKhac;
+use App\KkDvVtKhacCt;
+use App\KkDvVtXb;
+use App\KkDvVtXbCt;
+use App\KkDvVtXk;
+use App\KkDvVtXkCt;
+use App\KkDvVtXtx;
+use App\KkDvVtXtxCt;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,57 +25,34 @@ class ReportsDvVtController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function indexxk(){
         if (Session::has('admin')) {
-            return view('reports.kkgdvvt.bcth.index')
+            return view('reports.kkgdvvt.bcth.dvxk.index')
                 ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
         }else
             return view('errors.notlogin');
     }
-/*
-    public function kkgdv($id){
-        if (Session::has('admin')) {
-            //dd($id);
-            $modelkk = KkGDvLt::findOrFail($id);
-            //dd($modelkk);
-            $modeldn = DnDvLt::where('masothue',$modelkk->masothue)
-                ->first();
-            $modelcskd = CsKdDvLt::where('macskd',$modelkk->macskd)
-                ->first();
-            $modelkkct = KkGDvLtCt::where('mahs',$modelkk->mahs)
-                ->get();
 
-            return view('reports.kkgdvlt.print')
-                ->with('modelkk',$modelkk)
-                ->with('modeldn',$modeldn)
-                ->with('modelcskd',$modelcskd)
-                ->with('modelkkct',$modelkkct)
-                ->with('pageTitle','Kê khai giá dịch vụ lưu trú');
-
-        }else
-            return view('errors.notlogin');
-    }
-
-    public function dvltbc1(Request $request){
+    public function dvxkbc1(Request $request){
         if (Session::has('admin')) {
 
             $input = $request->all();
             //dd($input);
-            $model = KkGDvLt::where('trangthai','Chờ duyệt')
+            $model = KkDvVtXk::where('trangthai','Chờ duyệt')
                 ->OrWhere('trangthai','Duyệt')
                 ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                 ->get();
             //dd($model);
             foreach($model as $kk){
-                $modelcskd = CsKdDvLt::where('macskd',$kk->macskd)->first();
-                $kk->tencskd = $modelcskd->tencskd;
-                $kk->diachikd = $modelcskd->diachikd;
-                $kk->telkd = $modelcskd->telkd;
-                $kk->loaihang = $modelcskd->loaihang;
-
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)){
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                }
             }
 
-            return view('reports.kkgdvlt.bcth.BC1')
+            return view('reports.kkgdvvt.bcth.dvxk.BC1')
                 ->with('input',$input)
                 ->with('model',$model)
                 ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
@@ -78,32 +61,33 @@ class ReportsDvVtController extends Controller
             return view('errors.notlogin');
     }
 
-    public function dvltbc2(Request $request){
+    public function dvxkbc2(Request $request){
         if (Session::has('admin')) {
 
             $input = $request->all();
             //dd($input);
-            $model = KkGDvLt::where('trangthai','Chờ duyệt')
+            $model = KkDvVtXk::where('trangthai','Chờ duyệt')
                 ->OrWhere('trangthai','Duyệt')
                 ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
                 ->get();
             //dd($model);
             $mahss = '';
             foreach($model as $kk){
-                $modelcskd = CsKdDvLt::where('macskd',$kk->macskd)->first();
-                $kk->tencskd = $modelcskd->tencskd;
-                $kk->diachikd = $modelcskd->diachikd;
-                $kk->telkd = $modelcskd->telkd;
-                $kk->loaihang = $modelcskd->loaihang;
-                $mahss = $mahss.$kk->mahs.',';
-
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)) {
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                    $mahss = $mahss . $kk->masokk . ',';
+                }
             }
 
-            $modelctkk = KkGDvLtCt::whereIn('mahs',explode(',',$mahss))
+            $modelctkk = KkDvVtXkCt::whereIn('masokk',explode(',',$mahss))
+                ->orderBy('loaixe')
                 ->get();
 
 
-            return view('reports.kkgdvlt.bcth.BC2')
+            return view('reports.kkgdvvt.bcth.dvxk.BC2')
                 ->with('input',$input)
                 ->with('model',$model)
                 ->with('modelctkk',$modelctkk)
@@ -112,5 +96,217 @@ class ReportsDvVtController extends Controller
         }else
             return view('errors.notlogin');
     }
-*/
+
+    public function indexxb(){
+        if (Session::has('admin')) {
+            return view('reports.kkgdvvt.bcth.dvxb.index')
+                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvxbbc1(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            //dd($input);
+            $model = KkDvVtXb::where('trangthai','Chờ duyệt')
+                ->OrWhere('trangthai','Duyệt')
+                ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->get();
+            //dd($model);
+            foreach($model as $kk){
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)){
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                }
+            }
+
+            return view('reports.kkgdvvt.bcth.dvxb.BC1')
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvxbbc2(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            //dd($input);
+            $model = KkDvVtXb::where('trangthai','Chờ duyệt')
+                ->OrWhere('trangthai','Duyệt')
+                ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->get();
+            //dd($model);
+            $mahss = '';
+            foreach($model as $kk){
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)) {
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                    $mahss = $mahss . $kk->masokk . ',';
+                }
+            }
+
+            $modelctkk = KkDvVtXbCt::whereIn('masokk',explode(',',$mahss))
+                ->get();
+
+
+            return view('reports.kkgdvvt.bcth.dvxb.BC2')
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('modelctkk',$modelctkk)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function indexxtx(){
+        if (Session::has('admin')) {
+            return view('reports.kkgdvvt.bcth.dvxtx.index')
+                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvxtxbc1(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            //dd($input);
+            $model = KkDvVtXtx::where('trangthai','Chờ duyệt')
+                ->OrWhere('trangthai','Duyệt')
+                ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->get();
+            //dd($model);
+            foreach($model as $kk){
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)){
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                }
+            }
+
+            return view('reports.kkgdvvt.bcth.dvxtx.BC1')
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvxtxbc2(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            //dd($input);
+            $model = KkDvVtXtx::where('trangthai','Chờ duyệt')
+                ->OrWhere('trangthai','Duyệt')
+                ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->get();
+            //dd($model);
+            $mahss = '';
+            foreach($model as $kk){
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)) {
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                    $mahss = $mahss . $kk->masokk . ',';
+                }
+            }
+
+            $modelctkk = KkDvVtXtxCt::whereIn('masokk',explode(',',$mahss))
+                ->get();
+
+
+            return view('reports.kkgdvvt.bcth.dvxtx.BC2')
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('modelctkk',$modelctkk)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function indexch(){
+        if (Session::has('admin')) {
+            return view('reports.kkgdvvt.bcth.dvch.index')
+                ->with('pageTitle','Báo cáo tổng hợp dịch vụ vận tải');
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvchbc1(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            //dd($input);
+            $model = KkDvVtKhac::where('trangthai','Chờ duyệt')
+                ->OrWhere('trangthai','Duyệt')
+                ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->get();
+            //dd($model);
+            foreach($model as $kk){
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)){
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                }
+            }
+
+            return view('reports.kkgdvvt.bcth.dvch.BC1')
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+
+        }else
+            return view('errors.notlogin');
+    }
+
+    public function dvchbc2(Request $request){
+        if (Session::has('admin')) {
+
+            $input = $request->all();
+            //dd($input);
+            $model = KkDvVtKhac::where('trangthai','Chờ duyệt')
+                ->OrWhere('trangthai','Duyệt')
+                ->whereBetween('ngaychuyen', [$input['ngaytu'], $input['ngayden']])
+                ->get();
+            //dd($model);
+            $mahss = '';
+            foreach($model as $kk){
+                $modeldv = DonViDvVt::where('masothue',$kk->masothue)->first();
+                if(isset($modeldv)) {
+                    $kk->tendonvi = $modeldv->tendonvi;
+                    $kk->diachi = $modeldv->diachi;
+                    $kk->dienthoai = $modeldv->dienthoai;
+                    $mahss = $mahss . $kk->masokk . ',';
+                }
+            }
+
+            $modelctkk = KkDvVtKhacCt::whereIn('masokk',explode(',',$mahss))
+                ->get();
+
+
+            return view('reports.kkgdvvt.bcth.dvch.BC2')
+                ->with('input',$input)
+                ->with('model',$model)
+                ->with('modelctkk',$modelctkk)
+                ->with('pageTitle','Báo cáo thống kê các đơn vị kê khai giá trong khoảng thời gian');
+
+        }else
+            return view('errors.notlogin');
+    }
 }

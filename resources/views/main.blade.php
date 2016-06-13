@@ -250,7 +250,14 @@
                     <li id="navbaocao"><a href="{{url('')}}"><i class="fa fa-file fa-fw"></i><span class="menu-title">Báo cáo tổng hợp</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="{{url('reports/dvlt')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Dịch vụ lưu trú</span></a></li>
-                            <li><a href="{{url('reports/danhsach')}}"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Dịch vụ vận tải</span></a></li>
+                            <li class=""><a href="#"><i class="fa fa-user fa-fw"></i><span class="submenu-title">Dịch vụ vận tải</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level collapse" style="height: 0px;">
+                                    <li><a href="{{url('reports/dvxk/danhsach')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Dịch vụ xe khách</span></a></li>
+                                    <li><a href="{{url('reports/dvxb/danhsach')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Dịch vụ xe buýt</span></a></li>
+                                    <li><a href="{{url('reports/dvxtx/danhsach')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Dịch vụ xe taxi</span></a></li>
+                                    <li><a href="{{url('reports/dvch/danhsach')}}"><i class="fa fa fa-truck"></i><span class="submenu-title">Dịch vụ chở hàng</span></a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     @endif

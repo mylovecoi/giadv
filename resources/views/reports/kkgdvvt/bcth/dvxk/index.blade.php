@@ -43,7 +43,7 @@
                     <div class="portlet box">
                         <div class="portlet-header">
                             <div class="caption">
-                                <b>Báo cáo tổng hợp dịch vụ vận tải</b>
+                                <b>BÁO CÁO TỔNG HỢP DỊCH VỤ VẬN TẢI XE KHÁCH</b>
                             </div>
                             <div class="actions">
                             </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    @include('reports.kkgdvvt.bcth.modal-thoai')
+    @include('reports.kkgdvvt.bcth.dvxk.modal-thoai')
 
 @stop
 

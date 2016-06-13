@@ -329,11 +329,33 @@ Route::post('reports/dvlt/BC1','ReportsController@dvltbc1');
 Route::post('reports/dvlt/BC2','ReportsController@dvltbc2');
 
 Route::group(['prefix'=>'reports'],function(){
-    Route::get('danhsach','ReportsDvVtController@index');
-    //Route::get('create/{idkk}/{madichvu}','KkDvVtKhacCtController@create');
-    //Route::post('store','KkDvVtKhacCtController@store');
-    //Route::get('edit/{masokk}','KkDvVtKhacCtController@edit');
-    //Route::patch('update/{id}','KkDvVtKhacCtController@update');
-    //Route::get('del/{id}','KkDvVtKhacCtController@destroy');
+    //Xe khách
+    Route::group(['prefix'=>'dvxk'],function(){
+        Route::get('danhsach','ReportsDvVtController@indexxk');
+        Route::post('BC1','ReportsDvVtController@dvxkbc1');
+        Route::post('BC2','ReportsDvVtController@dvxkbc2');
+    });
+    //
+    //Xe buýt
+    Route::group(['prefix'=>'dvxb'],function(){
+        Route::get('danhsach','ReportsDvVtController@indexxb');
+        Route::post('BC1','ReportsDvVtController@dvxbbc1');
+        Route::post('BC2','ReportsDvVtController@dvxbbc2');
+    });
+    //
+    //Xe taxi
+    Route::group(['prefix'=>'dvxtx'],function(){
+        Route::get('danhsach','ReportsDvVtController@indexxtx');
+        Route::post('BC1','ReportsDvVtController@dvxtxbc1');
+        Route::post('BC2','ReportsDvVtController@dvxtxbc2');
+    });
+    //
+    //Chở hàng
+    Route::group(['prefix'=>'dvch'],function(){
+        Route::get('danhsach','ReportsDvVtController@indexch');
+        Route::post('BC1','ReportsDvVtController@dvchbc1');
+        Route::post('BC2','ReportsDvVtController@dvchbc2');
+    });
+    //
 });
 // </editor-fold>

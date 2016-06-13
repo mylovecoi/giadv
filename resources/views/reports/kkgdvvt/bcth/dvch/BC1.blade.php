@@ -52,8 +52,7 @@
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
         <th>STT</th>
-        <th>Tên cơ sở kinh doanh</th>
-        <th>Loại hạng</th>
+        <th>Tên đơn vị kinh doanh</th>
         <th>Địa chỉ</th>
         <th>Số điện thoại</th>
         <th>Số công văn</th>
@@ -64,10 +63,9 @@
     @foreach($model as $key => $ttkk)
     <tr>
         <th style="text-align: center">{{$key + 1}}</th>
-        <th style="text-align: left">{{$ttkk->tencskd}}</th>
-        <th style="text-align: center">{{$ttkk->loaihang}} sao</th>
-        <th style="text-align: left">{{$ttkk->diachikd}}</th>
-        <th style="text-align: center">{{$ttkk->telkd}}</th>
+        <th style="text-align: left">{{$ttkk->tendonvi}}</th>
+        <th style="text-align: left">{{$ttkk->diachi}}</th>
+        <th style="text-align: center">{{$ttkk->dienthoai}}</th>
         <th style="text-align: center">{{$ttkk->socv}}</th>
         <th style="text-align: center">{{getDayVn($ttkk->ngaynhap)}}</th>
         <th style="text-align: center">{{getDayVn($ttkk->ngayhieuluc)}}</th>

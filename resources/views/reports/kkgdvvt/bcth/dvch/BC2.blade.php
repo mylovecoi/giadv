@@ -52,9 +52,9 @@
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
         <th>STT</th>
-        <th>Loại phòng</th>
+        <th>Loại xe</th>
+        <th>Mô tả dịch vụ</th>
         <th>Quy cách chất lượng</th>
-        <th>Số hiệu phòng</th>
         <th>Mức giá kê khai liền kề</th>
         <th>Mức giá kê</th>
         <th>Mức tăng giảm</th>
@@ -63,7 +63,7 @@
     @foreach($model as $cskd)
         <tr>
             <th style="text-align: left" colspan="8">
-                {{$cskd->tencskd}}-Loại hạng {{$cskd->loaihang}}-ngày kê khai {{getDayVn($cskd->ngaynhap)}}- ngày thực hiện mức giá kê khai {{getDayVn($cskd->ngayhieuluc)}}
+                {{$cskd->tendonvi}}-ngày kê khai {{getDayVn($cskd->ngaynhap)}}- ngày thực hiện mức giá kê khai {{getDayVn($cskd->ngayhieuluc)}}
                 - Trạng thái hồ sơ {{$cskd->trangthai}}
             </th>
         </tr>
@@ -71,13 +71,32 @@
             @if($ctkk->mahs == $cskd->mahs)
                 <tr>
                     <th style="text-align: center">{{$key +1}}</th>
-                    <th style="text-align: left">{{$ctkk->loaip}}</th>
+                    <th style="text-align: left">{{$ctkk->loaixe}}</th>
+                    <th style="text-align: left">{{$ctkk->tendichvu}}</th>
                     <th style="text-align: left">{{$ctkk->qccl}}</th>
-                    <th style="text-align: left">{{$ctkk->sohieu}}</th>
-                    <th style="text-align: right">{{number_format($ctkk->mucgialk)}}</th>
-                    <th style="text-align: right">{{number_format($ctkk->mucgiakk)}}</th>
-                    <th style="text-align: right"></th>
-                    <th style="text-align: right"></th>
+                    <th style="text-align: right">{{number_format($ctkk->giakklk)}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->giakk)}}</th>
+                    <th style="text-align: right">
+                        <?php
+                        if($ctkk->giakklk>0)
+                            if($ctkk->giakklk>$ctkk->giakk)
+                                echo '-'.number_format($ctkk->giakklk-$ctkk->giakk);
+                            else
+                                echo number_format($ctkk->giakk-$ctkk->giakklk);
+                        ?>
+                    </th>
+                    <th style="text-align: right">
+                        <?php
+                        if($ctkk->giakklk>0)
+                            if($ctkk->giakklk>$ctkk->giakk)
+                                echo '-'.round(($ctkk->giakklk-$ctkk->giakk)/$ctkk->giakklk * 100, 2) . '%';
+                            else
+                                echo round(($ctkk->giakk-$ctkk->giakklk)/$ctkk->giakk*100,2) . '%';
+                        ?>
+                    </th>
+
+
+
                 </tr>
             @endif
         @endforeach

@@ -57,7 +57,7 @@
 <div class="row">
     <p><b>Phát triển bởi Công ty TNHH Phát Triển Phần Mềm Cuộc Sống</b></p>
 
-    <p>Địa chỉ: T14 – Cụm 591 – Liên Ninh – Thanh trì – Hà Nội</p>
+    <p><b>Địa chỉ</b>: T14 – Cụm 591 – Liên Ninh – Thanh trì – Hà Nội</p>
 
     <p><b>Tel</b>: 04.36343951 - <b>Email</b>: phanmemcuocsong@gmail.com</p>
 </div>

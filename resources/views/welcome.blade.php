@@ -40,9 +40,8 @@
     <br>
     <br>
     <br>
-    <h1>GIẢI PHÁP QUẢN LÝ CƠ SỞ DỮ LIỆU VỀ GIÁ</h1>
+    <h1><b>GIẢI PHÁP QUẢN LÝ CƠ SỞ DỮ LIỆU VỀ GIÁ</b></h1>
 
-    <h3 class="mtn"></b></h3>
     <br>
 </div>
 <div class="row mbxl">
@@ -57,7 +56,7 @@
 <hr class="mtxl mbxl">
 
 <div class="row">
-    <p>Phát triển bởi Công ty TNHH Phát Triển Phần Mềm Cuộc Sống</p>
+    <p><b>Phát triển bởi Công ty TNHH Phát Triển Phần Mềm Cuộc Sống</b></p>
 
     <p>Địa chỉ: T14 – Cụm 591 – Liên Ninh – Thanh trì – Hà Nội</p>
 

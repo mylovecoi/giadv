@@ -298,7 +298,7 @@
         </div>
         <!--BEGIN FOOTER-->
         <div id="footer">
-            <div class="copyright">2016 © LifeSoft - Tiện ích hơn - Hiệu quả hơn</div>
+            <div class="copyright">2016 © LifeSoft <a href="" style="color:#5b9bd1">Tiện ích hơn - Hiệu quả hơn</a></div>
         </div>
         <!--END FOOTER--><!--END PAGE WRAPPER-->
     </div>

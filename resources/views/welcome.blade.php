@@ -60,7 +60,7 @@
 
     <p>Địa chỉ: T14 – Cụm 591 – Liên Ninh – Thanh trì – Hà Nội</p>
 
-    <p>Tel: 04.36343951 - Email: phanmemcuocsong@gmail.com</p>
+    <p><b>Tel</b>: 04.36343951 - Email: phanmemcuocsong@gmail.com</p>
 </div>
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>

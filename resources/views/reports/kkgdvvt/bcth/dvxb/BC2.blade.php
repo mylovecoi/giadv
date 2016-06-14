@@ -52,11 +52,14 @@
 <table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
     <tr>
         <th>STT</th>
-        <th>Loại xe</th>
         <th>Mô tả dịch vụ</th>
         <th>Quy cách chất lượng</th>
-        <th>Mức giá kê khai liền kề</th>
-        <th>Mức giá kê</th>
+        <th>Mức giá vé lượt</br>kê khai liền kề</th>
+        <th>Mức giá vé lượt</br>kê khai</th>
+        <th>Mức tăng giảm</th>
+        <th>Tỷ lệ (%)</th>
+        <th>Mức giá vé tháng</br>kê khai liền kề</th>
+        <th>Mức giá vé tháng</br>kê khai</th>
         <th>Mức tăng giảm</th>
         <th>Tỷ lệ (%)</th>
     </tr>
@@ -68,34 +71,52 @@
             </th>
         </tr>
         @foreach($modelctkk as $key=>$ctkk)
-            @if($ctkk->mahs == $cskd->mahs)
+            @if($ctkk->masokk == $cskd->masokk)
                 <tr>
                     <th style="text-align: center">{{$key +1}}</th>
-                    <th style="text-align: left">{{$ctkk->loaixe}}</th>
                     <th style="text-align: left">{{$ctkk->tendichvu}}</th>
                     <th style="text-align: left">{{$ctkk->qccl}}</th>
-                    <th style="text-align: right">{{number_format($ctkk->giakklk)}}</th>
-                    <th style="text-align: right">{{number_format($ctkk->giakk)}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->giakklkluot)}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->giakkluot)}}</th>
                     <th style="text-align: right">
                         <?php
-                        if($ctkk->giakklk>0)
-                            if($ctkk->giakklk>$ctkk->giakk)
-                                echo '-'.number_format($ctkk->giakklk-$ctkk->giakk);
+                        if($ctkk->giakklkluot>0)
+                            if($ctkk->giakklkluot>$ctkk->giakkluot)
+                                echo '-'.number_format($ctkk->giakklkluot-$ctkk->giakkluot);
                             else
-                                echo number_format($ctkk->giakk-$ctkk->giakklk);
+                                echo number_format($ctkk->giakkluot-$ctkk->giakklkluot);
                         ?>
                     </th>
                     <th style="text-align: right">
                         <?php
-                        if($ctkk->giakklk>0)
-                            if($ctkk->giakklk>$ctkk->giakk)
-                                echo '-'.round(($ctkk->giakklk-$ctkk->giakk)/$ctkk->giakklk * 100, 2) . '%';
+                        if($ctkk->giakklkluot>0)
+                            if($ctkk->giakklkluot>$ctkk->giakkluot)
+                                echo '-'.round(($ctkk->giakklkluot-$ctkk->giakkluot)/$ctkk->giakklkluot * 100, 2) . '%';
                             else
-                                echo round(($ctkk->giakk-$ctkk->giakklk)/$ctkk->giakk*100,2) . '%';
+                                echo round(($ctkk->giakkluot-$ctkk->giakklkluot)/$ctkk->giakkluot*100,2) . '%';
                         ?>
                     </th>
 
-
+                    <th style="text-align: right">{{number_format($ctkk->giakklkthang)}}</th>
+                    <th style="text-align: right">{{number_format($ctkk->giakkthang)}}</th>
+                    <th style="text-align: right">
+                        <?php
+                        if($ctkk->giakklkthang>0)
+                            if($ctkk->giakklkthang>$ctkk->giakkthang)
+                                echo '-'.number_format($ctkk->giakklkthang-$ctkk->giakkthang);
+                            else
+                                echo number_format($ctkk->giakkthang-$ctkk->giakklkthang);
+                        ?>
+                    </th>
+                    <th style="text-align: right">
+                        <?php
+                        if($ctkk->giakklkthang>0)
+                            if($ctkk->giakklkthang>$ctkk->giakkthang)
+                                echo '-'.round(($ctkk->giakklkthang-$ctkk->giakkthang)/$ctkk->giakklkthang * 100, 2) . '%';
+                            else
+                                echo round(($ctkk->giakkthang-$ctkk->giakklkthang)/$ctkk->giakkthang*100,2) . '%';
+                        ?>
+                    </th>
 
                 </tr>
             @endif

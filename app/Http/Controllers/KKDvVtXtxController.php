@@ -394,8 +394,13 @@ class KKDvVtXtxController extends Controller
                     .'<button type="button" data-target="#modal-create" '
                     .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
                     .'onclick="editItem(this,'.$dv->id.')"><i'
-                    .'class="fa fa-edit"></i>&nbsp;Kê khai giá'
+                    .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
                     .'</button>';
+                $result['message'] .='</br>';
+                $result['message'] .='<button type="button" data-target="#modal-pagia-create"
+                                        data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                        onclick="editpagia('.$dv->tendichvu.','.$dv->tendichvu.')"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
+                $result['message'] .='</button>';
                 $result['message'] .= '</td >';
                 $result['message'] .= '</tr >';
             }
@@ -443,8 +448,13 @@ class KKDvVtXtxController extends Controller
                     .'<button type="button" data-target="#modal-create" '
                     .'data-toggle="modal" class="btn btn-default btn-xs mbs"'
                     .'onclick="editItem(this,'.$dv->id.','.$dv->masokk.')"><i'
-                    .'class="fa fa-edit"></i>&nbsp;Kê khai giá'
+                    .' class="fa fa-edit"></i>&nbsp;Kê khai giá'
                     .'</button>';
+                $result['message'] .='</br>';
+                $result['message'] .='<button type="button" data-target="#modal-pagia-create"
+                                        data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                        onclick="editpagia('.$dv->tendichvu.','.$dv->tendichvu.')"><i class="fa fa-edit"></i>&nbsp;Phương án giá';
+                $result['message'] .='</button>';
                 $result['message'] .= '</td >';
                 $result['message'] .= '</tr >';
             }

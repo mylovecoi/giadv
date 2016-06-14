@@ -120,6 +120,11 @@
                                         onclick="editItem(this,'{{$dv->id}}','{{$dv->masokk}}')"><i
                                             class="fa fa-edit"></i>&nbsp;Kê khai giá
                                 </button>
+                                </br>
+                                <button type="button" data-target="#modal-pagia-create"
+                                        data-toggle="modal" class="btn btn-default btn-xs mbs"
+                                        onclick="editpagia('{{$dv->madichvu}}','{{$dv->masokk}}')"><i class="fa fa-edit"></i>&nbsp;Phương án giá
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -156,6 +161,7 @@
     </div>
 
     @include('includes.script.create-header-scripts')
+    @include('quanly.dvvt.template.phuongangia')
 
     <!--Modal Wide Width-->
     <div id="modal-create" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
@@ -186,6 +192,13 @@
     </div>
 
     <script>
+        function update_pagia(){
+
+        }
+
+        function editpagia(madichvu, masokk){
+
+        }
         function editItem(e, id, makk){
             var tr=$(e).closest('tr');
             $('#giakklk').attr('value',tr.find('td[name=giakklk]').text());

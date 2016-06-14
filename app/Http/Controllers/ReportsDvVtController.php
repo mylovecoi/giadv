@@ -83,7 +83,6 @@ class ReportsDvVtController extends Controller
             }
 
             $modelctkk = KkDvVtXkCt::whereIn('masokk',explode(',',$mahss))
-                ->orderBy('loaixe')
                 ->get();
 
 

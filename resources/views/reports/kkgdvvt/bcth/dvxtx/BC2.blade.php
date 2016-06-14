@@ -68,7 +68,7 @@
             </th>
         </tr>
         @foreach($modelctkk as $key=>$ctkk)
-            @if($ctkk->mahs == $cskd->mahs)
+            @if($ctkk->masokk == $cskd->masokk)
                 <tr>
                     <th style="text-align: center">{{$key +1}}</th>
                     <th style="text-align: left">{{$ctkk->loaixe}}</th>
